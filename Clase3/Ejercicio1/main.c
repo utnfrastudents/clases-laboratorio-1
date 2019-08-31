@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-int getMax(int, int, int);
+//#include <stdlib.h>
+#include "utn.h"
 
 int main()
 {
@@ -16,22 +15,5 @@ int main()
     printf("El valor maximo entre %d, %d y %d es %d\n", a, b, c, max);
 
     return 0;
-}
-
-int getMax(int a, int b, int c)
-{
-    int max = a;
-
-    if(b > a)
-    {
-        max = b;
-    }
-
-    if(c > a && c > b)
-    {
-        max = c;
-    }
-
-    return max;
 }
 
