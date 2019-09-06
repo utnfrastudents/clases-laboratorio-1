@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 
 int main()
 {
@@ -9,16 +9,19 @@ int main()
 
     printf("%d\n%d\n%d\n%d\n", x, numeros[1], inicializacionEnCero[1], *numeros);
 
-    for(int j = 0; j < 5; j++)
+    //Acceso secuencial
+    for(int i = 0; i < 5; i++)
     {
-        printf("Ingrese un numero para la posicion %d: ", j);
-        scanf("%d", &numeros[j]);
+        printf("Ingrese un numero para la posicion %d: ", i);
+        scanf("%d", &inicializacionEnCero[i]);
     }
 
     for(int i = 0; i < 5; i++)
     {
-        printf("El valor del indice %d es %d\n", i, numeros[i]);
+        printf("El valor del indice %d es %d\n", i, inicializacionEnCero[i]);
     }
+
+    printf("Acceso aleatorio a un valor del vector: %d\n", inicializacionEnCero[4]);
 
     return 0;
 }
