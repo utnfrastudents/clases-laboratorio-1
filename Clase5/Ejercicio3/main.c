@@ -6,16 +6,14 @@ static void mostrarVectorInt(int vec[] /* int *vec */, int tam);
 
 static int obtenerMayor(int vec[], int tam, int* posicion);
 
+static void cargarVectorEnteros(int vec[], int tam);
+
 int main()
 {
     int valores[VECTOR] = {0};
     int mayor, posicion;
 
-    for(int i=0; i < VECTOR; i++)
-    {
-        printf("Ingrese un entero a la posicion %d: ", i);
-        scanf("%d", &valores[i]);
-    }
+    cargarVectorEnteros(valores, VECTOR);
 
     mostrarVectorInt(valores, VECTOR);
 
@@ -58,4 +56,16 @@ static int obtenerMayor(int vec[], int tam, int* posicion)
     }
 
     return maximo;
+}
+
+static void cargarVectorEnteros(int vec[], int tam)
+{
+    if(vec != NULL && tam > 0)
+    {
+        for(int i=0; i < tam; i++)
+        {
+            printf("Ingrese un entero a la posicion %d: ", i);
+            scanf("%d", &vec[i]);
+        }
+    }
 }
