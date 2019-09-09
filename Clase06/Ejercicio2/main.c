@@ -2,37 +2,33 @@
 #include <stdlib.h>
 
 #define TAM 5
+#define ASC 0
+#define DESC 1
 
-void mostrarVector(int vec[], int tam);
+void mostrarVectorInt(int vec[], int tam);
+void ordenarVectorInt(int vec[], int tam, int criterio);
+void swapInt(int* i, int* j);
 
 int main()
 {
     int vec[TAM] = {7, 8, 1, 3, 5};
-    int aux;
+
 
     printf("Vector desordenado: ");
-    mostrarVector(vec, TAM);
+    mostrarVectorInt(vec, TAM);
 
-    for(int i=0; i < TAM-1; i++)
-    {
-        for(int j = i+1; j < TAM; j++)
-        {
-            if(vec[i] > vec[j])
-            {
-                aux = vec[i];
-                vec[i] = vec[j];
-                vec[j] = aux;
-            }
-        }
-    }
+    ordenarVectorInt(vec, TAM, ASC);
+    printf("\nVector ordenado ascendente: ");
+    mostrarVectorInt(vec, TAM);
 
-    printf("\nVector ordenado: ");
-    mostrarVector(vec, TAM);
+    ordenarVectorInt(vec, TAM, DESC);
+    printf("\nVector ordenado descendente: ");
+    mostrarVectorInt(vec, TAM);
 
     return 0;
 }
 
-void mostrarVector(int vec[], int tam)
+void mostrarVectorInt(int vec[], int tam)
 {
     if(vec != NULL && tam > 0)
     {
@@ -41,4 +37,31 @@ void mostrarVector(int vec[], int tam)
             printf("%d ", vec[i]);
         }
     }
+}
+
+void ordenarVectorInt(int vec[], int tam, int criterio)
+{
+    if(vec != NULL && tam > 0 && (criterio == 0 || criterio ==1))
+    {
+        for(int i=0; i < tam-1; i++)
+        {
+            for(int j = i+1; j < tam; j++)
+            {
+                if((criterio == 0 && (vec[i] > vec[j]))
+                    || (criterio == 1 && (vec[i] < vec[j])))
+                {
+                    swapInt(&vec[i], &vec[j]);
+                }
+            }
+        }
+    }
+}
+
+void swapInt(int* i, int* j)
+{
+    int aux;
+
+    aux = *i;
+    *i = *j;
+    *j = aux;
 }
