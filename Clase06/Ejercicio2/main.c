@@ -47,8 +47,8 @@ void ordenarVectorInt(int vec[], int tam, int criterio)
         {
             for(int j = i+1; j < tam; j++)
             {
-                if((criterio == 0 && (vec[i] > vec[j]))
-                    || (criterio == 1 && (vec[i] < vec[j])))
+                if((!criterio && (vec[i] > vec[j]))
+                    || (criterio && (vec[i] < vec[j])))
                 {
                     swapInt(&vec[i], &vec[j]);
                 }
