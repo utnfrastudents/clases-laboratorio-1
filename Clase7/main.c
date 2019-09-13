@@ -1,17 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "input.h"
 
 #define TAM 5
 #define ASC 0
 #define DESC 1
+#define ORDER 1
+#define NO_ORDER 0
 
 void mostrarAlumno(int leg, int edad, char sex, int nP1, int nP2, float prom);
 void mostrarAlumnos(int leg[], int edad[], char sex[], int nP1[], int nP2[], float prom[], int tam);
-void ordenarAlumnosPorLegajo(int leg[], int edad[], char sex[], int nP1[], int nP2[], float prom[], int tam, int criterio);
+void ordenarAlumnosPorLegajoGenero(int leg[], int edad[], char sex[], int nP1[], int nP2[], float prom[], int tam, int criterioLegajo, int criterioGenero);
 void swapInt(int* i, int* j);
 void swapChar(char* i, char* j);
 void swapFloat(float* i, float* j);
-void clearBuffer(void);
 
 int main()
 {
@@ -25,14 +25,14 @@ int main()
     printf("[Alumnos desordenados]\n");
     mostrarAlumnos(legajos, edades, sexos, notasP1, notasP2, promedios, TAM);
 
-    ordenarAlumnosPorLegajo(legajos, edades, sexos, notasP1, notasP2, promedios, TAM, ASC);
+    ordenarAlumnosPorLegajoGenero(legajos, edades, sexos, notasP1, notasP2, promedios, TAM, ASC, DESC);
 
-    printf("[Alumnos ordenados de forma ascendente]\n");
+    printf("[Alumnos ordenados de forma ascendente y por genero]\n");
     mostrarAlumnos(legajos, edades, sexos, notasP1, notasP2, promedios, TAM);
 
-    ordenarAlumnosPorLegajo(legajos, edades, sexos, notasP1, notasP2, promedios, TAM, DESC);
+    ordenarAlumnosPorLegajoGenero(legajos, edades, sexos, notasP1, notasP2, promedios, TAM, DESC, DESC);
 
-    printf("[Alumnos ordenados de forma descendente]\n");
+    printf("[Alumnos ordenados de forma descendente y por genero]\n");
     mostrarAlumnos(legajos, edades, sexos, notasP1, notasP2, promedios, TAM);
 
     return 0;
@@ -60,17 +60,33 @@ void mostrarAlumnos(int leg[], int edad[], char sex[], int nP1[], int nP2[], flo
     }
 }
 
-void ordenarAlumnosPorLegajo(int leg[], int edad[], char sex[], int nP1[], int nP2[], float prom[], int tam, int criterio)
+void ordenarAlumnosPorLegajoGenero(int leg[], int edad[], char sex[], int nP1[], int nP2[], float prom[], int tam, int criterioLegajo, int criterioGenero)
 {
+    int swap = NO_ORDER;
+
     if(leg!=NULL && edad!=NULL && sex!=NULL && nP1!=NULL && nP2!=NULL && prom!=NULL
-        && tam>0 && (criterio==ASC || criterio==DESC))
+        && tam>0 && (criterioLegajo==ASC || criterioLegajo==DESC) && (criterioGenero==ASC || criterioGenero==DESC))
     {
         for(int i=0; i < tam-1; i++)
         {
             for(int j = i+1; j < tam; j++)
             {
-                if((!criterio && (leg[i] > leg[j]))
-                    || (criterio && (leg[i] < leg[j])))
+                if((!criterioGenero && (sex[i] > sex[j]))
+                    || (criterioGenero && (sex[i] < sex[j])))
+                {
+                    swap = ORDER;
+                }
+                else
+                {
+                    if(sex[i] == sex[j]
+                        && ((!criterioLegajo && (leg[i] > leg[j]))
+                        || (criterioLegajo && (leg[i] < leg[j]))))
+                    {
+                        swap = ORDER;
+                    }
+                }
+
+                if(swap == ORDER)
                 {
                     swapInt(&leg[i], &leg[j]);
                     swapInt(&edad[i], &edad[j]);
@@ -80,17 +96,7 @@ void ordenarAlumnosPorLegajo(int leg[], int edad[], char sex[], int nP1[], int n
                     swapFloat(&prom[i], &prom[j]);
                 }
 
-                if((!criterio && (sex[i] > sex[j]))
-                    || (criterio && (sex[i] < sex[j])))
-                {
-                    swapInt(&leg[i], &leg[j]);
-                    swapInt(&edad[i], &edad[j]);
-                    swapChar(&sex[i], &sex[j]);
-                    swapInt(&nP1[i], &nP1[j]);
-                    swapInt(&nP2[i], &nP2[j]);
-                    swapFloat(&prom[i], &prom[j]);
-                }
-
+                swap = NO_ORDER;
             }
         }
     }
@@ -121,14 +127,4 @@ void swapFloat(float* i, float* j)
     aux = *i;
     *i = *j;
     *j = aux;
-}
-
-void clearBuffer()
-{
-    char memoryBuffer = '\n';
-
-    while (getchar() != memoryBuffer)
-    {
-        /**< No requiere implementacion */
-    }
 }
