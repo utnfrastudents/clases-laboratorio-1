@@ -1,20 +1,26 @@
 #include "input.h"
 
-#define TAM 20
+#define TAM 21
 
 void mostrarVectorChar(char vec[], int tam);
 
 int main()
 {
-    char x[TAM] = "Juan";
-    char l[TAM];
+    char x[TAM] = "Juan Sebastian Veron";
+    char l[10];
+    int size;
 
     input_clearScreen();
 
-    strncpy(l, x, TAM);
+    // Controlar la cantidad de caracteres a copiar
+    strncpy(l, x, 9);
+    l[9] = '\0';
 
-    mostrarVectorChar(l, TAM);
+    mostrarVectorChar(l, 9);
     printf("%s\n", l);
+
+    size = strlen(x);
+    printf("size %d\n", size);
 
     return 0;
 }
