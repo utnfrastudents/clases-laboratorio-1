@@ -4,8 +4,7 @@
 #define NOMBRE_LONGITUD 20
 #define UNA_LINEA 1 /**< Debe tomar los valores [1] indicando una linea [0] todas las lineas. >*/
 
-typedef char tNombre[NOMBRE_LONGITUD];
-typedef tNombre mNombres[CANTIDAD_NOMBRES];
+typedef char mNombres[CANTIDAD_NOMBRES][NOMBRE_LONGITUD];
 
 void cargarNombres(mNombres* nombres, int cantidad, int longitud);
 void imprimirNombres(mNombres* nombres, int cantidad, int longitud);
