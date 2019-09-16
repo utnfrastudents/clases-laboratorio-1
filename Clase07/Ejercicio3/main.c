@@ -13,10 +13,10 @@ int main()
     if(!input_getString(name, "Ingrese su nombre: ", "Intente nuevamente: ", 1, FULL_NAME)
         && !input_getString(lastName, "Ingrese su apellido: ", "Intente nuevamente: ", 1, FULL_NAME))
     {
-        if(!input_concatStrings(stringCamelCase(name, FULL_NAME), " ", FULL_NAME)
-            && !input_concatStrings(name, stringCamelCase(lastName, FULL_NAME), FULL_NAME))
+        if(!input_concatStrings(stringCamelCase(lastName, FULL_NAME), ", ", FULL_NAME)
+            && !input_concatStrings(lastName, stringCamelCase(name, FULL_NAME), FULL_NAME))
         {
-            printf("Nombre y Apellido ingresado: %s\n", name);
+            printf("Nombre y Apellido ingresado: %s\n", lastName);
         }
     }
 
