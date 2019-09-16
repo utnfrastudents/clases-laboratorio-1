@@ -2,6 +2,7 @@
 
 #define CANTIDAD_NOMBRES 5
 #define NOMBRE_LONGITUD 20
+#define UNA_LINEA 1
 
 typedef char mNombres[CANTIDAD_NOMBRES][NOMBRE_LONGITUD];
 
@@ -22,14 +23,29 @@ int main()
 
 void cargarNombres(mNombres nombres, int cantidad, int longitud)
 {
+    int longitudAux;
+
     if(nombres != NULL && cantidad > 0 && cantidad <= CANTIDAD_NOMBRES
         && longitud > 0 && longitud <= NOMBRE_LONGITUD)
     {
+        if(UNA_LINEA)
+        {
+            longitudAux = 1;
+        }
+        else
+        {
+            longitudAux = longitud;
+        }
+        
+        
         for(int i = 0; i < cantidad; i++)
         {
-            if(!input_getString(&nombres[i][i], "Ingrese un nombre: ", "Intente nuevamente: ", 1, longitud))
+            for(int j = 0; j < longitudAux; j++)
             {
-                printf("%d nombre ingresado correctamente.\n", i+1);
+                if(!input_getString(&nombres[i][j], "Ingrese un nombre: ", "Intente nuevamente: ", 1, longitud))
+                {
+                    printf("Nombre %d ingresado correctamente: %s\n", i+1, &nombres[i][j]);
+                }
             }
         }
     }
