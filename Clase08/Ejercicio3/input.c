@@ -95,13 +95,13 @@ int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int 
 
             if(counter == 1)
             {
-                printf("%s: ", message);
+                printf("%s", message);
             }
             else
             {
                 if(counter > 1)
                 {
-                    printf("%s: ", eMessage);
+                    printf("%s", eMessage);
                 }
             }
 
