@@ -26,7 +26,7 @@ int main()
 
 static int buscarNumero(int vec[], int tam, int numero, int* posicion)
 {
-    int esta = 0;
+    int esta = -1;
 
     if(vec != NULL && tam > 0)
     {
