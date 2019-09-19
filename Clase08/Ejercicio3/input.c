@@ -56,7 +56,7 @@ int input_getNumberType(float number)
     int returnEvaluation; /**< Se almacena el indicador de tipo de numero. >*/
     float floorNumber; /**< Se almacena la parte entera de un numero. >*/
 
-    floorNumber = floor(number);
+    floorNumber = (int)number;
 
     if (number - floorNumber != 0.0f)
     {
