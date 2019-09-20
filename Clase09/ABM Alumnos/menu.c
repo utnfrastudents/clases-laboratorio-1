@@ -34,7 +34,7 @@ int menu_create(int* option)
     input_clearScreen();
 
     printf("=======================================================\n");
-    printf("                ALTA DE EMPLEADO\n");
+    printf("                ALTA DEL ALUMNO\n");
     printf("=======================================================\n");
     printf("    1 - Ingresar el Nombre\n");
     printf("    2 - Ingresar el Apellido\n");

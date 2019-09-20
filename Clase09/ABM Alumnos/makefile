@@ -12,9 +12,12 @@ INPO = input.o
 MENUC = menu.c
 MENUH = menu.h
 MENUO = menu.o
-PROJECT = tp2
+ALUMNOC = alumno.c
+ALUMNOH = alumno.h
+ALUMNOO = alumno.o
+PROJECT = base-practica-c
 
-$(PROJECT): $(OBJDIR)$(INPO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
+$(PROJECT): $(OBJDIR)$(INPO) $(OBJDIR)$(ALUMNOO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
 	$(CC) $(WFLAGS) $^ -o $(EXEDIR)$@
 $(OBJDIR)$(OBJ): $(MENUH) $(SRC)
 	cd $(OBJDIR) \
@@ -22,10 +25,13 @@ $(OBJDIR)$(OBJ): $(MENUH) $(SRC)
 $(OBJDIR)$(MENUO): $(MENUC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
+$(OBJDIR)$(ALUMNOO): $(ALUMNOC)
+	cd $(OBJDIR) \
+	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(INPO): $(INPC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 clean:
-	$(RM) $(PROJECT).layout $(OBJDIR)*.o $(EXEDIR)$(PROJECT)
+	$(RM) $(PROJECT).layout $(PROJECT).depend $(OBJDIR)*.o $(EXEDIR)$(PROJECT)
 debug: $(PROJECT)
 	./$(EXEDIR)$^
