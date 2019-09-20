@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1569023587 source:/home/alumno/Escritorio/Clase09/ABM Alumnos/alumno.c
+	"alumno.h"
+
+1569022211 /home/alumno/Escritorio/Clase09/ABM Alumnos/alumno.h
+	"input.h"
+
+1568930679 /home/alumno/Escritorio/Clase09/ABM Alumnos/input.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<float.h>
+	<math.h>
+	<ctype.h>
+	<limits.h>
+
+1568930679 source:/home/alumno/Escritorio/Clase09/ABM Alumnos/input.c
+	"input.h"
+
+1569023430 source:/home/alumno/Escritorio/Clase09/ABM Alumnos/main.c
+	"menu.h"
+
+1569018290 /home/alumno/Escritorio/Clase09/ABM Alumnos/menu.h
+	"alumno.h"
+
+1569019578 source:/home/alumno/Escritorio/Clase09/ABM Alumnos/menu.c
+	"menu.h"
+

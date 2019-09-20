@@ -3,10 +3,11 @@
 
 #include "input.h"
 
-#define TAM 20
 #define ALUMNOS 2
 #define ALUMNO_VACIO 1
 #define ALUMNO_CARGADO 0
+#define TAM 5
+#define NOMBRE 20
 
 typedef struct
 {
@@ -18,7 +19,7 @@ typedef struct
 typedef struct
 {
     int legajo;
-    char nombre[TAM];
+    char nombre[NOMBRE];
     int edad;
     char sexo;
     int notaParcial1;
@@ -31,6 +32,7 @@ typedef struct
 void inicializarAlumnos(sAlumno vec[], int tam);
 int buscarAlumnoLibre(sAlumno vec[], int tam);
 int buscarAlumnoPorLegajo(sAlumno vec[], int tam, int legajo);
+int altaAlumno(sAlumno vec[], int tam);
 void mostrarAlumno(sAlumno alumno);
 void mostrarAlumnos(sAlumno vec[], int tam);
 

@@ -4,10 +4,14 @@ int main()
 {
     int lifeCycle; /**< Indicador del ciclo de vida de cada menu >*/
     int optionMainMenu; /**< Opcion elegida por el usuario del menu principal >*/
-    int optionCreateMenu; /**< Opcion elegida por el usuario para el menu de alta >*/
+//    int optionCreateMenu; /**< Opcion elegida por el usuario para el menu de alta >*/
     int optionUpdateMenu; /**< Opcion elegida por el usuario para el menu de modificacion >*/
     int optionDeleteMenu; /**< Opcion elegida por el usuario para el menu de eliminacion >*/
     int optionReportMenu; /**< Opcion elegida por el usuario para el menu de reportes >*/
+
+    sAlumno alumnos[TAM];
+
+    inicializarAlumnos(alumnos, TAM);
 
     do
     {
@@ -22,24 +26,10 @@ int main()
         switch (optionMainMenu)
         {
             case 1: // Opcion elegida: Alta de Empleado
-                do
+                if(altaAlumno(alumnos, TAM))
                 {
-                    lifeCycle = menu_create(&optionCreateMenu);
-
-                    if(optionCreateMenu == CREATE_MAX || optionCreateMenu == OPTION_ERROR)
-                    {
-                        break;
-                    }
-
-                    switch (optionCreateMenu)
-                    {
-                        case 1: // Opcion elegida: Ingreso del Nombre
-                            /* code */
-                            break;
-                    }
-
-                    input_pauseScreen("Presione la tecla Enter para continuar");
-                } while (!lifeCycle);
+                    printf("Carga exitosa del alumno.\n");
+                }
                 break;
             case 2: // Opcion elegida: Modificar un Empleado
                 do
