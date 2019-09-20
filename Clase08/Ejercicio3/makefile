@@ -22,6 +22,6 @@ $(OBJDIR)$(INPO): $(INPC)
 	&& cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 clean:
-	$(RM) $(PROJECT).layout $(OBJDIR)*.o $(EXEDIR)$(PROJECT)
+	$(RM) $(PROJECT).layout $(PROJECT).depend $(OBJDIR)*.o $(EXEDIR)$(PROJECT)
 debug: $(PROJECT)
 	./$(EXEDIR)$^
