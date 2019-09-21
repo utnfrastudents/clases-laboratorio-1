@@ -7,7 +7,7 @@ int main()
 //    int optionCreateMenu; /**< Opcion elegida por el usuario para el menu de alta >*/
     int optionUpdateMenu; /**< Opcion elegida por el usuario para el menu de modificacion >*/
     int optionDeleteMenu; /**< Opcion elegida por el usuario para el menu de eliminacion >*/
-    int optionReportMenu; /**< Opcion elegida por el usuario para el menu de reportes >*/
+//    int optionReportMenu; /**< Opcion elegida por el usuario para el menu de reportes >*/
 
     sAlumno alumnos[TAM];
 
@@ -72,24 +72,7 @@ int main()
                 } while (!lifeCycle);
                 break;
             case 4:
-                do
-                {
-                    lifeCycle = menu_printReports(&optionReportMenu);
-
-                    if(optionReportMenu == REPORT_MAX || optionReportMenu == OPTION_ERROR)
-                    {
-                        break;
-                    }
-
-                    switch (optionReportMenu)
-                    {
-                        case 1: // Opcion elegida: Listado ordenado de Empleados
-                            /* code */
-                            break;
-                    }
-
-                    input_pauseScreen("Presione la tecla Enter para continuar");
-                } while (!lifeCycle);
+                mostrarAlumnos(alumnos, TAM);
                 break;
         }
 
