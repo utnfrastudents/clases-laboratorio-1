@@ -9,9 +9,15 @@ int main()
 //    int optionDeleteMenu; /**< Opcion elegida por el usuario para el menu de eliminacion >*/
 //    int optionReportMenu; /**< Opcion elegida por el usuario para el menu de reportes >*/
 
-    sAlumno alumnos[TAM];
+    sAlumno alumnos[TAM] = {
+        {1234, "Juan", 20, 'm', 4, 6, 5, {16, 9, 2019}, 0},
+        {1111, "Juana", 19, 'f', 7, 4, 5, {20, 9, 2019}, 0},
+        {5555, "Ariel", 20, 'm', 8, 6, 7, {12, 9, 2019}, 0},
+        {2222, "Alicia", 21, 'f', 9, 6, 7, {9, 9, 2019}, 0},
+        {1166, "Nahuel", 30, 'm', 2, 4, 3, {4, 9, 2019}, 0}
+    };
 
-    inicializarAlumnos(alumnos, TAM);
+//    inicializarAlumnos(alumnos, TAM);
 
     do
     {
