@@ -101,9 +101,7 @@ int altaAlumno(sAlumno vec[], int tam)
 
 void mostrarAlumno(sAlumno alumno)
 {
-    alumno.promedio = (float)(alumno.notaParcial1 + alumno.notaParcial2)/2;
-
-    printf("%d     %s      %3d     %c      %2d     %2d     %.2f   %02d/%02d/%04d\n",
+    printf("%d     %20s      %3d     %c      %2d     %2d     %.2f   %02d/%02d/%4d\n",
         alumno.legajo, alumno.nombre, alumno.edad, alumno.sexo,
         alumno.notaParcial1, alumno.notaParcial2, alumno.promedio,
         alumno.fechaIngreso.dia, alumno.fechaIngreso.mes, alumno.fechaIngreso.ano);
@@ -131,13 +129,13 @@ void mostrarAlumnos(sAlumno vec[], int tam)
     }
 }
 
-sAlumno newAlumno(int legajo, char nombre[TAM], int edad, char sexo,
+sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
     int notaParcial1, int notaParcial2, sFecha fechaIngreso)
 {
     sAlumno alumnoAux;
 
     alumnoAux.legajo = legajo;
-    strncpy(alumnoAux.nombre, nombre, TAM);
+    strncpy(alumnoAux.nombre, nombre, NOMBRE);
     alumnoAux.edad = edad;
     alumnoAux.sexo = sexo;
     alumnoAux.notaParcial1 = notaParcial1;
