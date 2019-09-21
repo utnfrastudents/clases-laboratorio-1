@@ -1,5 +1,11 @@
 #include "alumno.h"
 
+/** \brief Funcion que carga como un constructor los campos de un Alumno
+ *
+ * \param
+ * \return
+ *
+ */
 sAlumno newAlumno(int legajo, char nombre[TAM], int edad, char sexo,
     int notaParcial1, int notaParcial2, sFecha fechaIngreso);
 
@@ -93,6 +99,52 @@ int altaAlumno(sAlumno vec[], int tam)
         else
         {
             printf("Sistema de alumnos completo.\n");
+        }
+    }
+
+    return returnValue;
+}
+
+int bajaAlumno(sAlumno vec[], int tam)
+{
+    int returnValue = 0;
+    int legajo;
+    int legajoExistente;
+    char borrar;
+
+    if(vec != NULL && tam > 0)
+    {
+        if(!input_getInt(&legajo, "Ingrese el legajo: ", "Intente nuevamente: ", 1000, 9999))
+        {
+            legajoExistente = buscarAlumnoPorLegajo(vec, tam, legajo);
+
+            if(legajoExistente == -1)
+            {
+                printf("El legajo ingresado no existe.\n");
+            }
+            else
+            {
+                printf("El alumno es:\n");
+                mostrarAlumno(vec[legajoExistente]);
+
+                printf("Desea borrar? [s] [n]: ");
+                setbuf(stdin, NULL);
+                scanf("%c", &borrar);
+
+                switch(borrar)
+                {
+                    case 'n':
+                        printf("Operacion cancelada.\n");
+                        break;
+                    case 's':
+                        vec[legajoExistente].isEmpty = ALUMNO_VACIO;
+                        input_clearBufferAfter();
+                        break;
+                    default:
+                        printf("Operacion invalida.\n");
+                        break;
+                }
+            }
         }
     }
 

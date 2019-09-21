@@ -33,6 +33,7 @@ void inicializarAlumnos(sAlumno vec[], int tam);
 int buscarAlumnoLibre(sAlumno vec[], int tam);
 int buscarAlumnoPorLegajo(sAlumno vec[], int tam, int legajo);
 int altaAlumno(sAlumno vec[], int tam);
+int bajaAlumno(sAlumno vec[], int tam);
 void mostrarAlumno(sAlumno alumno);
 void mostrarAlumnos(sAlumno vec[], int tam);
 
