@@ -13,6 +13,30 @@
 #define EXIT_BUFFER '\0' /**< Valor de terminacion de cadena de caracteres. >*/
 #define STRING_AS_NUMBER_MAX 64 /**< Buffer de entrada maximo para cadenas numericas. >*/
 #define STRING_MAX 256 /**< Se define la maxima cantidad de caracteres. >*/
+#define DAY_MIN 1 /**< Dia minimo de cada mes. >*/
+#define DAY_28 28 /**< Dia maximo de febrero de anio no bisiesto. >*/
+#define DAY_29 29 /**< Dia maximo de febrero de anio bisiesto. >*/
+#define DAY_30 30 /**< Dia maximo de abril, junio, septiembre y noviembre. >*/
+#define DAY_31 31 /**< Dia maximo de enero, marzo, mayo, julio, agosto, octubre y diciembre. >*/
+#define MONTH_MIN 1 /**< Mes minimo de cada anio. >*/
+#define MONTH_MAX 12 /**< Mes maximo de cada anio. >*/
+#define YEAR_MIN 1900 /**< Anio minimo definido por el programa. >*/
+#define YEAR_MAX 2500 /**< Anio maximo definido por el programa. >*/
+
+/*! \struct sDate
+ * \brief Tipo de Dato generico para almacenar una fecha.
+ * 
+ * \field day Valor del dia de la fecha.
+ * \field month Valor del mes de la fecha.
+ * \field year Valor del anio de la fecha.
+ * 
+ */
+typedef struct
+{
+    int day; /**< Valor del dia de la fecha. >*/
+    int month; /**< Valor del mes de la fecha. >*/
+    int year; /**< Valor del anio de la fecha. >*/
+} sDate;
 
 /** \brief Funcion que limpia el buffer de entrada a posterior del ingreso por teclado.
  *
@@ -57,7 +81,7 @@ int input_getNumberType(float number);
  * \param eMessage[] char Es el mensaje a ser mostrado en caso de error.
  * \param lowLimit int Limite inferior a validar.
  * \param hiLimit int Limite superior a validar.
- * \return int Si obtuvo el numero [0] si no [-1].
+ * \return int Si obtuvo el numero devuelve [0] si no [-1].
  *
  */
 int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int hiLimit);
@@ -69,7 +93,7 @@ int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int 
  * \param eMessage[] char Es el mensaje a ser mostrado en caso de error.
  * \param lowLimit float Limite inferior a validar.
  * \param hiLimit float Limite superior a validar.
- * \return int Si obtuvo el numero [0] si no [-1].
+ * \return int Si obtuvo el numero devuelve [0] si no [-1].
  *
  */
 int input_getFloat(float* input, char message[], char eMessage[], float lowLimit, float hiLimit);
@@ -82,7 +106,7 @@ int input_getFloat(float* input, char message[], char eMessage[], float lowLimit
  * \param eMessage[] char Es el mensaje a ser mostrado en caso de error.
  * \param lowLimit char Limite inferior a validar.
  * \param hiLimit char Limite superior a validar.
- * \return int Si obtuvo el caracter [0] si no [-1].
+ * \return int Si obtuvo el caracter devuelve [0] si no [-1].
  *
  */
 int input_getChar(char* input, char message[], char eMessage[], char lowLimit, char hiLimit);
@@ -94,10 +118,21 @@ int input_getChar(char* input, char message[], char eMessage[], char lowLimit, c
  * \param eMessage[] char Es el mensaje a ser mostrado en caso de error.
  * \param lowLimit int Longitud mínima de la cadena.
  * \param hiLimit int Longitud máxima de la cadena.
- * \return int Si obtuvo la cadena [0] si no [-1].
+ * \return int Si obtuvo la cadena devuelve [0] si no [-1].
  *
  */
 int input_getString(char* input, char message[], char eMessage[], int lowLimit, int hiLimit);
+
+/** \brief Solicita la carga de una fecha en pantalla
+ *      en formato latinoamericano DD/MM/AAAA.
+ * 
+ * \param date sDate* Puntero para almacenar el tipo de dato de fecha.
+ * \param message[] char Es el mensaje a ser mostrado.
+ * \param eMessage[] char Es el mensaje a ser mostrado en caso de error.
+ * \return Si obtuvo una fecha devuelve [0] si no [-1].
+ * 
+ */
+int input_getDate(sDate* date, char message[], char eMessage[]);
 
 /** \brief Valida la concatenacion de dos cadenas
  *      controlando el longitud de la primer cadena por parametro.
