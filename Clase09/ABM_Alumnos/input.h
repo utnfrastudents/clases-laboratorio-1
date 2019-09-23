@@ -174,4 +174,14 @@ char* input_stringToLowercase(char string[], int maxLength);
  */
 void input_printNumberByType(char message[], float number);
 
+/** \brief Funcion que realiza una consulta booleana al usuario
+ *      y devuelve la respuesta.
+ * 
+ * \param message[] char Pregunta al usuario.
+ * \return Si la respuesta es [S] o [Y] devuelve [1]
+ *      Si responde [N] devuelve [0].
+ * 
+ */
+int input_userResponse(char message[]);
+
 #endif // INPUT_H_INCLUDED

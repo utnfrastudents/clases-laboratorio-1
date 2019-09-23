@@ -127,23 +127,16 @@ int bajaAlumno(sAlumno vec[], int tam)
                 printf("El alumno es:\n");
                 mostrarAlumno(vec[legajoExistente]);
 
-                printf("Desea borrar? [S] [N]: ");
-                setbuf(stdin, NULL);
-                scanf("%c", &borrar);
-
-                switch(toupper(borrar))
+                if(input_userResponse("Desea borrar? [S] [N]: "))
                 {
-                    case NO:
-                        printf("Operacion cancelada.\n");
-                        break;
-                    case YES:
-                        vec[legajoExistente].isEmpty = ALUMNO_VACIO;
-                        input_clearBufferAfter();
-                        break;
-                    default:
-                        printf("Operacion invalida.\n");
-                        break;
+                    vec[legajoExistente].isEmpty = ALUMNO_VACIO;
+                    printf("Alumno borrado.\n");
                 }
+                else
+                {
+                    printf("Operacion cancelada.\n");
+                }
+                
             }
         }
     }

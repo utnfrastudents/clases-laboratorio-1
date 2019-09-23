@@ -17,6 +17,8 @@ ALUMNOH = alumno.h
 ALUMNOO = alumno.o
 PROJECT = base-practica-c
 
+debug: $(PROJECT)
+	./$(EXEDIR)$^
 $(PROJECT): $(OBJDIR)$(INPO) $(OBJDIR)$(ALUMNOO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
 	$(CC) $(WFLAGS) $^ -o $(EXEDIR)$@
 $(OBJDIR)$(OBJ): $(MENUH) $(SRC)
@@ -33,5 +35,3 @@ $(OBJDIR)$(INPO): $(INPC)
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 clean:
 	$(RM) $(PROJECT).layout $(PROJECT).depend $(OBJDIR)*.o $(EXEDIR)$(PROJECT)
-debug: $(PROJECT)
-	./$(EXEDIR)$^

@@ -499,3 +499,25 @@ static int isDate(sDate date)
 
     return returnValue;
 }
+
+int input_userResponse(char message[])
+{
+    int returnValue = 0;
+    char response;
+
+    if(message != NULL)
+    {
+        printf("%s", message);
+        setbuf(stdin, NULL);
+        scanf("%c", &response);
+
+        if(toupper(response) == 'S' || toupper(response) == 'Y')
+        {
+            returnValue = 1;
+        }
+
+        input_clearBufferAfter();
+    }
+
+    return returnValue;
+}
