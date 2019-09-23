@@ -2,6 +2,7 @@
 
 int main()
 {
+    int legajo = 2000;
     int lifeCycle; /**< Indicador del ciclo de vida de cada menu >*/
     int optionMainMenu; /**< Opcion elegida por el usuario del menu principal >*/
 //    int optionCreateMenu; /**< Opcion elegida por el usuario para el menu de alta >*/
@@ -13,7 +14,7 @@ int main()
 
     inicializarAlumnos(alumnos, TAM);
 
-    hardcodearAlumnos(alumnos, TAM, 9);
+    legajo += hardcodearAlumnos(alumnos, TAM, 9);
 
     do
     {
@@ -28,9 +29,10 @@ int main()
         switch (optionMainMenu)
         {
             case 1: // Opcion elegida: Alta de Empleado
-                if(altaAlumno(alumnos, TAM))
+                if(altaAlumno(alumnos, TAM, legajo))
                 {
                     printf("Carga exitosa del alumno.\n");
+                    legajo++;
                 }
                 break;
             case 2: // Opcion elegida: Modificar un Empleado

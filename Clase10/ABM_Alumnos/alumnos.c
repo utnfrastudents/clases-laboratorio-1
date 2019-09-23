@@ -59,7 +59,7 @@ int buscarAlumnoPorLegajo(sAlumno vec[], int tam, int legajo)
     return indice;
 }
 
-int altaAlumno(sAlumno vec[], int tam)
+int altaAlumno(sAlumno vec[], int tam, int legajo)
 {
     int returnValue = 0;
     sAlumno alumnoAux;
@@ -72,27 +72,25 @@ int altaAlumno(sAlumno vec[], int tam)
 
         if(indiceAlumno != -1)
         {
-            if(!inputs_getInt(&alumnoAux.legajo, "Ingrese el legajo: ", "Intente nuevamente: ", 1000, 9999))
+            legajoExistente = buscarAlumnoPorLegajo(vec, tam, legajo);
+
+            if(legajoExistente != -1)
             {
-                legajoExistente = buscarAlumnoPorLegajo(vec, tam, alumnoAux.legajo);
-                if(legajoExistente != -1)
+                printf("El legajo ya se encuentra registrado.\n");
+                mostrarAlumno(vec[legajoExistente]);
+            }
+            else
+            {
+                if(!inputs_getString(alumnoAux.nombre, "Ingrese el nombre: ", "Intente nuevamente: ", 1, NOMBRE)
+                    && !inputs_getInt(&alumnoAux.edad, "Ingrese la edad: ", "Intente nuevamente: ", 0, 150)
+                    && !inputs_getChar(&alumnoAux.sexo, "Ingrese el sexo [f] o [m]: ", "Intente nuevamente: ", 'a', 'z')
+                    && !inputs_getInt(&alumnoAux.notaParcial1, "Ingrese primer parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
+                    && !inputs_getInt(&alumnoAux.notaParcial2, "Ingrese segundo parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
+                    && !inputs_getDate(&alumnoAux.fechaIngreso, "Fecha de ingreso DD/MM/AAA: ", "Intente nuevamente: "))
                 {
-                    printf("El legajo ya se encuentra registrado.\n");
-                    mostrarAlumno(vec[legajoExistente]);
-                }
-                else
-                {
-                    if(!inputs_getString(alumnoAux.nombre, "Ingrese el nombre: ", "Intente nuevamente: ", 1, NOMBRE)
-                        && !inputs_getInt(&alumnoAux.edad, "Ingrese la edad: ", "Intente nuevamente: ", 0, 150)
-                        && !inputs_getChar(&alumnoAux.sexo, "Ingrese el sexo [f] o [m]: ", "Intente nuevamente: ", 'a', 'z')
-                        && !inputs_getInt(&alumnoAux.notaParcial1, "Ingrese primer parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
-                        && !inputs_getInt(&alumnoAux.notaParcial2, "Ingrese segundo parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
-                        && !inputs_getDate(&alumnoAux.fechaIngreso, "Fecha de ingreso DD/MM/AAA: ", "Intente nuevamente: "))
-                    {
-                        vec[indiceAlumno] = newAlumno(alumnoAux.legajo, alumnoAux.nombre, alumnoAux.edad,
-                            alumnoAux.sexo, alumnoAux.notaParcial1, alumnoAux.notaParcial2, alumnoAux.fechaIngreso);
-                        returnValue = 1;
-                    }
+                    vec[indiceAlumno] = newAlumno(legajo, alumnoAux.nombre, alumnoAux.edad,
+                        alumnoAux.sexo, alumnoAux.notaParcial1, alumnoAux.notaParcial2, alumnoAux.fechaIngreso);
+                    returnValue = 1;
                 }
             }
         }
@@ -209,16 +207,16 @@ int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad)
     int contador = 0;
 
     sAlumno suplentes[] = {
-        {1234, "juan sosa", 20, 'm', 4, 6, 5, {16, 10, 2019}, 0},
-        {1111, "juana martinez", 19, 'f', 7, 4, 5, {20, 2, 2016}, 0},
-        {5555, "ariel perez", 20, 'm', 8, 6, 7, {12, 5, 2014}, 0},
-        {2222, "alicia saenz", 21, 'f', 9, 6, 7, {9, 7, 2013}, 0},
-        {1166, "nahuel hernandez", 30, 'm', 2, 4, 3, {4, 12, 2019}, 0},
-        {2234, "carlos llorente", 33, 'm', 4, 6, 5, {26, 6, 2017}, 0},
-        {3111, "manuela lopez", 39, 'f', 7, 4, 5, {10, 8, 2015}, 0},
-        {1555, "ricado perez", 22, 'm', 8, 6, 7, {15, 11, 2009}, 0},
-        {9222, "sol diaz", 27, 'f', 9, 6, 7, {30, 3, 2012}, 0},
-        {8166, "micael rodriguez", 20, 'm', 2, 4, 3, {10, 1, 2018}, 0}
+        {1994, "juan sosa", 20, 'm', 4, 6, 5, {16, 10, 2019}, 0},
+        {1997, "juana martinez", 19, 'f', 7, 4, 5, {20, 2, 2016}, 0},
+        {1996, "ariel perez", 20, 'm', 8, 6, 7, {12, 5, 2014}, 0},
+        {1991, "alicia saenz", 21, 'f', 9, 6, 7, {9, 7, 2013}, 0},
+        {1995, "nahuel hernandez", 30, 'm', 2, 4, 3, {4, 12, 2019}, 0},
+        {1992, "carlos llorente", 33, 'm', 4, 6, 5, {26, 6, 2017}, 0},
+        {1998, "manuela lopez", 39, 'f', 7, 4, 5, {10, 8, 2015}, 0},
+        {2000, "ricado perez", 22, 'm', 8, 6, 7, {15, 11, 2009}, 0},
+        {1999, "sol diaz", 27, 'f', 9, 6, 7, {30, 3, 2012}, 0},
+        {1993, "micael rodriguez", 20, 'm', 2, 4, 3, {10, 1, 2018}, 0}
     };
 
     if(vec != NULL && cantidad <= 10 && tam >= cantidad)
