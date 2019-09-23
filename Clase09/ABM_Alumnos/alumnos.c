@@ -1,4 +1,4 @@
-#include "alumno.h"
+#include "alumnos.h"
 
 /** \brief Funcion que carga como un constructor los campos de un Alumno
  *
@@ -72,7 +72,7 @@ int altaAlumno(sAlumno vec[], int tam)
 
         if(indiceAlumno != -1)
         {
-            if(!input_getInt(&alumnoAux.legajo, "Ingrese el legajo: ", "Intente nuevamente: ", 1000, 9999))
+            if(!inputs_getInt(&alumnoAux.legajo, "Ingrese el legajo: ", "Intente nuevamente: ", 1000, 9999))
             {
                 legajoExistente = buscarAlumnoPorLegajo(vec, tam, alumnoAux.legajo);
                 if(legajoExistente != -1)
@@ -82,12 +82,12 @@ int altaAlumno(sAlumno vec[], int tam)
                 }
                 else
                 {
-                    if(!input_getString(alumnoAux.nombre, "Ingrese el nombre: ", "Intente nuevamente: ", 1, NOMBRE)
-                        && !input_getInt(&alumnoAux.edad, "Ingrese la edad: ", "Intente nuevamente: ", 0, 150)
-                        && !input_getChar(&alumnoAux.sexo, "Ingrese el sexo [f] o [m]: ", "Intente nuevamente: ", 'a', 'z')
-                        && !input_getInt(&alumnoAux.notaParcial1, "Ingrese primer parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
-                        && !input_getInt(&alumnoAux.notaParcial2, "Ingrese segundo parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
-                        && !input_getDate(&alumnoAux.fechaIngreso, "Fecha de ingreso DD/MM/AAA: ", "Intente nuevamente: "))
+                    if(!inputs_getString(alumnoAux.nombre, "Ingrese el nombre: ", "Intente nuevamente: ", 1, NOMBRE)
+                        && !inputs_getInt(&alumnoAux.edad, "Ingrese la edad: ", "Intente nuevamente: ", 0, 150)
+                        && !inputs_getChar(&alumnoAux.sexo, "Ingrese el sexo [f] o [m]: ", "Intente nuevamente: ", 'a', 'z')
+                        && !inputs_getInt(&alumnoAux.notaParcial1, "Ingrese primer parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
+                        && !inputs_getInt(&alumnoAux.notaParcial2, "Ingrese segundo parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
+                        && !inputs_getDate(&alumnoAux.fechaIngreso, "Fecha de ingreso DD/MM/AAA: ", "Intente nuevamente: "))
                     {
                         vec[indiceAlumno] = newAlumno(alumnoAux.legajo, alumnoAux.nombre, alumnoAux.edad,
                             alumnoAux.sexo, alumnoAux.notaParcial1, alumnoAux.notaParcial2, alumnoAux.fechaIngreso);
@@ -113,7 +113,7 @@ int bajaAlumno(sAlumno vec[], int tam)
 
     if(vec != NULL && tam > 0)
     {
-        if(!input_getInt(&legajo, "Ingrese el legajo: ", "Intente nuevamente: ", 1000, 9999))
+        if(!inputs_getInt(&legajo, "Ingrese el legajo: ", "Intente nuevamente: ", 1000, 9999))
         {
             legajoExistente = buscarAlumnoPorLegajo(vec, tam, legajo);
 
@@ -126,7 +126,7 @@ int bajaAlumno(sAlumno vec[], int tam)
                 printf("El alumno es:\n");
                 mostrarAlumno(vec[legajoExistente]);
 
-                if(input_userResponse("Desea borrar? [S] [N]: "))
+                if(inputs_userResponse("Desea borrar? [S] [N]: "))
                 {
                     vec[legajoExistente].isEmpty = ALUMNO_VACIO;
                     printf("Alumno borrado.\n");

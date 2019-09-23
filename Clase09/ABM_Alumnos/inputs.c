@@ -1,32 +1,6 @@
-#include "input.h"
+#include "inputs.h"
 
-/** \brief Funcion que evalua si una cadena ingresada por teclado
- *  es un numero decimal.
- *
- * \param stringValue[] char Direccion de la cadena a evaluar.
- * \return int Si es un numero decimal retorna [1] si no [0].
- *
- */
-static int isNumber(char stringValue[]);
-
-/** \brief Funcion que evalua si una cadena ingresada por teclado
- *  es un numero flontante.
- *
- * \param stringValue[] char Direccion de la cadena a evaluar.
- * \return int Si es un numero flotante retorna [1] si no [0].
- *
- */
-static int isFloat(char stringValue[]);
-
-/** \brief Funcion que evalua si la fecha ingresada es válida
- *
- * \param date sDate Fecha a evaluar.
- * \return int Si es una fecha retorna [1] si no [0].
- *
- */
-static int isDate(sDate date);
-
-void input_clearBufferAfter()
+void inputs_clearBufferAfter()
 {
     /**< Mientras que en el buffer no exista un Enter
     la funcion getchar toma sus valores. */
@@ -36,7 +10,7 @@ void input_clearBufferAfter()
     }
 }
 
-void input_clearScreen()
+void inputs_clearScreen()
 {
     /**< Para los sistemas basados en UNIX. */
     #if defined (__unix__) || defined (__APPLE__) || defined (__MACH__)
@@ -50,7 +24,7 @@ void input_clearScreen()
     #endif
 }
 
-void input_pauseScreen(char message[])
+void inputs_pauseScreen(char message[])
 {
     printf("%s", message);
 
@@ -59,7 +33,74 @@ void input_pauseScreen(char message[])
     getchar(); /**< Metodo para pausar la ejecucion del programa. */
 }
 
-int input_getNumberType(float number)
+int inputs_isNumber(char stringValue[])
+{
+    int returnValue = 0;  /**< Variable de retorno. >*/
+    int i = 0; /**< Variable contador de ciclos de cada caracter de la cadena. >*/
+
+    char charAux; /**< Variable para almacenar el caracter actual del ciclo. >*/
+
+    while(stringValue[i] != (int)EXIT_BUFFER)
+    {
+        charAux = stringValue[i];
+        if(i == 0 && (charAux == '-' || charAux == '+'))
+        {
+            i = 1;
+        }
+
+        if((int)charAux >= (int)'0' && (int)charAux <= (int)'9')
+        {
+            returnValue = 1;
+        }
+        else
+        {
+            returnValue = 0;
+            break;
+        }
+        i++;
+    }
+
+    return returnValue;
+}
+
+int inputs_isFloat(char stringValue[])
+{
+    int returnValue = 0;  /**< Variable de retorno. >*/
+    int i = 0; /**< Variable contador de ciclos de cada caracter de la cadena. >*/
+    int pointerCounter = 0; /**< Variable para almacenar la cantidad de puntos de la cadena. >*/
+
+    while(stringValue[i] != (int)EXIT_BUFFER)
+    {
+        if(i == 0 && ((int)stringValue[0] == (int)'-'
+        || (int)stringValue[0] == (int)'+'))
+        {
+            i = 1;
+        }
+
+        if(stringValue[i] == '.')
+        {
+            pointerCounter++;
+        }
+        else
+        {
+            if((int)stringValue[i] >= (int)'0'
+                && (int)stringValue[i] <= (int)'9' && pointerCounter <= 1)
+            {
+                returnValue = 1;
+            }
+            else
+            {
+                returnValue = 0;
+                break;
+            }
+        }
+        i++;
+    }
+
+    return returnValue;
+}
+
+int inputs_getNumberType(float number)
 {
     int returnEvaluation; /**< Se almacena el indicador de tipo de numero. >*/
     float floorNumber; /**< Se almacena la parte entera de un numero. >*/
@@ -85,7 +126,7 @@ int input_getNumberType(float number)
     return returnEvaluation;
 }
 
-int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int hiLimit)
+int inputs_getInt(int* input, char message[], char eMessage[], int lowLimit, int hiLimit)
 {
     int returnValue = -1; /**< Variable de retorno. >*/
     int counter = 0; /**< Variable contador de ciclos de solicitudes al usuario. >*/
@@ -115,7 +156,7 @@ int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int 
 
             scanf("%s", stringNumber);
 
-            numberIndicator = isNumber(stringNumber);
+            numberIndicator = inputs_isNumber(stringNumber);
             if(numberIndicator)
             {
                 convertedNumber = atoi(stringNumber);
@@ -133,7 +174,7 @@ int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int 
     return returnValue;
 }
 
-int input_getFloat(float* input, char message[], char eMessage[], float lowLimit, float hiLimit)
+int inputs_getFloat(float* input, char message[], char eMessage[], float lowLimit, float hiLimit)
 {
     int returnValue = -1; /**< Variable de retorno. >*/
     int counter = 0; /**< Variable contador de ciclos de solicitudes al usuario. >*/
@@ -164,7 +205,7 @@ int input_getFloat(float* input, char message[], char eMessage[], float lowLimit
 
             scanf("%s", stringNumber);
 
-            numberIndicator = isFloat(stringNumber);
+            numberIndicator = inputs_isFloat(stringNumber);
             if(numberIndicator)
             {
                 convertedNumber = atof(stringNumber);
@@ -182,7 +223,7 @@ int input_getFloat(float* input, char message[], char eMessage[], float lowLimit
     return returnValue;
 }
 
-int input_getChar(char* input, char message[], char eMessage[], char lowLimit, char hiLimit)
+int inputs_getChar(char* input, char message[], char eMessage[], char lowLimit, char hiLimit)
 {
     int returnValue = -1; /**< Variable de retorno. >*/
     int counter = 0; /**< Variable contador de ciclos de solicitudes al usuario. >*/
@@ -223,7 +264,7 @@ int input_getChar(char* input, char message[], char eMessage[], char lowLimit, c
     return returnValue;
 }
 
-int input_getString(char* input, char message[], char eMessage[], int lowLimit, int hiLimit)
+int inputs_getString(char* input, char message[], char eMessage[], int lowLimit, int hiLimit)
 {
     int returnValue = -1; /**< Variable de retorno. >*/
     int counter = 0; /**< Variable contador de ciclos de solicitudes al usuario. >*/
@@ -276,7 +317,7 @@ int input_getString(char* input, char message[], char eMessage[], int lowLimit, 
     return returnValue;
 }
 
-int input_getDate(sDate* date, char message[], char eMessage[])
+int inputs_getDate(sDate* date, char message[], char eMessage[])
 {
     int returnValue = -1;
     int counter = 0;
@@ -300,12 +341,12 @@ int input_getDate(sDate* date, char message[], char eMessage[])
             setbuf(stdin, NULL); /**< Limpieza de buffer previo. */
             if(scanf("%d/%d/%d", &dateAux.day, &dateAux.month, &dateAux.year) != 3)
             {
-                input_clearBufferAfter();
+                inputs_clearBufferAfter();
                 continue;
             }
-        } while (!isDate(dateAux));
+        } while (!structs_isDate(dateAux));
 
-        if(isDate(dateAux))
+        if(structs_isDate(dateAux))
         {
             date->day = dateAux.day;
             date->month = dateAux.month;
@@ -318,9 +359,9 @@ int input_getDate(sDate* date, char message[], char eMessage[])
     return returnValue;
 }
 
-void input_printNumberByType(char message[], float number)
+void inputs_printNumberByType(char message[], float number)
 {
-    switch (input_getNumberType(number))
+    switch (inputs_getNumberType(number))
     {
         case 1:
             /**< Se imprime en consola el numero como entero */
@@ -333,117 +374,7 @@ void input_printNumberByType(char message[], float number)
     }
 }
 
-static int isNumber(char stringValue[])
-{
-    int returnValue = 0;  /**< Variable de retorno. >*/
-    int i = 0; /**< Variable contador de ciclos de cada caracter de la cadena. >*/
-
-    char charAux; /**< Variable para almacenar el caracter actual del ciclo. >*/
-
-    while(stringValue[i] != (int)EXIT_BUFFER)
-    {
-        charAux = stringValue[i];
-        if(i == 0 && (charAux == '-' || charAux == '+'))
-        {
-            i = 1;
-        }
-
-        if((int)charAux >= (int)'0' && (int)charAux <= (int)'9')
-        {
-            returnValue = 1;
-        }
-        else
-        {
-            returnValue = 0;
-            break;
-        }
-        i++;
-    }
-
-    return returnValue;
-}
-
-static int isFloat(char stringValue[])
-{
-    int returnValue = 0;  /**< Variable de retorno. >*/
-    int i = 0; /**< Variable contador de ciclos de cada caracter de la cadena. >*/
-    int pointerCounter = 0; /**< Variable para almacenar la cantidad de puntos de la cadena. >*/
-
-    while(stringValue[i] != (int)EXIT_BUFFER)
-    {
-        if(i == 0 && ((int)stringValue[0] == (int)'-'
-        || (int)stringValue[0] == (int)'+'))
-        {
-            i = 1;
-        }
-
-        if(stringValue[i] == '.')
-        {
-            pointerCounter++;
-        }
-        else
-        {
-            if((int)stringValue[i] >= (int)'0'
-                && (int)stringValue[i] <= (int)'9' && pointerCounter <= 1)
-            {
-                returnValue = 1;
-            }
-            else
-            {
-                returnValue = 0;
-                break;
-            }
-        }
-        i++;
-    }
-
-    return returnValue;
-}
-
-static int isDate(sDate date)
-{
-    int returnValue = 0;
-
-    if(date.year >= YEAR_MIN && date.year <= YEAR_MAX
-        && date.month >= MONTH_MIN && date.month <= MONTH_MAX)
-    {
-        switch (date.month)
-        {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if(date.day >= DAY_MIN && date.day <= DAY_31)
-                {
-                    returnValue = 1;
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if(date.day >= DAY_MIN && date.day <= DAY_30)
-                {
-                    returnValue = 1;
-                }
-                break;
-            case 2:
-                if((date.year % 4 == 0 && date.day >= DAY_MIN && date.day <= DAY_29)
-                    || (date.year % 4 != 0 && date.day >= DAY_MIN && date.day <= DAY_28))
-                {
-                    returnValue = 1;
-                }
-                break;
-        }
-    }
-
-    return returnValue;
-}
-
-int input_userResponse(char message[])
+int inputs_userResponse(char message[])
 {
     int returnValue = 0;
     char response;
@@ -459,7 +390,7 @@ int input_userResponse(char message[])
             returnValue = 1;
         }
 
-        input_clearBufferAfter();
+        inputs_clearBufferAfter();
     }
 
     return returnValue;

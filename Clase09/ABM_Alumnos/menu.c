@@ -4,7 +4,7 @@ int menu_main(int* option)
 {
     int returnValue = -1;
 
-    input_clearScreen();
+    inputs_clearScreen();
 
     printf("=======================================================\n");
     printf("                MENU DE ALUMNOS\n");
@@ -18,7 +18,7 @@ int menu_main(int* option)
     printf("    7 - Salir\n");
     printf("=======================================================\n");
 
-    if(!input_getInt(option, "Elija una opcion del menu: ",
+    if(!inputs_getInt(option, "Elija una opcion del menu: ",
         "Opcion incorrecta, ingrese nuevamente: ", OPTION_MIN, MAIN_MAX))
     {
         returnValue = 0;
@@ -31,7 +31,7 @@ int menu_update(int* option)
 {
     int returnValue = -1;
 
-    input_clearScreen();
+    inputs_clearScreen();
 
     printf("=======================================================\n");
     printf("                MODIFICAR ALUMNO\n");
@@ -44,7 +44,7 @@ int menu_update(int* option)
     printf("    6 - Volver al menu principal\n");
     printf("=======================================================\n");
 
-    if(!input_getInt(option, "Elija una opcion del menu: ",
+    if(!inputs_getInt(option, "Elija una opcion del menu: ",
         "Opcion incorrecta, ingrese nuevamente: ", OPTION_MIN, UPDATE_MAX))
     {
         returnValue = 0;

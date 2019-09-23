@@ -1,7 +1,7 @@
 #ifndef ALUMNOS_H_INCLUDED
 #define ALUMNOS_H_INCLUDED
 
-#include "arrays.h"
+#include "inputs.h"
 
 #define ALUMNOS 2
 #define ALUMNO_VACIO 1

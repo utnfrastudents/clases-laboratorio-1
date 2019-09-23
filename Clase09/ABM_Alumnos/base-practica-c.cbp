@@ -19,18 +19,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="alumno.c">
+		<Unit filename="alumnos.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="alumno.h" />
+		<Unit filename="alumnos.h" />
 		<Unit filename="arrays.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="arrays.h" />
-		<Unit filename="input.c">
+		<Unit filename="inputs.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="input.h" />
+		<Unit filename="inputs.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -38,6 +38,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
+		<Unit filename="structs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="structs.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />

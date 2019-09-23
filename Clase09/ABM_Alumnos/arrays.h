@@ -1,7 +1,14 @@
 #ifndef ARRAYS_H_INCLUDED
 #define ARRAYS_H_INCLUDED
 
-#include "input.h"
+#include <string.h>
+#include <ctype.h>
+#include <float.h>
+#include "structs.h"
+
+#define STRING_AS_NUMBER_MAX 64 /**< Buffer de entrada maximo para cadenas numericas. >*/
+#define STRING_MAX 256 /**< Se define la maxima cantidad de caracteres. >*/
+#define EXIT_BUFFER '\0' /**< Valor de terminacion de cadena de caracteres. >*/
 
 /** \brief Funcion de intercambio de numeros enteros.
  * 

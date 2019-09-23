@@ -7,22 +7,25 @@ CFLAGS = -c
 WFLAGS = -Wall
 SRC = main.c
 OBJ = main.o
-INPC = input.c
-INPH = input.h
-INPO = input.o
 MENUC = menu.c
 MENUH = menu.h
 MENUO = menu.o
-ALUMNOC = alumno.c
-ALUMNOH = alumno.h
-ALUMNOO = alumno.o
+ALUC = alumnos.c
+ALUH = alumnos.h
+ALUO = alumnos.o
+INPC = inputs.c
+INPH = inputs.h
+INPO = inputs.o
 ARRC = arrays.c
 ARRH = arrays.h
 ARRO = arrays.o
+STRC = structs.c
+STRH = structs.h
+STRO = structs.o
 
 debug: $(PROJECT)
 	./$(EXEDIR)$^
-$(PROJECT): $(OBJDIR)$(INPO) $(OBJDIR)$(ARRO) $(OBJDIR)$(ALUMNOO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
+$(PROJECT): $(OBJDIR)$(STRO) $(OBJDIR)$(ARRO) $(OBJDIR)$(INPO) $(OBJDIR)$(ALUO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
 	$(CC) $(WFLAGS) $^ -o $(EXEDIR)$@
 $(OBJDIR)$(OBJ): $(MENUH) $(SRC)
 	cd $(OBJDIR) \
@@ -30,14 +33,19 @@ $(OBJDIR)$(OBJ): $(MENUH) $(SRC)
 $(OBJDIR)$(MENUO): $(MENUC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
-$(OBJDIR)$(ALUMNOO): $(ALUMNOC)
+$(OBJDIR)$(ALUO): $(ALUC)
+	cd $(OBJDIR) \
+	&& $(CC) $(CFLAGS) $(UPDIR)$^
+$(OBJDIR)$(INPO): $(INPC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(ARRO): $(ARRC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
-$(OBJDIR)$(INPO): $(INPC)
-	cd $(OBJDIR) \
+$(OBJDIR)$(STRO): $(STRC)
+	mkdir -p $(OBJDIR) \
+	&& mkdir -p $(EXEDIR) \
+	&& cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 clean:
 	$(RM) $(PROJECT).layout $(PROJECT).depend $(OBJDIR)*.o $(EXEDIR)$(PROJECT)

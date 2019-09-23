@@ -1,44 +1,13 @@
-#ifndef INPUT_H_INCLUDED
-#define INPUT_H_INCLUDED
+#ifndef INPUTS_H_INCLUDED
+#define INPUTS_H_INCLUDED
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <float.h>
 #include <math.h>
-#include <ctype.h>
 #include <limits.h>
+#include "arrays.h"
 
 #define ENTER_CHARACTER '\n' /**< Caracter de tecla enter por teclado. >*/
-#define EXIT_BUFFER '\0' /**< Valor de terminacion de cadena de caracteres. >*/
-#define STRING_AS_NUMBER_MAX 64 /**< Buffer de entrada maximo para cadenas numericas. >*/
-#define STRING_MAX 256 /**< Se define la maxima cantidad de caracteres. >*/
-#define DAY_MIN 1 /**< Dia minimo de cada mes. >*/
-#define DAY_28 28 /**< Dia maximo de febrero de anio no bisiesto. >*/
-#define DAY_29 29 /**< Dia maximo de febrero de anio bisiesto. >*/
-#define DAY_30 30 /**< Dia maximo de abril, junio, septiembre y noviembre. >*/
-#define DAY_31 31 /**< Dia maximo de enero, marzo, mayo, julio, agosto, octubre y diciembre. >*/
-#define MONTH_MIN 1 /**< Mes minimo de cada anio. >*/
-#define MONTH_MAX 12 /**< Mes maximo de cada anio. >*/
-#define YEAR_MIN 1900 /**< Anio minimo definido por el programa. >*/
-#define YEAR_MAX 2500 /**< Anio maximo definido por el programa. >*/
 #define YES 'S' /**< Respuesta SI por teclado. >*/
 #define NO 'N' /**< Respuesta NO por teclado. >*/
-
-/*! \struct sDate
- * \brief Tipo de Dato generico para almacenar una fecha.
- * 
- * \field day Valor del dia de la fecha.
- * \field month Valor del mes de la fecha.
- * \field year Valor del anio de la fecha.
- * 
- */
-typedef struct
-{
-    int day; /**< Valor del dia de la fecha. >*/
-    int month; /**< Valor del mes de la fecha. >*/
-    int year; /**< Valor del anio de la fecha. >*/
-} sDate;
 
 /** \brief Funcion que limpia el buffer de entrada a posterior del ingreso por teclado.
  *
@@ -46,7 +15,7 @@ typedef struct
  * \return void No retorna valores.
  *
  */
-void input_clearBufferAfter(void);
+void inputs_clearBufferAfter(void);
 
 /** \brief Funcion que limpia la pantalla de la consola en los diferentes SO.
  *
@@ -54,7 +23,7 @@ void input_clearBufferAfter(void);
  * \return void No retorna valores.
  *
  */
-void input_clearScreen(void);
+void inputs_clearScreen(void);
 
 /** \brief Funcion que interrumpe la ejecucion del programa
  *      hasta que se presiona la tecla Enter.
@@ -63,7 +32,25 @@ void input_clearScreen(void);
  * \return void No retorna valores.
  *
  */
-void input_pauseScreen(char message[]);
+void inputs_pauseScreen(char message[]);
+
+/** \brief Funcion que evalua si una cadena ingresada por teclado
+ *  es un numero decimal.
+ *
+ * \param stringValue[] char Direccion de la cadena a evaluar.
+ * \return int Si es un numero decimal retorna [1] si no [0].
+ *
+ */
+int inputs_isNumber(char stringValue[]);
+
+/** \brief Funcion que evalua si una cadena ingresada por teclado
+ *  es un numero flontante.
+ *
+ * \param stringValue[] char Direccion de la cadena a evaluar.
+ * \return int Si es un numero flotante retorna [1] si no [0].
+ *
+ */
+int inputs_isFloat(char stringValue[]);
 
 /** \brief Solicita un numero flotante al usuario e indica su tipo.
  *
@@ -74,7 +61,7 @@ void input_pauseScreen(char message[]);
  *      Si devuelve [2] el numero es de tipo flotante.
  *
  */
-int input_getNumberType(float number);
+int inputs_getNumberType(float number);
 
 /** \brief Solicita un numero al usuario y lo valida.
  *
@@ -86,7 +73,7 @@ int input_getNumberType(float number);
  * \return int Si obtuvo el numero devuelve [0] si no [-1].
  *
  */
-int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int hiLimit);
+int inputs_getInt(int* input, char message[], char eMessage[], int lowLimit, int hiLimit);
 
 /** \brief Solicita un numero flotante al usuario y lo valida.
  *
@@ -98,7 +85,7 @@ int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int 
  * \return int Si obtuvo el numero devuelve [0] si no [-1].
  *
  */
-int input_getFloat(float* input, char message[], char eMessage[], float lowLimit, float hiLimit);
+int inputs_getFloat(float* input, char message[], char eMessage[], float lowLimit, float hiLimit);
 
 
 /** \brief Solicita un caracter al usuario y lo valida.
@@ -111,7 +98,7 @@ int input_getFloat(float* input, char message[], char eMessage[], float lowLimit
  * \return int Si obtuvo el caracter devuelve [0] si no [-1].
  *
  */
-int input_getChar(char* input, char message[], char eMessage[], char lowLimit, char hiLimit);
+int inputs_getChar(char* input, char message[], char eMessage[], char lowLimit, char hiLimit);
 
 /** \brief Solicita una cadena de caracteres al usuario y la valida.
  *
@@ -123,7 +110,7 @@ int input_getChar(char* input, char message[], char eMessage[], char lowLimit, c
  * \return int Si obtuvo la cadena devuelve [0] si no [-1].
  *
  */
-int input_getString(char* input, char message[], char eMessage[], int lowLimit, int hiLimit);
+int inputs_getString(char* input, char message[], char eMessage[], int lowLimit, int hiLimit);
 
 /** \brief Solicita la carga de una fecha en pantalla
  *      en formato latinoamericano DD/MM/AAAA.
@@ -134,7 +121,7 @@ int input_getString(char* input, char message[], char eMessage[], int lowLimit, 
  * \return Si obtuvo una fecha devuelve [0] si no [-1].
  * 
  */
-int input_getDate(sDate* date, char message[], char eMessage[]);
+int inputs_getDate(sDate* date, char message[], char eMessage[]);
 
 /** \brief Funcion que imprime un numero en pantalla segun su tipo.
  *
@@ -143,7 +130,7 @@ int input_getDate(sDate* date, char message[], char eMessage[]);
  * \return void No retorna valores.
  *
  */
-void input_printNumberByType(char message[], float number);
+void inputs_printNumberByType(char message[], float number);
 
 /** \brief Funcion que realiza una consulta booleana al usuario
  *      y devuelve la respuesta.
@@ -153,6 +140,6 @@ void input_printNumberByType(char message[], float number);
  *      Si responde [N] devuelve [0].
  * 
  */
-int input_userResponse(char message[]);
+int inputs_userResponse(char message[]);
 
-#endif // INPUT_H_INCLUDED
+#endif // INPUTS_H_INCLUDED
