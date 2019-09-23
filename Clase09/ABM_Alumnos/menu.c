@@ -18,8 +18,8 @@ int menu_main(int* option)
     printf("    7 - Salir\n");
     printf("=======================================================\n");
 
-    if(!input_getInt(option, "Elija una opcion del menu",
-        "Opcion incorrecta, ingrese nuevamente", OPTION_MIN, MAIN_MAX))
+    if(!input_getInt(option, "Elija una opcion del menu: ",
+        "Opcion incorrecta, ingrese nuevamente: ", OPTION_MIN, MAIN_MAX))
     {
         returnValue = 0;
     }
@@ -44,8 +44,8 @@ int menu_update(int* option)
     printf("    6 - Volver al menu principal\n");
     printf("=======================================================\n");
 
-    if(!input_getInt(option, "Elija una opcion del menu",
-        "Opcion incorrecta, ingrese nuevamente", OPTION_MIN, UPDATE_MAX))
+    if(!input_getInt(option, "Elija una opcion del menu: ",
+        "Opcion incorrecta, ingrese nuevamente: ", OPTION_MIN, UPDATE_MAX))
     {
         returnValue = 0;
     }

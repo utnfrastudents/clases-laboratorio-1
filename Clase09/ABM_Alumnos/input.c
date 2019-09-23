@@ -103,13 +103,13 @@ int input_getInt(int* input, char message[], char eMessage[], int lowLimit, int 
 
             if(counter == 1)
             {
-                printf("%s: ", message);
+                printf("%s", message);
             }
             else
             {
                 if(counter > 1)
                 {
-                    printf("%s: ", eMessage);
+                    printf("%s", eMessage);
                 }
             }
 
@@ -152,13 +152,13 @@ int input_getFloat(float* input, char message[], char eMessage[], float lowLimit
 
             if(counter == 1)
             {
-                printf("%s: ", message);
+                printf("%s", message);
             }
             else
             {
                 if(counter > 1)
                 {
-                    printf("%s: ", eMessage);
+                    printf("%s", eMessage);
                 }
             }
 
@@ -199,13 +199,13 @@ int input_getChar(char* input, char message[], char eMessage[], char lowLimit, c
 
             if(counter == 1)
             {
-                printf("%s: ", message);
+                printf("%s", message);
             }
             else
             {
                 if(counter > 1)
                 {
-                    printf("%s: ", eMessage);
+                    printf("%s", eMessage);
                 }
             }
 

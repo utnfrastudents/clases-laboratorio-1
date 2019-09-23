@@ -7,7 +7,7 @@
  *
  */
 sAlumno newAlumno(int legajo, char nombre[TAM], int edad, char sexo,
-    int notaParcial1, int notaParcial2, sFecha fechaIngreso);
+    int notaParcial1, int notaParcial2, sDate fechaIngreso);
 
 void inicializarAlumnos(sAlumno vec[], int tam)
 {
@@ -87,7 +87,7 @@ int altaAlumno(sAlumno vec[], int tam)
                         && !input_getChar(&alumnoAux.sexo, "Ingrese el sexo [f] o [m]: ", "Intente nuevamente: ", 'a', 'z')
                         && !input_getInt(&alumnoAux.notaParcial1, "Ingrese primer parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
                         && !input_getInt(&alumnoAux.notaParcial2, "Ingrese segundo parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
-                        && scanf("%d/%d/%d", &alumnoAux.fechaIngreso.dia, &alumnoAux.fechaIngreso.mes, &alumnoAux.fechaIngreso.ano) == 3)
+                        && !input_getDate(&alumnoAux.fechaIngreso, "Fecha de ingreso DD/MM/AAA: ", "Intente nuevamente: "))
                     {
                         vec[indiceAlumno] = newAlumno(alumnoAux.legajo, alumnoAux.nombre, alumnoAux.edad,
                             alumnoAux.sexo, alumnoAux.notaParcial1, alumnoAux.notaParcial2, alumnoAux.fechaIngreso);
@@ -127,16 +127,16 @@ int bajaAlumno(sAlumno vec[], int tam)
                 printf("El alumno es:\n");
                 mostrarAlumno(vec[legajoExistente]);
 
-                printf("Desea borrar? [s] [n]: ");
+                printf("Desea borrar? [S] [N]: ");
                 setbuf(stdin, NULL);
                 scanf("%c", &borrar);
 
-                switch(borrar)
+                switch(toupper(borrar))
                 {
-                    case 'n':
+                    case NO:
                         printf("Operacion cancelada.\n");
                         break;
-                    case 's':
+                    case YES:
                         vec[legajoExistente].isEmpty = ALUMNO_VACIO;
                         input_clearBufferAfter();
                         break;
@@ -153,10 +153,14 @@ int bajaAlumno(sAlumno vec[], int tam)
 
 void mostrarAlumno(sAlumno alumno)
 {
-    printf("%d     %20s      %3d     %c      %2d     %2d     %.2f   %02d/%02d/%4d\n",
-        alumno.legajo, alumno.nombre, alumno.edad, alumno.sexo,
-        alumno.notaParcial1, alumno.notaParcial2, alumno.promedio,
-        alumno.fechaIngreso.dia, alumno.fechaIngreso.mes, alumno.fechaIngreso.ano);
+    printf("+============+=================+=======+=======+============+============+============+============+\n");
+    printf("|   %s   |      %s     | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
+        "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
+    printf("+============+=================+=======+=======+============+============+============+============+\n");
+    printf("| %10d | %15s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
+        alumno.legajo, alumno.nombre, alumno.edad, alumno.sexo, alumno.notaParcial1, alumno.notaParcial2,
+        alumno.promedio, alumno.fechaIngreso.day, alumno.fechaIngreso.month, alumno.fechaIngreso.year);
+    printf("+------------+-----------------+-------+-------+------------+------------+------------+------------+\n");
 }
 
 void mostrarAlumnos(sAlumno vec[], int tam)
@@ -165,14 +169,23 @@ void mostrarAlumnos(sAlumno vec[], int tam)
 
     if(vec != NULL && tam > 0)
     {
+        printf("+============+=================+=======+=======+============+============+============+============+\n");
+        printf("|   %s   |      %s     | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
+            "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
+        printf("+============+=================+=======+=======+============+============+============+============+\n");
+
         for(int i=0; i < tam; i++)
         {
             if(vec[i].isEmpty == ALUMNO_CARGADO)
             {
-                mostrarAlumno(vec[i]);
+                printf("| %10d | %15s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
+                    vec[i].legajo, vec[i].nombre, vec[i].edad, vec[i].sexo, vec[i].notaParcial1, vec[i].notaParcial2,
+                    vec[i].promedio, vec[i].fechaIngreso.day, vec[i].fechaIngreso.month, vec[i].fechaIngreso.year);
                 flag = 1;
             }
         }
+
+        printf("+------------+-----------------+-------+-------+------------+------------+------------+------------+\n");
     }
 
     if(flag == 0)
@@ -182,7 +195,7 @@ void mostrarAlumnos(sAlumno vec[], int tam)
 }
 
 sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
-    int notaParcial1, int notaParcial2, sFecha fechaIngreso)
+    int notaParcial1, int notaParcial2, sDate fechaIngreso)
 {
     sAlumno alumnoAux;
 

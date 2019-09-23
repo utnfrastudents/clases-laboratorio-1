@@ -54,7 +54,7 @@ int main()
                             break;
                     }
 
-                    input_pauseScreen("Presione la tecla Enter para continuar");
+                    input_pauseScreen("Presione la tecla Enter para volver al menu principal");
                 } while (!lifeCycle);
                 break;
             case 3:
@@ -64,6 +64,7 @@ int main()
                 }
                 break;
             case 4:
+                input_clearScreen();
                 mostrarAlumnos(alumnos, TAM);
                 break;
         }

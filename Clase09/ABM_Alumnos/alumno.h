@@ -11,13 +11,6 @@
 
 typedef struct
 {
-    int dia;
-    int mes;
-    int ano;
-} sFecha;
-
-typedef struct
-{
     int legajo;
     char nombre[NOMBRE];
     int edad;
@@ -25,7 +18,7 @@ typedef struct
     int notaParcial1;
     int notaParcial2;
     float promedio;
-    sFecha fechaIngreso;
+    sDate fechaIngreso;
     int isEmpty;
 } sAlumno;
 
