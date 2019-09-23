@@ -318,63 +318,6 @@ int input_getDate(sDate* date, char message[], char eMessage[])
     return returnValue;
 }
 
-int input_concatStrings(char firstString[], char secondString[], int maxLenght)
-{
-    int returnValue = -1;
-
-    if(firstString != NULL && secondString != NULL
-        && (strlen(firstString) + strlen(secondString)) < maxLenght
-        && maxLenght < STRING_MAX && maxLenght > 0)
-    {
-        strncat(firstString, secondString, maxLenght);
-
-        /**< Se controla el uso de memoria agregando el caracter terminador. */
-        firstString[maxLenght] = EXIT_BUFFER;
-
-        returnValue = 0;
-    }
-
-    return returnValue;
-}
-
-char* input_stringToUppercase(char string[], int maxLength)
-{
-    char* auxString = string;
-    int i = 0;
-
-    if(string != NULL && maxLength < STRING_MAX && maxLength > 0)
-    {
-        while(i <= maxLength || auxString[i] == EXIT_BUFFER)
-        {
-            auxString[i] = toupper((char)auxString[i]);
-            i++;
-        }
-
-        auxString[maxLength] = EXIT_BUFFER;
-    }
-
-    return auxString;
-}
-
-char* input_stringToLowercase(char string[], int maxLength)
-{
-    char* auxString = string;
-    int i = 0;
-
-    if(string != NULL && maxLength < STRING_MAX && maxLength > 0)
-    {
-        while(i <= maxLength || auxString[i] == EXIT_BUFFER)
-        {
-            auxString[i] = tolower((char)auxString[i]);
-            i++;
-        }
-
-        auxString[maxLength] = EXIT_BUFFER;
-    }
-
-    return auxString;
-}
-
 void input_printNumberByType(char message[], float number)
 {
     switch (input_getNumberType(number))

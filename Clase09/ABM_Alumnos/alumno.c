@@ -110,7 +110,6 @@ int bajaAlumno(sAlumno vec[], int tam)
     int returnValue = 0;
     int legajo;
     int legajoExistente;
-    char borrar;
 
     if(vec != NULL && tam > 0)
     {
@@ -136,7 +135,7 @@ int bajaAlumno(sAlumno vec[], int tam)
                 {
                     printf("Operacion cancelada.\n");
                 }
-                
+
             }
         }
     }
@@ -146,14 +145,14 @@ int bajaAlumno(sAlumno vec[], int tam)
 
 void mostrarAlumno(sAlumno alumno)
 {
-    printf("+============+=================+=======+=======+============+============+============+============+\n");
-    printf("|   %s   |      %s     | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
-        "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
-    printf("+============+=================+=======+=======+============+============+============+============+\n");
-    printf("| %10d | %15s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
-        alumno.legajo, alumno.nombre, alumno.edad, alumno.sexo, alumno.notaParcial1, alumno.notaParcial2,
-        alumno.promedio, alumno.fechaIngreso.day, alumno.fechaIngreso.month, alumno.fechaIngreso.year);
-    printf("+------------+-----------------+-------+-------+------------+------------+------------+------------+\n");
+    printf("+============+======================+=======+=======+============+============+============+============+\n");
+    printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
+            "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
+    printf("+============+======================+=======+=======+============+============+============+============+\n");
+    printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
+        alumno.legajo, arrays_stringToCamelCase(alumno.nombre, NOMBRE), alumno.edad, alumno.sexo, alumno.notaParcial1,
+        alumno.notaParcial2, alumno.promedio, alumno.fechaIngreso.day, alumno.fechaIngreso.month, alumno.fechaIngreso.year);
+    printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+\n");
 }
 
 void mostrarAlumnos(sAlumno vec[], int tam)
@@ -162,23 +161,23 @@ void mostrarAlumnos(sAlumno vec[], int tam)
 
     if(vec != NULL && tam > 0)
     {
-        printf("+============+=================+=======+=======+============+============+============+============+\n");
-        printf("|   %s   |      %s     | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
+        printf("+============+======================+=======+=======+============+============+============+============+\n");
+        printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
             "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
-        printf("+============+=================+=======+=======+============+============+============+============+\n");
+        printf("+============+======================+=======+=======+============+============+============+============+\n");
 
         for(int i=0; i < tam; i++)
         {
             if(vec[i].isEmpty == ALUMNO_CARGADO)
             {
-                printf("| %10d | %15s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
-                    vec[i].legajo, vec[i].nombre, vec[i].edad, vec[i].sexo, vec[i].notaParcial1, vec[i].notaParcial2,
-                    vec[i].promedio, vec[i].fechaIngreso.day, vec[i].fechaIngreso.month, vec[i].fechaIngreso.year);
+                printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
+                    vec[i].legajo, arrays_stringToCamelCase(vec[i].nombre, NOMBRE), vec[i].edad, vec[i].sexo, vec[i].notaParcial1,
+                    vec[i].notaParcial2, vec[i].promedio, vec[i].fechaIngreso.day, vec[i].fechaIngreso.month, vec[i].fechaIngreso.year);
                 flag = 1;
             }
         }
 
-        printf("+------------+-----------------+-------+-------+------------+------------+------------+------------+\n");
+        printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+\n");
     }
 
     if(flag == 0)

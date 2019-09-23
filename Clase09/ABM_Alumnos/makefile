@@ -1,3 +1,4 @@
+PROJECT = base-practica-c
 OBJDIR = obj/Debug/
 EXEDIR = bin/Debug/
 prefix = /usr/bin
@@ -15,11 +16,13 @@ MENUO = menu.o
 ALUMNOC = alumno.c
 ALUMNOH = alumno.h
 ALUMNOO = alumno.o
-PROJECT = base-practica-c
+ARRC = arrays.c
+ARRH = arrays.h
+ARRO = arrays.o
 
 debug: $(PROJECT)
 	./$(EXEDIR)$^
-$(PROJECT): $(OBJDIR)$(INPO) $(OBJDIR)$(ALUMNOO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
+$(PROJECT): $(OBJDIR)$(INPO) $(OBJDIR)$(ARRO) $(OBJDIR)$(ALUMNOO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
 	$(CC) $(WFLAGS) $^ -o $(EXEDIR)$@
 $(OBJDIR)$(OBJ): $(MENUH) $(SRC)
 	cd $(OBJDIR) \
@@ -28,6 +31,9 @@ $(OBJDIR)$(MENUO): $(MENUC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(ALUMNOO): $(ALUMNOC)
+	cd $(OBJDIR) \
+	&& $(CC) $(CFLAGS) $(UPDIR)$^
+$(OBJDIR)$(ARRO): $(ARRC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(INPO): $(INPC)

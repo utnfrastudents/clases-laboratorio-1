@@ -1,13 +1,13 @@
 #ifndef ALUMNOS_H_INCLUDED
 #define ALUMNOS_H_INCLUDED
 
-#include "input.h"
+#include "arrays.h"
 
 #define ALUMNOS 2
 #define ALUMNO_VACIO 1
 #define ALUMNO_CARGADO 0
 #define TAM 5
-#define NOMBRE 20
+#define NOMBRE 50
 
 typedef struct
 {

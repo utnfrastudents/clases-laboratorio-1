@@ -23,6 +23,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="alumno.h" />
+		<Unit filename="arrays.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="arrays.h" />
 		<Unit filename="input.c">
 			<Option compilerVar="CC" />
 		</Unit>

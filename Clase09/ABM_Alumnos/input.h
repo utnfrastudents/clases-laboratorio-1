@@ -136,35 +136,6 @@ int input_getString(char* input, char message[], char eMessage[], int lowLimit, 
  */
 int input_getDate(sDate* date, char message[], char eMessage[]);
 
-/** \brief Valida la concatenacion de dos cadenas
- *      controlando el longitud de la primer cadena por parametro.
- *
- * \param firstString[] char Primer cadena a concatenarse.
- * \param secondString[] char Segunda cadena a concatenarse.
- * \param maxLenght int Longitud maxima para controlar la concatenacion.
- * \return void Si pudo realizar la concatenacion retorna [0] si no [-1].
- *
- */
-int input_concatStrings(char firstString[], char secondString[], int maxLenght);
-
-/** \brief Devuelve la cadena de caracteres en mayusculas.
- * 
- *  \param string[] char Cadena de caracteres a pasar a mayusculas.
- *  \param maxLength int Longitud maxima a pasar a mayusculas.
- *  \return char* Puntero a cadena de caracteres pasada a mayusculas.
- * 
- */
-char* input_stringToUppercase(char string[], int maxLength);
-
-/** \brief Devuelve la cadena de caracteres en minusculas.
- * 
- *  \param string[] char Cadena de caracteres a pasar a minusculas.
- *  \param maxLength int Longitud maxima a pasar a minusculas.
- *  \return char* Puntero a cadena de caracteres pasada a minusculas.
- * 
- */
-char* input_stringToLowercase(char string[], int maxLength);
-
 /** \brief Funcion que imprime un numero en pantalla segun su tipo.
  *
  * \param message[] char Mensaje a imprimir antes del numero.
