@@ -93,7 +93,7 @@ int altaAlumno(sAlumno vec[], int tam, int legajo, sCarrera carreras[], int tam_
                     && !inputs_getDate(&alumnoAux.fechaIngreso, "Fecha de ingreso DD/MM/AAA: ", "Intente nuevamente: "))
                 {
                     mostrarCarreras(carreras, tam_carreras);
-                    if(inputs_getInt(&alumnoAux.idCarrera, "Elija una carrera: ", "Intente nuevamente: ", 1000, 1002))
+                    if(!inputs_getInt(&alumnoAux.idCarrera, "Elija una carrera: ", "Intente nuevamente: ", 1000, 1002))
                     {
                         vec[indiceAlumno] = newAlumno(legajo, alumnoAux.nombre, alumnoAux.edad, alumnoAux.sexo,
                             alumnoAux.notaParcial1, alumnoAux.notaParcial2, alumnoAux.fechaIngreso, alumnoAux.idCarrera);
@@ -232,7 +232,7 @@ int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad)
         {1995, "nahuel hernandez", 30, 'm', 2, 4, 3, {4, 12, 2019}, 1001, 0},
         {1992, "carlos llorente", 33, 'm', 4, 6, 5, {26, 6, 2017}, 1000, 0},
         {1998, "manuela lopez", 39, 'f', 7, 4, 5, {10, 8, 2015}, 1002, 0},
-        {2000, "ricado perez", 22, 'm', 8, 6, 7, {15, 11, 2009}, 1000, 0},
+        {1990, "ricado perez", 22, 'm', 8, 6, 7, {15, 11, 2009}, 1000, 0},
         {1999, "sol diaz", 27, 'f', 9, 6, 7, {30, 3, 2012}, 1002, 0},
         {1993, "micael rodriguez", 20, 'm', 2, 4, 3, {10, 1, 2018}, 1001, 0}
     };
