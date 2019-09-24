@@ -70,7 +70,11 @@ int altaAlumno(sAlumno vec[], int tam, int legajo, sCarrera carreras[], int tam_
     {
         indiceAlumno = buscarAlumnoLibre(vec, tam);
 
-        if(indiceAlumno != -1)
+        if(indiceAlumno == -1)
+        {
+            printf("Sistema de alumnos completo.\n");
+        }
+        else
         {
             legajoExistente = buscarAlumnoPorLegajo(vec, tam, legajo);
 
@@ -97,10 +101,6 @@ int altaAlumno(sAlumno vec[], int tam, int legajo, sCarrera carreras[], int tam_
                     }
                 }
             }
-        }
-        else
-        {
-            printf("Sistema de alumnos completo.\n");
         }
     }
 

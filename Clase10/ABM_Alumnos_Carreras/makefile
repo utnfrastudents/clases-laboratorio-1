@@ -14,6 +14,9 @@ MENUO = menu.o
 ALUC = alumnos.c
 ALUH = alumnos.h
 ALUO = alumnos.o
+CARC = carreras.c
+CARH = carreras.h
+CARO = carreras.o
 INPC = inputs.c
 INPH = inputs.h
 INPO = inputs.o
@@ -26,7 +29,7 @@ STRO = structs.o
 
 debug: $(PROJECT)
 	./$(EXEDIR)$^
-$(PROJECT): $(OBJDIR)$(STRO) $(OBJDIR)$(ARRO) $(OBJDIR)$(INPO) $(OBJDIR)$(ALUO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
+$(PROJECT): $(OBJDIR)$(STRO) $(OBJDIR)$(ARRO) $(OBJDIR)$(INPO) $(OBJDIR)$(CARO) $(OBJDIR)$(ALUO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
 	$(CC) $(WFLAGS) $^ -o $(EXEDIR)$@
 $(OBJDIR)$(OBJ): $(MENUH) $(SRC)
 	cd $(OBJDIR) \
@@ -35,6 +38,9 @@ $(OBJDIR)$(MENUO): $(MENUC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(ALUO): $(ALUC)
+	cd $(OBJDIR) \
+	&& $(CC) $(CFLAGS) $(UPDIR)$^
+$(OBJDIR)$(CARO): $(CARC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(INPO): $(INPC)
