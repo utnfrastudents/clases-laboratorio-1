@@ -1,5 +1,25 @@
 #include "carreras.h"
 
+int buscarCarreraPorId(int id, sCarrera vec[], int tam, char descrip[])
+{
+    int aux = 0;
+
+    if(descrip != NULL && vec != NULL && tam > 0)
+    {
+        for(int i=0; i<tam; i++)
+        {
+            if(vec[i].idCarrera == id)
+            {
+                strcpy(descrip, vec[i].descripcion);
+                aux = 1;
+                break;
+            }
+        }
+    }
+
+    return aux;
+}
+
 void mostrarCarrera(sCarrera carrera)
 {
     printf("+======+=========+\n");

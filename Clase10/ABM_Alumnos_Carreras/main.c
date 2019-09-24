@@ -30,7 +30,7 @@ int main()
         switch (optionMainMenu)
         {
             case 1: // Opcion elegida: Alta de Empleado
-                if(altaAlumno(alumnos, TAM, legajo))
+                if(altaAlumno(alumnos, TAM, legajo, carreras, TAMC))
                 {
                     printf("Carga exitosa del alumno.\n");
                     legajo++;
@@ -57,14 +57,14 @@ int main()
                 } while (!lifeCycle);
                 break;
             case 3:
-                if(bajaAlumno(alumnos, TAM))
+                if(bajaAlumno(alumnos, TAM, carreras, TAMC))
                 {
                     printf("Alumno borrado.\n");
                 }
                 break;
             case 4:
                 inputs_clearScreen();
-                mostrarAlumnos(alumnos, TAM);
+                mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                 break;
             case 7:
                 mostrarCarreras(carreras, TAMC);

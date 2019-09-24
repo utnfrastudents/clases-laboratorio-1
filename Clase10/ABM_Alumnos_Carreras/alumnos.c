@@ -6,8 +6,8 @@
  * \return
  *
  */
-sAlumno newAlumno(int legajo, char nombre[TAM], int edad, char sexo,
-    int notaParcial1, int notaParcial2, sDate fechaIngreso);
+sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
+    int notaParcial1, int notaParcial2, sDate fechaIngreso, int idCarrera);
 
 void inicializarAlumnos(sAlumno vec[], int tam)
 {
@@ -59,7 +59,7 @@ int buscarAlumnoPorLegajo(sAlumno vec[], int tam, int legajo)
     return indice;
 }
 
-int altaAlumno(sAlumno vec[], int tam, int legajo)
+int altaAlumno(sAlumno vec[], int tam, int legajo, sCarrera carreras[], int tam_carreras)
 {
     int returnValue = 0;
     sAlumno alumnoAux;
@@ -77,7 +77,7 @@ int altaAlumno(sAlumno vec[], int tam, int legajo)
             if(legajoExistente != -1)
             {
                 printf("El legajo ya se encuentra registrado.\n");
-                mostrarAlumno(vec[legajoExistente]);
+                mostrarAlumno(vec[legajoExistente], carreras, tam_carreras);
             }
             else
             {
@@ -88,9 +88,13 @@ int altaAlumno(sAlumno vec[], int tam, int legajo)
                     && !inputs_getInt(&alumnoAux.notaParcial2, "Ingrese segundo parcial [1-10]: ", "Intente nuevamente: ", 1, 10)
                     && !inputs_getDate(&alumnoAux.fechaIngreso, "Fecha de ingreso DD/MM/AAA: ", "Intente nuevamente: "))
                 {
-                    vec[indiceAlumno] = newAlumno(legajo, alumnoAux.nombre, alumnoAux.edad,
-                        alumnoAux.sexo, alumnoAux.notaParcial1, alumnoAux.notaParcial2, alumnoAux.fechaIngreso);
-                    returnValue = 1;
+                    mostrarCarreras(carreras, tam_carreras);
+                    if(inputs_getInt(&alumnoAux.idCarrera, "Elija una carrera: ", "Intente nuevamente: ", 1000, 1002))
+                    {
+                        vec[indiceAlumno] = newAlumno(legajo, alumnoAux.nombre, alumnoAux.edad, alumnoAux.sexo,
+                            alumnoAux.notaParcial1, alumnoAux.notaParcial2, alumnoAux.fechaIngreso, alumnoAux.idCarrera);
+                        returnValue = 1;
+                    }
                 }
             }
         }
@@ -103,7 +107,7 @@ int altaAlumno(sAlumno vec[], int tam, int legajo)
     return returnValue;
 }
 
-int bajaAlumno(sAlumno vec[], int tam)
+int bajaAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras)
 {
     int returnValue = 0;
     int legajo;
@@ -122,7 +126,7 @@ int bajaAlumno(sAlumno vec[], int tam)
             else
             {
                 printf("El alumno es:\n");
-                mostrarAlumno(vec[legajoExistente]);
+                mostrarAlumno(vec[legajoExistente], carreras, tam_carreras);
 
                 if(inputs_userResponse("Desea borrar? [S] [N]: "))
                 {
@@ -141,41 +145,54 @@ int bajaAlumno(sAlumno vec[], int tam)
     return returnValue;
 }
 
-void mostrarAlumno(sAlumno alumno)
+void mostrarAlumno(sAlumno alumno, sCarrera vec[], int tam)
 {
-    printf("+============+======================+=======+=======+============+============+============+============+\n");
-    printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
-            "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
-    printf("+============+======================+=======+=======+============+============+============+============+\n");
-    printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
-        alumno.legajo, arrays_stringToCamelCase(alumno.nombre, NOMBRE), alumno.edad, alumno.sexo, alumno.notaParcial1,
-        alumno.notaParcial2, alumno.promedio, alumno.fechaIngreso.day, alumno.fechaIngreso.month, alumno.fechaIngreso.year);
-    printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+\n");
+    char descrip[NOM_CARRERA];
+
+    if(buscarCarreraPorId(alumno.idCarrera, vec, tam, descrip))
+    {
+        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
+        printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   | %s |\n",
+                "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso", "Carrera");
+        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
+        printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d | %7s |\n",
+            alumno.legajo, arrays_stringToCamelCase(alumno.nombre, NOMBRE),
+            alumno.edad, alumno.sexo, alumno.notaParcial1,
+            alumno.notaParcial2, alumno.promedio, alumno.fechaIngreso.day,
+            alumno.fechaIngreso.month, alumno.fechaIngreso.year, descrip);
+        printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+---------+\n");
+    }
+    else
+    {
+        printf("El alumno no tiene carrera asignada.\n");
+    }
 }
 
-void mostrarAlumnos(sAlumno vec[], int tam)
+void mostrarAlumnos(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras)
 {
     int flag = 0;
+    char descrip[NOM_CARRERA];
 
     if(vec != NULL && tam > 0)
     {
-        printf("+============+======================+=======+=======+============+============+============+============+\n");
-        printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
-            "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
-        printf("+============+======================+=======+=======+============+============+============+============+\n");
+        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
+        printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   | %s |\n",
+                "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso", "Carrera");
+        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
 
         for(int i=0; i < tam; i++)
         {
-            if(vec[i].isEmpty == ALUMNO_CARGADO)
+            if(vec[i].isEmpty == ALUMNO_CARGADO && buscarCarreraPorId(vec[i].idCarrera, carreras, tam_carreras, descrip))
             {
-                printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
-                    vec[i].legajo, arrays_stringToCamelCase(vec[i].nombre, NOMBRE), vec[i].edad, vec[i].sexo, vec[i].notaParcial1,
-                    vec[i].notaParcial2, vec[i].promedio, vec[i].fechaIngreso.day, vec[i].fechaIngreso.month, vec[i].fechaIngreso.year);
+                printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d | %7s |\n",
+                    vec[i].legajo, arrays_stringToCamelCase(vec[i].nombre, NOMBRE), vec[i].edad, vec[i].sexo,
+                    vec[i].notaParcial1, vec[i].notaParcial2, vec[i].promedio, vec[i].fechaIngreso.day,
+                    vec[i].fechaIngreso.month, vec[i].fechaIngreso.year, descrip);
                 flag = 1;
             }
         }
 
-        printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+\n");
+        printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+---------+\n");
     }
 
     if(flag == 0)
@@ -185,7 +202,7 @@ void mostrarAlumnos(sAlumno vec[], int tam)
 }
 
 sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
-    int notaParcial1, int notaParcial2, sDate fechaIngreso)
+    int notaParcial1, int notaParcial2, sDate fechaIngreso, int idCarrera)
 {
     sAlumno alumnoAux;
 
@@ -197,6 +214,7 @@ sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
     alumnoAux.notaParcial2 = notaParcial2;
     alumnoAux.fechaIngreso = fechaIngreso;
     alumnoAux.promedio = (float)(notaParcial1 + notaParcial2)/2;
+    alumnoAux.idCarrera = idCarrera;
     alumnoAux.isEmpty = ALUMNO_CARGADO;
 
     return alumnoAux;
@@ -207,16 +225,16 @@ int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad)
     int contador = 0;
 
     sAlumno suplentes[] = {
-        {1994, "juan sosa", 20, 'm', 4, 6, 5, {16, 10, 2019}, 0},
-        {1997, "juana martinez", 19, 'f', 7, 4, 5, {20, 2, 2016}, 0},
-        {1996, "ariel perez", 20, 'm', 8, 6, 7, {12, 5, 2014}, 0},
-        {1991, "alicia saenz", 21, 'f', 9, 6, 7, {9, 7, 2013}, 0},
-        {1995, "nahuel hernandez", 30, 'm', 2, 4, 3, {4, 12, 2019}, 0},
-        {1992, "carlos llorente", 33, 'm', 4, 6, 5, {26, 6, 2017}, 0},
-        {1998, "manuela lopez", 39, 'f', 7, 4, 5, {10, 8, 2015}, 0},
-        {2000, "ricado perez", 22, 'm', 8, 6, 7, {15, 11, 2009}, 0},
-        {1999, "sol diaz", 27, 'f', 9, 6, 7, {30, 3, 2012}, 0},
-        {1993, "micael rodriguez", 20, 'm', 2, 4, 3, {10, 1, 2018}, 0}
+        {1994, "juan sosa", 20, 'm', 4, 6, 5, {16, 10, 2019}, 1001, 0},
+        {1997, "juana martinez", 19, 'f', 7, 4, 5, {20, 2, 2016}, 1000, 0},
+        {1996, "ariel perez", 20, 'm', 8, 6, 7, {12, 5, 2014}, 1002, 0},
+        {1991, "alicia saenz", 21, 'f', 9, 6, 7, {9, 7, 2013}, 1001, 0},
+        {1995, "nahuel hernandez", 30, 'm', 2, 4, 3, {4, 12, 2019}, 1001, 0},
+        {1992, "carlos llorente", 33, 'm', 4, 6, 5, {26, 6, 2017}, 1000, 0},
+        {1998, "manuela lopez", 39, 'f', 7, 4, 5, {10, 8, 2015}, 1002, 0},
+        {2000, "ricado perez", 22, 'm', 8, 6, 7, {15, 11, 2009}, 1000, 0},
+        {1999, "sol diaz", 27, 'f', 9, 6, 7, {30, 3, 2012}, 1002, 0},
+        {1993, "micael rodriguez", 20, 'm', 2, 4, 3, {10, 1, 2018}, 1001, 0}
     };
 
     if(vec != NULL && cantidad <= 10 && tam >= cantidad)

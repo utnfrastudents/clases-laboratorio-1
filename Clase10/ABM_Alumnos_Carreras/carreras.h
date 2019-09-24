@@ -12,6 +12,7 @@ typedef struct
     char descripcion[NOM_CARRERA];
 } sCarrera;
 
+int buscarCarreraPorId(int id, sCarrera vec[], int tam, char descrip[]);
 void mostrarCarrera(sCarrera carrera);
 void mostrarCarreras(sCarrera vec[], int tam);
 
