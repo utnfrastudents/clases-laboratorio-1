@@ -1,7 +1,7 @@
 #ifndef CARRERAS_H_INCLUDED
 #define CARRERAS_H_INCLUDED
 
-#include "inputs.h"
+#include "menu.h"
 
 #define NOM_CARRERA 5
 #define TAMC 3

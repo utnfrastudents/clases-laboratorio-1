@@ -1,7 +1,7 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-#include "alumnos.h"
+#include "inputs.h"
 
 #define OPTION_MIN 1 /**< Opcion minima en comun de cada menu >*/
 #define MAIN_MAX 8 /**< Opcion maxima del menu principal >*/

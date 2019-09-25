@@ -28,6 +28,7 @@ int buscarAlumnoLibre(sAlumno vec[], int tam);
 int buscarAlumnoPorLegajo(sAlumno vec[], int tam, int legajo);
 int altaAlumno(sAlumno vec[], int tam, int legajo, sCarrera carreras[], int tam_carreras);
 int bajaAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras);
+int modificarAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras);
 void mostrarAlumno(sAlumno alumno, sCarrera vec[], int tam);
 void mostrarAlumnos(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras);
 int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad);
