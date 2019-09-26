@@ -9,6 +9,7 @@
 #define UPDATE_MAX 3 /**< Opcion maxima de menu para modificar un Empleado >*/
 #define DELETE_MAX 2 /**< Opcion maxima de menu para dar de baja un Empleado >*/
 #define REPORT_MAX 4 /**< Opcion maxima de menu para mostrar informes de Empleados */
+#define ORDER_MAX 7
 #define OPTION_ERROR -1 /**< Opcion de retorno de error de cada menu >*/
 
 /** \brief Funcion que imprime un menu en pantalla
@@ -28,5 +29,7 @@ int menu_main(int* option);
  *
  */
 int menu_update(int* option);
+
+int menu_order(int* option);
 
 #endif // MENU_H_INCLUDED
