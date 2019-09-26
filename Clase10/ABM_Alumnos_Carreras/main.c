@@ -37,24 +37,10 @@ int main()
                 }
                 break;
             case 2: // Opcion elegida: Modificar un Empleado
-                do
+                if(modificarAlumno(alumnos, TAM, carreras, TAMC))
                 {
-                    lifeCycle = menu_update(&optionUpdateMenu);
-
-                    if(optionUpdateMenu == UPDATE_MAX || optionUpdateMenu == OPTION_ERROR)
-                    {
-                        break;
-                    }
-
-                    switch (optionUpdateMenu)
-                    {
-                        case 1: // Opcion elegida: Ingreso del Nombre
-                            /* code */
-                            break;
-                    }
-
-                    inputs_pauseScreen("Presione la tecla Enter para volver al menu principal");
-                } while (!lifeCycle);
+                    printf("Se ha actualiado la nota del alumno.\n");
+                }
                 break;
             case 3:
                 if(bajaAlumno(alumnos, TAM, carreras, TAMC))
