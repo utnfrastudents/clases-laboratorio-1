@@ -131,6 +131,7 @@ int bajaAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras)
                 if(inputs_userResponse("Desea borrar? [S] [N]: "))
                 {
                     vec[legajoExistente].isEmpty = ALUMNO_VACIO;
+                    returnValue = 1;
                     printf("Alumno borrado.\n");
                 }
                 else
@@ -138,6 +139,69 @@ int bajaAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras)
                     printf("Operacion cancelada.\n");
                 }
 
+            }
+        }
+    }
+
+    return returnValue;
+}
+
+int modificarAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras)
+{
+    int returnValue = 0;
+    int legajo;
+    int legajoExistente;
+    int optionUpdateMenu = 0;
+    int nuevaNota;
+
+    if(vec != NULL && tam > 0)
+    {
+        if(!inputs_getInt(&legajo, "Ingrese el legajo: ", "Intente nuevamente: ", 1000, 9999))
+        {
+            legajoExistente = buscarAlumnoPorLegajo(vec, tam, legajo);
+
+            if(legajoExistente == -1)
+            {
+                printf("El legajo ingresado no existe.\n");
+            }
+            else
+            {
+                printf("El alumno es:\n");
+                mostrarAlumno(vec[legajoExistente], carreras, tam_carreras);
+
+                if(inputs_userResponse("Desea modificar las notas del alumno? [S] [N]: "))
+                {
+                    if(menu_update(&optionUpdateMenu) == -1)
+                    {
+                        printf("Operacion cancelada.\n");
+                    }
+                    else
+                    {
+                        switch (optionUpdateMenu)
+                        {
+                            case 1:
+                                if(!inputs_getInt(&nuevaNota, "Ingrese la nueva nota 1 de [1-10]: ", "Intente nuevamente: ", 1, 10))
+                                {
+                                    vec[legajoExistente].notaParcial1 = nuevaNota;
+                                    vec[legajoExistente].promedio = (float)(nuevaNota + vec[legajoExistente].notaParcial2)/2;
+                                    returnValue = 1;
+                                }
+                                break;
+                            case 2:
+                                if(!inputs_getInt(&nuevaNota, "Ingrese la nueva nota 2 de [1-10]: ", "Intente nuevamente: ", 1, 10))
+                                {
+                                    vec[legajoExistente].notaParcial2 = nuevaNota;
+                                    vec[legajoExistente].promedio = (float)(vec[legajoExistente].notaParcial1 + nuevaNota)/2;
+                                    returnValue = 1;
+                                }
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    printf("Operacion cancelada.\n");
+                }
             }
         }
     }

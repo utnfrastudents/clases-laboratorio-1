@@ -31,16 +31,16 @@ debug: $(PROJECT)
 	./$(EXEDIR)$^
 $(PROJECT): $(OBJDIR)$(STRO) $(OBJDIR)$(ARRO) $(OBJDIR)$(INPO) $(OBJDIR)$(CARO) $(OBJDIR)$(ALUO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
 	$(CC) $(WFLAGS) $^ -o $(EXEDIR)$@
-$(OBJDIR)$(OBJ): $(MENUH) $(SRC)
+$(OBJDIR)$(OBJ): $(ALUH) $(SRC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$(SRC)
-$(OBJDIR)$(MENUO): $(MENUC)
-	cd $(OBJDIR) \
-	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(ALUO): $(ALUC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(CARO): $(CARC)
+	cd $(OBJDIR) \
+	&& $(CC) $(CFLAGS) $(UPDIR)$^
+$(OBJDIR)$(MENUO): $(MENUC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(INPO): $(INPC)

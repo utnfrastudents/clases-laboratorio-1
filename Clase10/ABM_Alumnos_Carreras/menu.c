@@ -39,8 +39,7 @@ int menu_update(int* option)
     printf("=======================================================\n");
     printf("    1 - Modificar la Nota 1\n");
     printf("    2 - Modificar la Nota 2\n");
-    printf("    3 - Modificar la Fecha de Ingreso\n");
-    printf("    4 - Volver al menu principal\n");
+    printf("    3 - Volver al menu principal\n");
     printf("=======================================================\n");
 
     if(!inputs_getInt(option, "Elija una opcion del menu: ",
