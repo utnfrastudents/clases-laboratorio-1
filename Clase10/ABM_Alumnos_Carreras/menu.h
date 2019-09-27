@@ -11,6 +11,8 @@
 #define REPORT_MAX 4 /**< Opcion maxima de menu para mostrar informes de Empleados */
 #define ORDER_MAX 7
 #define OPTION_ERROR -1 /**< Opcion de retorno de error de cada menu >*/
+#define ASC 1
+#define DESC 2
 
 /** \brief Funcion que imprime un menu en pantalla
  *      para que el usuario ingrese la opcion elegida
@@ -30,6 +32,6 @@ int menu_main(int* option);
  */
 int menu_update(int* option);
 
-int menu_order(int* option);
+int menu_order(int* optionMenu, int* optionOrder);
 
 #endif // MENU_H_INCLUDED

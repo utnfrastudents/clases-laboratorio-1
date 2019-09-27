@@ -51,7 +51,7 @@ int menu_update(int* option)
     return returnValue;
 }
 
-int menu_order(int* option)
+int menu_order(int* optionMenu, int* optionOrder)
 {
     int returnValue = -1;
 
@@ -69,10 +69,15 @@ int menu_order(int* option)
     printf("    7 - Volver al menu principal\n");
     printf("=======================================================\n");
 
-    if(!inputs_getInt(option, "Elija una opcion del menu: ",
-        "Opcion incorrecta, ingrese nuevamente: ", OPTION_MIN, ORDER_MAX))
+    if(!inputs_getInt(optionMenu, "Elija una opcion del menu: ",
+            "Opcion incorrecta, ingrese nuevamente: ", OPTION_MIN, ORDER_MAX))
     {
-        returnValue = 0;
+        if(*optionMenu == ORDER_MAX
+            || !inputs_getInt(optionOrder, "Elija orden [1] ascendente o [2] desdendente: ",
+            "Opcion incorrecta, ingrese nuevamente: ", ASC, DESC))
+        {
+            returnValue = 0;
+        }
     }
 
     return returnValue;

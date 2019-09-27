@@ -9,6 +9,9 @@
 sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
     int notaParcial1, int notaParcial2, sDate fechaIngreso, int idCarrera);
 
+static int alumnosCompare(sAlumno alumno1, sAlumno alumno2);
+static int swapAlumnos(sAlumno* alumno1, sAlumno* alumno2);
+
 void inicializarAlumnos(sAlumno vec[], int tam)
 {
     if(vec != NULL && tam > 0)
@@ -209,6 +212,58 @@ int modificarAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carrera
     return returnValue;
 }
 
+int ordenarAlumnosPorLegajo(sAlumno vec[], int tam, int criterio)
+{
+    int orderValue = -1;
+    sAlumno auxAlumno;
+
+    if(vec != NULL && tam > 0 && (criterio == ASC || criterio == DESC))
+    {
+        for(int i= 0; i < tam-1 ; i++)
+        {
+            for(int j= i+1; j <tam; j++)
+            {
+                if((vec[i].legajo > vec[j].legajo && criterio == ASC)
+                    || (vec[i].legajo < vec[j].legajo && criterio == DESC))
+                {
+                    if(!swapAlumnos(&vec[i], &vec[j]))
+                    {
+                        orderValue = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    return orderValue;
+}
+
+int ordenarAlumnosPorNombre(sAlumno vec[], int tam, int criterio)
+{
+    int orderValue = -1;
+    sAlumno auxAlumno;
+
+    if(vec != NULL && tam > 0 && (criterio == ASC || criterio == DESC))
+    {
+        for(int i= 0; i < tam-1 ; i++)
+        {
+            for(int j= i+1; j <tam; j++)
+            {
+                if((strcmp(vec[i].nombre, vec[j].nombre) > 0 && criterio == ASC)
+                    || (strcmp(vec[i].nombre, vec[j].nombre) < 0 && criterio == DESC))
+                {
+                    if(!swapAlumnos(&vec[i], &vec[j]))
+                    {
+                        orderValue = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    return orderValue;
+}
+
 void mostrarAlumno(sAlumno alumno, sCarrera vec[], int tam)
 {
     char descrip[NOM_CARRERA];
@@ -311,4 +366,44 @@ int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad)
     }
 
     return contador;
+}
+
+static int alumnosCompare(sAlumno alumno1, sAlumno alumno2)
+{
+    int returnValue = -1;
+
+    if(alumno1.legajo == alumno2.legajo
+        && !strcmp(alumno1.nombre, alumno2.nombre)
+        && alumno1.edad == alumno2.edad
+        && alumno1.sexo == alumno2.sexo
+        && alumno1.notaParcial1 == alumno2.notaParcial1
+        && alumno1.notaParcial2 == alumno2.notaParcial2
+        && alumno1.promedio == alumno2.promedio
+        && !structs_dateCompare(alumno1.fechaIngreso, alumno2.fechaIngreso)
+        && alumno1.idCarrera == alumno2.idCarrera
+        && alumno1.isEmpty == alumno2.isEmpty)
+    {
+        returnValue = 0;
+    }
+
+    return returnValue;
+}
+
+static int swapAlumnos(sAlumno* alumno1, sAlumno* alumno2)
+{
+    int returnValue = -1;
+    sAlumno aux1;
+    sAlumno aux2;
+
+    aux1 = *alumno1;
+    aux2 = *alumno2;
+    *alumno1 = *alumno2;
+    *alumno2 = aux1;
+
+    if(!alumnosCompare(*alumno1, *alumno2))
+    {
+        returnValue = 0;
+    }
+
+    return returnValue;
 }

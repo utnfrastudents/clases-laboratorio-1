@@ -9,6 +9,8 @@ int main()
     int optionUpdateMenu; /**< Opcion elegida por el usuario para el menu de modificacion >*/
 //    int optionDeleteMenu; /**< Opcion elegida por el usuario para el menu de eliminacion >*/
 //    int optionReportMenu; /**< Opcion elegida por el usuario para el menu de reportes >*/
+    int optionOrderMenu;
+    int optionOrderType;
 
     sAlumno alumnos[TAM];
     sCarrera carreras[TAMC] = {{1000, "TUP"}, {1001, "TUSI"}, {1002, "LIC"}};
@@ -42,15 +44,46 @@ int main()
                     printf("Se ha actualiado la nota del alumno.\n");
                 }
                 break;
-            case 3:
+            case 3: // Opcion elegida: Dar de baja un Empleado
                 if(bajaAlumno(alumnos, TAM, carreras, TAMC))
                 {
                     printf("Alumno borrado.\n");
                 }
                 break;
-            case 4:
+            case 4: // Opcion elegida: Mostrar lista de Empleados
                 inputs_clearScreen();
                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
+                break;
+            case 5: //Opcion elegida: Ordenar listado de Empleados
+                do
+                {
+                    lifeCycle = menu_order(&optionOrderMenu, &optionOrderType);
+
+                    if(optionOrderMenu == ORDER_MAX || optionOrderMenu == OPTION_ERROR)
+                    {
+                        break;
+                    }
+
+                    switch (optionOrderMenu)
+                    {
+                        case 1: // Opcion elegida: Ordenar por legajo
+                            if(ordenarAlumnosPorLegajo(alumnos, TAM, optionOrderType))
+                            {
+                                inputs_clearScreen();
+                                mostrarAlumnos(alumnos, TAM, carreras, TAMC);
+                            }
+                            break;
+                        case 2: // Opcion elegida: Ordenar por nombre
+                            if(ordenarAlumnosPorNombre(alumnos, TAM, optionOrderType))
+                            {
+                                inputs_clearScreen();
+                                mostrarAlumnos(alumnos, TAM, carreras, TAMC);
+                            }
+                            break;
+                    }
+
+                    inputs_pauseScreen("Presione la tecla Enter para continuar");
+                } while (!lifeCycle);
                 break;
             case 7:
                 mostrarCarreras(carreras, TAMC);
