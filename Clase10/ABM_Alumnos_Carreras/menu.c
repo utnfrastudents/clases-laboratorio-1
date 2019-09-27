@@ -50,3 +50,35 @@ int menu_update(int* option)
 
     return returnValue;
 }
+
+int menu_order(int* optionMenu, int* optionOrder)
+{
+    int returnValue = -1;
+
+    inputs_clearScreen();
+
+    printf("=======================================================\n");
+    printf("              ORDENAR LISTADO DE ALUMNOS\n");
+    printf("=======================================================\n");
+    printf("    1 - Ordenar por Legajo\n");
+    printf("    2 - Ordenar por Nombre\n");
+    printf("    3 - Ordenar por Sexo y por Edad\n");
+    printf("    4 - Ordenar por Promedio\n");
+    printf("    5 - Ordenar por Fecha de Ingreso\n");
+    printf("    6 - Ordenar por Carrera y por Nombre\n");
+    printf("    7 - Volver al menu principal\n");
+    printf("=======================================================\n");
+
+    if(!inputs_getInt(optionMenu, "Elija una opcion del menu: ",
+            "Opcion incorrecta, ingrese nuevamente: ", OPTION_MIN, ORDER_MAX))
+    {
+        if(*optionMenu == ORDER_MAX
+            || !inputs_getInt(optionOrder, "Elija orden [1] ascendente o [2] desdendente: ",
+            "Opcion incorrecta, ingrese nuevamente: ", ASC, DESC))
+        {
+            returnValue = 0;
+        }
+    }
+
+    return returnValue;
+}
