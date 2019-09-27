@@ -87,6 +87,13 @@ int main()
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
+                        case 4: // Opcion elegida: Ordenar por promedio
+                            if(ordenarAlumnosPorPromedio(alumnos, TAM, optionOrderType))
+                            {
+                                inputs_clearScreen();
+                                mostrarAlumnos(alumnos, TAM, carreras, TAMC);
+                            }
+                            break;
                     }
 
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
