@@ -215,7 +215,6 @@ int modificarAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carrera
 int ordenarAlumnosPorLegajo(sAlumno vec[], int tam, int criterio)
 {
     int orderValue = -1;
-    sAlumno auxAlumno;
 
     if(vec != NULL && tam > 0 && (criterio == ASC || criterio == DESC))
     {
@@ -241,7 +240,6 @@ int ordenarAlumnosPorLegajo(sAlumno vec[], int tam, int criterio)
 int ordenarAlumnosPorNombre(sAlumno vec[], int tam, int criterio)
 {
     int orderValue = -1;
-    sAlumno auxAlumno;
 
     if(vec != NULL && tam > 0 && (criterio == ASC || criterio == DESC))
     {

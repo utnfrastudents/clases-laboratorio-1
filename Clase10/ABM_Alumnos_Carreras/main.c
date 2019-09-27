@@ -6,7 +6,7 @@ int main()
     int lifeCycle; /**< Indicador del ciclo de vida de cada menu >*/
     int optionMainMenu; /**< Opcion elegida por el usuario del menu principal >*/
 //    int optionCreateMenu; /**< Opcion elegida por el usuario para el menu de alta >*/
-    int optionUpdateMenu; /**< Opcion elegida por el usuario para el menu de modificacion >*/
+//    int optionUpdateMenu; /**< Opcion elegida por el usuario para el menu de modificacion >*/
 //    int optionDeleteMenu; /**< Opcion elegida por el usuario para el menu de eliminacion >*/
 //    int optionReportMenu; /**< Opcion elegida por el usuario para el menu de reportes >*/
     int optionOrderMenu;
@@ -95,4 +95,3 @@ int main()
 
     return 0;
 }
-
