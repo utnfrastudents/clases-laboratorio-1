@@ -325,6 +325,31 @@ int ordenarAlumnosPorPromedio(sAlumno vec[], int tam, int criterio)
     return orderValue;
 }
 
+int ordenarAlumnosPorFechaIngreso(sAlumno vec[], int tam, int criterio)
+{
+    int orderValue = -1;
+
+    if(vec != NULL && tam > 0 && (criterio == ASC || criterio == DESC))
+    {
+        for(int i= 0; i < tam-1 ; i++)
+        {
+            for(int j= i+1; j <tam; j++)
+            {
+                if((structs_dateCompare(vec[i].fechaIngreso, vec[j].fechaIngreso) == 1 && criterio == ASC)
+                    || (structs_dateCompare(vec[i].fechaIngreso, vec[j].fechaIngreso) == -1 && criterio == DESC))
+                {
+                    if(!swapAlumnos(&vec[i], &vec[j]))
+                    {
+                        orderValue = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    return orderValue;
+}
+
 void mostrarAlumno(sAlumno alumno, sCarrera vec[], int tam)
 {
     char descrip[NOM_CARRERA];

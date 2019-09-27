@@ -94,6 +94,13 @@ int main()
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
+                        case 5: // Opcion elegida: Ordenar por fecha de ingreso
+                            if(ordenarAlumnosPorFechaIngreso(alumnos, TAM, optionOrderType))
+                            {
+                                inputs_clearScreen();
+                                mostrarAlumnos(alumnos, TAM, carreras, TAMC);
+                            }
+                            break;
                     }
 
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
