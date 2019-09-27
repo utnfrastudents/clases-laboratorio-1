@@ -350,6 +350,44 @@ int ordenarAlumnosPorFechaIngreso(sAlumno vec[], int tam, int criterio)
     return orderValue;
 }
 
+int ordenarAlumnosPorCarreraNombre(sAlumno vec[], int tam, int criterioNombre)
+{
+    int orderValue = -1;
+
+    if(vec != NULL && tam > 0 && (criterioNombre == ASC || criterioNombre == DESC))
+    {
+        for(int i= 0; i < tam-1 ; i++)
+        {
+            for(int j= i+1; j <tam; j++)
+            {
+                if((vec[i].idCarrera > vec[j].idCarrera))
+                {
+                    if(!swapAlumnos(&vec[i], &vec[j]))
+                    {
+                        orderValue = 0;
+                    }
+                }
+                else
+                {
+                    if(vec[i].idCarrera == vec[j].idCarrera)
+                    {
+                        if((strcmp(vec[i].nombre, vec[j].nombre) > 0 && criterioNombre == ASC)
+                            || (strcmp(vec[i].nombre, vec[j].nombre) < 0 && criterioNombre == DESC))
+                        {
+                            if(!swapAlumnos(&vec[i], &vec[j]))
+                            {
+                                orderValue = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return orderValue;
+}
+
 void mostrarAlumno(sAlumno alumno, sCarrera vec[], int tam)
 {
     char descrip[NOM_CARRERA];

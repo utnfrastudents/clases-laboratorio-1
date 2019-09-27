@@ -101,6 +101,13 @@ int main()
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
+                        case 6: // Opcion elegida: Ordenar por carrera y nombre
+                            if(ordenarAlumnosPorCarreraNombre(alumnos, TAM, optionOrderType))
+                            {
+                                inputs_clearScreen();
+                                mostrarAlumnos(alumnos, TAM, carreras, TAMC);
+                            }
+                            break;
                     }
 
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
