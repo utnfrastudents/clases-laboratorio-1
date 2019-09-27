@@ -80,6 +80,13 @@ int main()
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
+                        case 3: // Opcion elegida: Ordenar por sexo y por edad
+                            if(ordenarAlumnosPorSexoEdad(alumnos, TAM, optionOrderType))
+                            {
+                                inputs_clearScreen();
+                                mostrarAlumnos(alumnos, TAM, carreras, TAMC);
+                            }
+                            break;
                     }
 
                     inputs_pauseScreen("Presione la tecla Enter para continuar");

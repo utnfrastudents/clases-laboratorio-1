@@ -31,7 +31,7 @@ int bajaAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras);
 int modificarAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras);
 int ordenarAlumnosPorLegajo(sAlumno vec[], int tam, int criterio);
 int ordenarAlumnosPorNombre(sAlumno vec[], int tam, int criterio);
-int ordenarAlumnosPorSexoEdad(sAlumno vec[], int tam, int criterioSexo, int criterioEdad);
+int ordenarAlumnosPorSexoEdad(sAlumno vec[], int tam, int criterioEdad);
 int ordenarAlumnosPorPromedio(sAlumno vec[], int tam, int criterio);
 int ordenarAlumnosPorFechaIngreso(sAlumno vec[], int tam, int criterio);
 int ordenarAlumnosPorCarreraNombre(sAlumno vec[], int tam, int criterioNombre);

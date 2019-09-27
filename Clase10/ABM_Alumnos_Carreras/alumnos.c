@@ -262,6 +262,45 @@ int ordenarAlumnosPorNombre(sAlumno vec[], int tam, int criterio)
     return orderValue;
 }
 
+int ordenarAlumnosPorSexoEdad(sAlumno vec[], int tam, int criterioEdad)
+{
+    int orderValue = -1;
+    int flagOrder = 0;
+
+    if(vec != NULL && tam > 0 && (criterioEdad == ASC || criterioEdad == DESC))
+    {
+        for(int i= 0; i < tam-1 ; i++)
+        {
+            for(int j= i+1; j <tam; j++)
+            {
+                if((vec[i].sexo > vec[j].sexo))
+                {
+                    if(!swapAlumnos(&vec[i], &vec[j]))
+                    {
+                        orderValue = 0;
+                    }
+                }
+                else
+                {
+                    if(vec[i].sexo == vec[j].sexo)
+                    {
+                        if((vec[i].edad > vec[j].edad && criterioEdad == ASC)
+                            || (vec[i].edad < vec[j].edad && criterioEdad == DESC))
+                        {
+                            if(!swapAlumnos(&vec[i], &vec[j]))
+                            {
+                                orderValue = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return orderValue;
+}
+
 void mostrarAlumno(sAlumno alumno, sCarrera vec[], int tam)
 {
     char descrip[NOM_CARRERA];
@@ -342,7 +381,7 @@ int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad)
     int contador = 0;
 
     sAlumno suplentes[] = {
-        {1994, "juan sosa", 20, 'm', 4, 6, 5, {16, 10, 2019}, 1001, 0},
+        {1994, "juan sosa", 25, 'm', 4, 6, 5, {16, 10, 2019}, 1001, 0},
         {1997, "juana martinez", 19, 'f', 7, 4, 5, {20, 2, 2016}, 1000, 0},
         {1996, "ariel perez", 20, 'm', 8, 6, 7, {12, 5, 2014}, 1002, 0},
         {1991, "alicia saenz", 21, 'f', 9, 6, 7, {9, 7, 2013}, 1001, 0},
