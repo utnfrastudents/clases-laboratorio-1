@@ -448,28 +448,45 @@ void mostrarAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera carreras[
 {
     int flag = 0;
     char descrip[NOM_CARRERA];
+    int contador = 0;
 
     if(vec != NULL && tam_alumnos > 0)
     {
-        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
-        printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   | %s |\n",
-                "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso", "Carrera");
-        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
+        
 
         for(int i=0; i < tam_alumnos; i++)
         {
-            if(vec[i].isEmpty == ALUMNO_CARGADO && buscarCarreraPorId(vec[i].idCarrera, carreras, tam_carreras, descrip)
-                && vec[i].idCarrera == idCarrera)
+            if(vec[i].isEmpty == ALUMNO_CARGADO
+                && buscarCarreraPorId(idCarrera, carreras, tam_carreras, descrip))
             {
-                printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d | %7s |\n",
-                    vec[i].legajo, arrays_stringToCamelCase(vec[i].nombre, NOMBRE), vec[i].edad, vec[i].sexo,
-                    vec[i].notaParcial1, vec[i].notaParcial2, vec[i].promedio, vec[i].fechaIngreso.day,
-                    vec[i].fechaIngreso.month, vec[i].fechaIngreso.year, descrip);
-                flag = 1;
+                contador++;
+                if(contador == 1)
+                {
+                    printf("+============+======================+=======+=======+============+============+============+============+\n");
+                    printf("|                                    CARRERA: %s                                                      |\n", descrip);
+                    printf("+============+======================+=======+=======+============+============+============+============+\n");
+                    printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
+                            "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
+                    printf("+============+======================+=======+=======+============+============+============+============+\n");  
+                }
+                else
+                {
+                    if(vec[i].idCarrera == idCarrera)
+                    {
+                        printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
+                            vec[i].legajo, arrays_stringToCamelCase(vec[i].nombre, NOMBRE), vec[i].edad, vec[i].sexo,
+                            vec[i].notaParcial1, vec[i].notaParcial2, vec[i].promedio, vec[i].fechaIngreso.day,
+                            vec[i].fechaIngreso.month, vec[i].fechaIngreso.year);
+                        flag = 1;
+                    }
+                }
             }
         }
 
-        printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+---------+\n");
+        if(flag == 1)
+        {
+            printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+\n");
+        }
     }
 
     if(flag == 0)

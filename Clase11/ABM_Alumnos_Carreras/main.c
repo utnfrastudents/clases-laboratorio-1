@@ -131,6 +131,13 @@ int main()
                             inputs_clearScreen();
                             mostrarAlumnosPorCarrera(alumnos, TAM, carreras, TAMC, optionCarrera);
                             break;
+                        case 2: // Opcion elegida: Mostrar alumnos de cada carrera
+                            inputs_clearScreen();
+                            for(int i=1000; i <= 1002; i++)
+                            {
+                                mostrarAlumnosPorCarrera(alumnos, TAM, carreras, TAMC, i);
+                            }
+                            break;
                     }
 
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
