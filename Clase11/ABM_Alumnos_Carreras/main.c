@@ -134,7 +134,11 @@ int main()
                         case 2: // Opcion elegida: Mostrar alumnos de cada carrera
                             inputs_clearScreen();
                             ordenarAlumnosPorCarreraNombre(alumnos, TAM, ASC);
-                            mostrarAlumnos(alumnos, TAM, carreras, TAMC);
+                            mostrarAlumnosTodasLasCarreras(alumnos, TAM, carreras, TAMC);
+                            break;
+                        case 3:
+                            inputs_clearScreen();
+                            mostrarCantidadAlumnosPorCarrera(alumnos, TAM, carreras, TAMC);
                             break;
                     }
 

@@ -11,6 +11,7 @@ sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
 
 static int alumnosCompare(sAlumno alumno1, sAlumno alumno2);
 static int swapAlumnos(sAlumno* alumno1, sAlumno* alumno2);
+int cantidadAlumnosPorCarrera(sAlumno alumnos[], int tam_alumnos, int idCarrera);
 
 void inicializarAlumnos(sAlumno vec[], int tam)
 {
@@ -416,7 +417,7 @@ void mostrarAlumnos(sAlumno vec[], int tam, sCarrera carreras[], int tam_carrera
     int flag = 0;
     char descrip[NOM_CARRERA];
 
-    if(vec != NULL && tam > 0)
+    if(vec != NULL && tam > 0 && carreras != NULL && tam_carreras > 0)
     {
         printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
         printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   | %s |\n",
@@ -450,10 +451,8 @@ void mostrarAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera carreras[
     char descrip[NOM_CARRERA];
     int contador = 0;
 
-    if(vec != NULL && tam_alumnos > 0)
+    if(vec != NULL && tam_alumnos > 0 && carreras != NULL && tam_carreras > 0)
     {
-        
-
         for(int i=0; i < tam_alumnos; i++)
         {
             if(vec[i].isEmpty == ALUMNO_CARGADO
@@ -467,18 +466,16 @@ void mostrarAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera carreras[
                     printf("+============+======================+=======+=======+============+============+============+============+\n");
                     printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   |\n",
                             "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso");
-                    printf("+============+======================+=======+=======+============+============+============+============+\n");  
+                    printf("+============+======================+=======+=======+============+============+============+============+\n");
                 }
-                else
+
+                if(vec[i].idCarrera == idCarrera)
                 {
-                    if(vec[i].idCarrera == idCarrera)
-                    {
-                        printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
-                            vec[i].legajo, arrays_stringToCamelCase(vec[i].nombre, NOMBRE), vec[i].edad, vec[i].sexo,
-                            vec[i].notaParcial1, vec[i].notaParcial2, vec[i].promedio, vec[i].fechaIngreso.day,
-                            vec[i].fechaIngreso.month, vec[i].fechaIngreso.year);
-                        flag = 1;
-                    }
+                    printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d |\n",
+                        vec[i].legajo, arrays_stringToCamelCase(vec[i].nombre, NOMBRE), vec[i].edad, vec[i].sexo,
+                        vec[i].notaParcial1, vec[i].notaParcial2, vec[i].promedio, vec[i].fechaIngreso.day,
+                        vec[i].fechaIngreso.month, vec[i].fechaIngreso.year);
+                    flag = 1;
                 }
             }
         }
@@ -486,6 +483,53 @@ void mostrarAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera carreras[
         if(flag == 1)
         {
             printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+\n");
+        }
+    }
+
+    if(flag == 0)
+    {
+        printf("No hay alumnos que mostrar.\n");
+    }
+}
+
+void mostrarAlumnosTodasLasCarreras(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras)
+{
+    for(int i = 1000; i <= 1002; i++)
+    {
+        mostrarAlumnosPorCarrera(vec, tam_alumnos, carreras, tam_carreras, i);
+    }
+}
+
+void mostrarCantidadAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras)
+{
+    int flag = 0;
+    int contador = 0;
+    int cantidadAlumnos = 0;
+
+    if(vec != NULL && tam_alumnos > 0 && carreras != NULL && tam_carreras > 0)
+    {
+        for(int i = 0; i < tam_carreras; i++)
+        {
+            contador++;
+            if(contador == 1)
+            {
+                printf("+=========+=========+\n");
+                printf("| %7s | %7s |\n", "Carrera", "Alumnos");
+                printf("+=========+=========+\n");
+            }
+
+            cantidadAlumnos = cantidadAlumnosPorCarrera(vec, tam_alumnos, carreras[i].idCarrera);
+
+            if (cantidadAlumnos > 0)
+            {
+                printf("| %7s | %7d |\n", carreras[i].descripcion, cantidadAlumnos);
+                flag = 1;
+            }
+
+            if (flag == 1)
+            {
+                printf("+---------+---------+\n");
+            }
         }
     }
 
@@ -520,7 +564,7 @@ int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad)
 
     sAlumno suplentes[] = {
         {1994, "juan sosa", 25, 'm', 4, 6, 5, {16, 10, 2019}, 1001, 0},
-        {1997, "juana martinez", 19, 'f', 7, 4, 5.5, {20, 2, 2016}, 1000, 0},
+        {1997, "juana martinez", 19, 'f', 7, 4, 5.5, {20, 2, 2016}, 1001, 0},
         {1996, "ariel perez", 20, 'm', 8, 6, 7, {12, 5, 2014}, 1002, 0},
         {1991, "alicia saenz", 21, 'f', 9, 6, 7.5, {9, 7, 2013}, 1001, 0},
         {1995, "nahuel hernandez", 30, 'm', 2, 4, 3, {4, 12, 2019}, 1001, 0},
@@ -579,4 +623,23 @@ static int swapAlumnos(sAlumno* alumno1, sAlumno* alumno2)
     }
 
     return returnValue;
+}
+
+int cantidadAlumnosPorCarrera(sAlumno alumnos[], int tam_alumnos, int idCarrera)
+{
+    int contador = 0;
+
+    if(alumnos != NULL && tam_alumnos >0)
+    {
+        for(int i=0; i< tam_alumnos; i++)
+        {
+            if(alumnos[i].isEmpty == ALUMNO_CARGADO
+                && alumnos[i].idCarrera == idCarrera)
+            {
+                contador++;
+            }
+        }
+    }
+
+    return contador;
 }

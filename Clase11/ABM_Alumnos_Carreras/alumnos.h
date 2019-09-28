@@ -38,6 +38,10 @@ int ordenarAlumnosPorCarreraNombre(sAlumno vec[], int tam, int criterioNombre);
 void mostrarAlumno(sAlumno alumno, sCarrera vec[], int tam);
 void mostrarAlumnos(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras);
 void mostrarAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras, int idCarrera);
+void mostrarAlumnosTodasLasCarreras(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras);
+void mostrarCantidadAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras);
+void mostrarCarreraConMasInscriptos(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras);
 int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad);
+//int cantidadAlumnosPorCarrera(sAlumno alumnos[], int tam_alumnos, int idCarrera);
 
 #endif // ALUMNOS_H_INCLUDED
