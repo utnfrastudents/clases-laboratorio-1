@@ -539,6 +539,28 @@ void mostrarCantidadAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera c
     }
 }
 
+void mostrarCarreraConMasInscriptos(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras)
+{
+    int cantidadMaxima = 0;
+    int aux;
+    sCarrera carreraAux;
+
+    for (int i = 0; i < tam_carreras; i++)
+    {
+        aux = cantidadAlumnosPorCarrera(vec, tam_alumnos, carreras[i].idCarrera);
+        if (aux > cantidadMaxima)
+        {
+            cantidadMaxima = aux;
+            carreraAux = carreras[i];
+        }
+    }
+    
+    if (cantidadMaxima > 0)
+    {
+        printf("La carrera con mas inscriptos es %s que tiene %d alumnos.\n", carreraAux.descripcion, cantidadMaxima);
+    }
+}
+
 sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
     int notaParcial1, int notaParcial2, sDate fechaIngreso, int idCarrera)
 {

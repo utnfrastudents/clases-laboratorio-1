@@ -140,8 +140,10 @@ int main()
                             inputs_clearScreen();
                             mostrarCantidadAlumnosPorCarrera(alumnos, TAM, carreras, TAMC);
                             break;
+                        case 4:
+                            mostrarCarreraConMasInscriptos(alumnos, TAM, carreras, TAMC);
+                            break;
                     }
-
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
                 } while (!lifeCycle);
                 break;
