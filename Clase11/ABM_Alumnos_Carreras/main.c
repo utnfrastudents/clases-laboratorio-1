@@ -141,6 +141,7 @@ int main()
                             mostrarCantidadAlumnosPorCarrera(alumnos, TAM, carreras, TAMC);
                             break;
                         case 4:
+                            inputs_clearScreen();
                             mostrarCarreraConMasInscriptos(alumnos, TAM, carreras, TAMC);
                             break;
                     }
