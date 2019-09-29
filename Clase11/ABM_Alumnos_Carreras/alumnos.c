@@ -642,12 +642,54 @@ void mostrarAlumnosVarones(sAlumno alumnos[], int tam_alumnos, sCarrera carreras
             }
         }
 
-        printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+---------+\n");
+        if (flag == 1)
+        {
+            printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+---------+\n");
+        }
     }
 
     if(flag == 0)
     {
         printf("No hay alumnos varones que mostrar.\n");
+    }
+}
+
+void mostrarMujeresPorCarrera(sAlumno alumnos[], int tam_alumnos, sCarrera carreras[], int tam_carreras, int idCarrera)
+{
+    int flag = 0;
+    char descrip[NOM_CARRERA];
+
+    if(alumnos != NULL && tam_alumnos > 0 && carreras != NULL && tam_carreras > 0)
+    {
+        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
+        printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   | %s |\n",
+                "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso", "Carrera");
+        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
+
+        for(int i=0; i < tam_alumnos; i++)
+        {
+            if(alumnos[i].isEmpty == ALUMNO_CARGADO
+                && buscarCarreraPorId(alumnos[i].idCarrera, carreras, tam_carreras, descrip)
+                && toupper(alumnos[i].sexo) == 'F'
+                && alumnos[i].idCarrera == idCarrera)
+            {
+                printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d | %7s |\n",
+                    alumnos[i].legajo, arrays_stringToCamelCase(alumnos[i].nombre, NOMBRE), alumnos[i].edad, alumnos[i].sexo,
+                    alumnos[i].notaParcial1, alumnos[i].notaParcial2, alumnos[i].promedio, alumnos[i].fechaIngreso.day,
+                    alumnos[i].fechaIngreso.month, alumnos[i].fechaIngreso.year, descrip);
+                flag = 1;
+            }
+        }
+
+        if (flag == 1)
+        {
+            printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+---------+\n");
+        }
+    }
+
+    if(flag == 0)
+    {
+        printf("No hay alumnas mujeres que mostrar.\n");
     }
 }
 

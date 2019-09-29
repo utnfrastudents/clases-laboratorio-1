@@ -106,13 +106,19 @@ int menu_reports(int* optionMenu, int* optionReport)
     if(!inputs_getInt(optionMenu, "Elija una opcion del menu: ",
         "Opcion incorrecta, ingrese nuevamente: ", OPTION_MIN, REPORT_MAX))
     {
-        returnValue = 0;
-
-        if(*optionMenu == 1 /**< Solo para opcion 1. >*/
-            && !inputs_getInt(optionReport, "Coloque el numero de la carrera: ",
-                "Opcion incorrecta, ingrese nuevamente: ", 1000, 1002))
+        switch (*optionMenu)
         {
-            returnValue = 0;
+            case 1:
+            case 7:
+                if(!inputs_getInt(optionReport, "Coloque el numero de la carrera: ",
+                    "Opcion incorrecta, ingrese nuevamente: ", 1000, 1002))
+                {
+                    returnValue = 0;
+                }
+                break;
+            default:
+                returnValue = 0;
+                break;
         }
     }
 

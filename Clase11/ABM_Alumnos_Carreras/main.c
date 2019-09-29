@@ -152,6 +152,10 @@ int main()
                             inputs_clearScreen();
                             mostrarAlumnosVarones(alumnos, TAM, carreras, TAMC);
                             break;
+                        case 7:
+                            inputs_clearScreen();
+                            mostrarMujeresPorCarrera(alumnos, TAM, carreras, TAMC, optionCarrera);
+                            break;
                     }
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
                 } while (!lifeCycle);
