@@ -156,6 +156,10 @@ int main()
                             inputs_clearScreen();
                             mostrarMujeresPorCarrera(alumnos, TAM, carreras, TAMC, optionCarrera);
                             break;
+                        case 8:
+                            inputs_clearScreen();
+                            mostrarAlumnosMayoresDe30DeLicenciatura(alumnos, TAM, carreras, TAMC);
+                            break;
                     }
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
                 } while (!lifeCycle);

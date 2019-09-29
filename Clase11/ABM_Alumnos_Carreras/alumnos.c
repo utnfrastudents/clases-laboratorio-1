@@ -693,6 +693,45 @@ void mostrarMujeresPorCarrera(sAlumno alumnos[], int tam_alumnos, sCarrera carre
     }
 }
 
+void mostrarAlumnosMayoresDe30DeLicenciatura(sAlumno alumnos[], int tam_alumnos, sCarrera carreras[], int tam_carreras)
+{
+    int flag = 0;
+    char descrip[NOM_CARRERA];
+
+    if(alumnos != NULL && tam_alumnos > 0 && carreras != NULL && tam_carreras > 0)
+    {
+        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
+        printf("|   %s   |        %s        | %s  | %s  |   %s   |   %s   |  %s  |  %s   | %s |\n",
+                "Legajo", "Nombre", "Edad", "Sexo", "Nota 1", "Nota 2", "Promedio", "Ingreso", "Carrera");
+        printf("+============+======================+=======+=======+============+============+============+============+=========+\n");
+
+        for(int i=0; i < tam_alumnos; i++)
+        {
+            if(alumnos[i].isEmpty == ALUMNO_CARGADO
+                && buscarCarreraPorId(alumnos[i].idCarrera, carreras, tam_carreras, descrip)
+                && !strcmp(descrip, "LIC")
+                && alumnos[i].edad > 30)
+            {
+                printf("| %10d | %20s | %5d | %5c | %10d | %10d | %10.2f | %02d/%02d/%4d | %7s |\n",
+                    alumnos[i].legajo, arrays_stringToCamelCase(alumnos[i].nombre, NOMBRE), alumnos[i].edad, alumnos[i].sexo,
+                    alumnos[i].notaParcial1, alumnos[i].notaParcial2, alumnos[i].promedio, alumnos[i].fechaIngreso.day,
+                    alumnos[i].fechaIngreso.month, alumnos[i].fechaIngreso.year, descrip);
+                flag = 1;
+            }
+        }
+
+        if (flag == 1)
+        {
+            printf("+------------+----------------------+-------+-------+------------+------------+------------+------------+---------+\n");
+        }
+    }
+
+    if(flag == 0)
+    {
+        printf("No hay alumnos mayores de 30 en licenciatura que mostrar.\n");
+    }
+}
+
 sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
     int notaParcial1, int notaParcial2, sDate fechaIngreso, int idCarrera)
 {
