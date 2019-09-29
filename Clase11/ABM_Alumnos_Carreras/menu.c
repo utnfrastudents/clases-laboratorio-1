@@ -94,12 +94,12 @@ int menu_reports(int* optionMenu, int* optionReport)
     printf("=======================================================\n");
     printf("    1 - Mostrar Alumnos de una Carrera\n");
     printf("    2 - Mostrar Alumnos de todas las Carreras\n");
-    printf("    3 - Mostrar Cantidad de alumnos por Carrera\n");
-    printf("    4 - Mostrar La Carrera con mas inscriptos\n");
-    printf("    5 - Mostrar Mejor Promedio por Carrera\n");
-    printf("    6 - Mostrar Alumnos Varones\n");
-    printf("    7 - Mostrar Mujeres de Alguna Carrera\n");
-    printf("    8 - Mostrar Alumnos mayores a 30 de Licenciatura\n");
+    printf("    3 - Mostrar cantidad de Alumnos por Carrera\n");
+    printf("    4 - Mostrar la Carrera con mas inscriptos\n");
+    printf("    5 - Mostrar mejor promedio por Carrera\n");
+    printf("    6 - Mostrar Alumnos varones\n");
+    printf("    7 - Mostrar mujeres de alguna Carrera\n");
+    printf("    8 - Mostrar Alumnos mayores a 30 de licenciatura\n");
     printf("    9 - Volver al menu principal\n");
     printf("=======================================================\n");
 

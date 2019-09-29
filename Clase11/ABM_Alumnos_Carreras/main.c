@@ -144,6 +144,13 @@ int main()
                             inputs_clearScreen();
                             mostrarCarreraConMasInscriptos(alumnos, TAM, carreras, TAMC);
                             break;
+                        case 5:
+                            inputs_clearScreen();
+                            mostrarMejorPromedioPorCarrera(alumnos, TAM, carreras, TAMC);
+                            //printf("->[debug]: Promedio Carrera 1000: %.2f\n", promedioMasAltoPorCarrera(alumnos, TAM, 1000));
+                            //printf("->[debug]: Promedio Carrera 1001: %.2f\n", promedioMasAltoPorCarrera(alumnos, TAM, 1001));
+                            //printf("->[debug]: Promedio Carrera 1002: %.2f\n", promedioMasAltoPorCarrera(alumnos, TAM, 1002));
+                            break;
                     }
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
                 } while (!lifeCycle);

@@ -1,0 +1,6 @@
+{
+    "editor.renderWhitespace": "boundary",
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableCommitSigning": true
+}

@@ -12,6 +12,7 @@ sAlumno newAlumno(int legajo, char nombre[NOMBRE], int edad, char sexo,
 static int alumnosCompare(sAlumno alumno1, sAlumno alumno2);
 static int swapAlumnos(sAlumno* alumno1, sAlumno* alumno2);
 int cantidadAlumnosPorCarrera(sAlumno alumnos[], int tam_alumnos, int idCarrera);
+float promedioMasAltoPorCarrera(sAlumno alumnos[], int tam_alumnos, int idCarrera);
 
 void inicializarAlumnos(sAlumno vec[], int tam)
 {
@@ -136,7 +137,6 @@ int bajaAlumno(sAlumno vec[], int tam, sCarrera carreras[], int tam_carreras)
                 {
                     vec[legajoExistente].isEmpty = ALUMNO_VACIO;
                     returnValue = 1;
-                    printf("Alumno borrado.\n");
                 }
                 else
                 {
@@ -543,7 +543,6 @@ void mostrarCarreraConMasInscriptos(sAlumno vec[], int tam_alumnos, sCarrera car
 {
     int cantidadMaxima = 0;
     int aux;
-    sCarrera carreraAux;
 
     for (int i = 0; i < tam_carreras; i++)
     {
@@ -553,7 +552,7 @@ void mostrarCarreraConMasInscriptos(sAlumno vec[], int tam_alumnos, sCarrera car
             cantidadMaxima = aux;
         }
     }
-    
+
     if (cantidadMaxima > 0)
     {
         printf("======================================\n");
@@ -569,6 +568,51 @@ void mostrarCarreraConMasInscriptos(sAlumno vec[], int tam_alumnos, sCarrera car
         }
 
         printf("--------------------------------------\n");
+    }
+}
+
+void mostrarMejorPromedioPorCarrera(sAlumno alumnos[], int tam_alumnos, sCarrera carreras[], int tam_carreras)
+{
+    int flag = 0;
+    int contador = 0;
+    char descrip[NOM_CARRERA];
+
+    if (alumnos != NULL && tam_alumnos > 0 && carreras != NULL && tam_carreras > 0)
+    {
+        for(int i = 0; i < tam_carreras; i++)
+        {
+            contador++;
+            if(contador == 1)
+            {
+                printf("+========+======================+========+========+==========+=========+\n");
+                printf("| %6s | %20s | %6s | %6s | %8s | %7s |\n",
+                        "Legajo", "Nombre", "Nota 1", "Nota 2", "Promedio", "Carrera");
+                printf("+========+======================+========+========+==========+=========+\n");
+            }
+
+            for (int j = 0; j < tam_alumnos; j++)
+            {
+                if(alumnos[j].idCarrera == carreras[i].idCarrera
+                    && alumnos[j].promedio == promedioMasAltoPorCarrera(alumnos, tam_alumnos, carreras[i].idCarrera)
+                    && buscarCarreraPorId(carreras[i].idCarrera, carreras, tam_carreras, descrip))
+                {
+                    printf("| %6d | %20s | %6d | %6d |     %.2f | %7s |\n",
+                        alumnos[j].legajo, arrays_stringToCamelCase(alumnos[j].nombre, NOMBRE),
+                        alumnos[j].notaParcial1, alumnos[j].notaParcial2, alumnos[j].promedio, descrip);
+                    flag = 1;
+                }
+            }
+        }
+
+        if (flag == 1)
+        {
+            printf("+--------+----------------------+--------+--------+----------+---------+\n");
+        }
+    }
+
+    if(flag == 0)
+    {
+        printf("No hay alumnos que mostrar.\n");
     }
 }
 
@@ -675,4 +719,25 @@ int cantidadAlumnosPorCarrera(sAlumno alumnos[], int tam_alumnos, int idCarrera)
     }
 
     return contador;
+}
+
+float promedioMasAltoPorCarrera(sAlumno alumnos[], int tam_alumnos, int idCarrera)
+{
+    float promedioMax = 0;
+
+    if(alumnos != NULL && tam_alumnos >0)
+    {
+        for (int i = 0; i < tam_alumnos; i++)
+        {
+            //printf("->[debug]: Carrera %d - Promedio %.2f - isEmpty %d\n", alumnos[i].idCarrera, alumnos[i].promedio, alumnos[i].isEmpty);
+            if(alumnos[i].isEmpty == ALUMNO_CARGADO
+                && alumnos[i].idCarrera == idCarrera
+                && alumnos[i].promedio > promedioMax)
+            {
+                promedioMax = alumnos[i].promedio;
+            }
+        }
+    }
+
+    return promedioMax;
 }
