@@ -42,6 +42,7 @@ void mostrarAlumnosTodasLasCarreras(sAlumno vec[], int tam_alumnos, sCarrera car
 void mostrarCantidadAlumnosPorCarrera(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras);
 void mostrarCarreraConMasInscriptos(sAlumno vec[], int tam_alumnos, sCarrera carreras[], int tam_carreras);
 void mostrarMejorPromedioPorCarrera(sAlumno alumnos[], int tam_alumnos, sCarrera carreras[], int tam_carreras);
+void mostrarAlumnosVarones(sAlumno alumnos[], int tam_alumnos, sCarrera carreras[], int tam_carreras);
 int hardcodearAlumnos(sAlumno vec[], int tam, int cantidad);
 
 #endif // ALUMNOS_H_INCLUDED
