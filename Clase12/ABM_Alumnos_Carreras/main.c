@@ -15,7 +15,18 @@ int main()
     int optionCarrera;
 
     sAlumno alumnos[TAM];
-    sCarrera carreras[TAMC] = {{1000, "TUP"}, {1001, "TUSI"}, {1002, "LIC"}};
+    sCarrera carreras[TAMC] = {
+        {1000, "TUP"},
+        {1001, "TUSI"},
+        {1002, "LIC"}
+    };
+    sComida comidas[TAMCOM] = {
+        {5000, "Bife", 250},
+        {5001, "Fideos", 200},
+        {5002, "Pizza", 190},
+        {5003, "Arroz", 200},
+        {5004, "Milanesa", 220}
+    };
 
     inicializarAlumnos(alumnos, TAM);
 

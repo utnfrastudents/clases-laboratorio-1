@@ -3,6 +3,8 @@
 
 #include "alumnos.h"
 
+#define TAMCOM 5
+
 typedef struct
 {
     int id;
