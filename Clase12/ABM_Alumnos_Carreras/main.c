@@ -3,6 +3,7 @@
 int main()
 {
     int legajo = 2000;
+    int idAlmuerzo = 60000;
     int lifeCycle; /**< Indicador del ciclo de vida de cada menu >*/
     int optionMainMenu; /**< Opcion elegida por el usuario del menu principal >*/
 //    int optionCreateMenu; /**< Opcion elegida por el usuario para el menu de alta >*/
@@ -27,10 +28,13 @@ int main()
         {5003, "Arroz", 200},
         {5004, "Milanesa", 220}
     };
+    sAlmuerzo almuerzos[TAMAL];
 
     inicializarAlumnos(alumnos, TAM);
+    inicializarAlmuerzos(almuerzos, TAMAL);
 
     legajo += hardcodearAlumnos(alumnos, TAM, 9);
+    idAlmuerzo += hardcodearAlmuerzos(almuerzos, TAMAL, 10);
 
     do
     {

@@ -17,7 +17,7 @@ int menu_main(int* option)
     printf("    6 - Informes Alumnos\n");
     printf("    7 - Mostrar Carreras\n");
     printf("    8 - Mostrar Comidas\n");
-    printf("    9 - \n");
+    printf("    9 - Mostrar Almuerzos\n");
     printf("    10 - \n");
     printf("    11 - Salir\n");
     printf("=======================================================\n");
