@@ -12,4 +12,13 @@ typedef struct
     float precio;
 } sComida;
 
+typedef struct
+{
+    int id;
+    int idAlumno;
+    int idComida;
+    sDate fecha;
+    int isEmpty;
+} sAlmuerzo;
+
 #endif // COMIDAS_H_INCLUDED
