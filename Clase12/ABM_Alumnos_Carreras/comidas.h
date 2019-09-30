@@ -21,4 +21,7 @@ typedef struct
     int isEmpty;
 } sAlmuerzo;
 
+void mostrarComida(sComida comida);
+void mostrarComidas(sComida comidas[], int len);
+
 #endif // COMIDAS_H_INCLUDED

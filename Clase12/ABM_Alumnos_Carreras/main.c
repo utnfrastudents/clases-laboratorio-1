@@ -176,7 +176,12 @@ int main()
                 } while (!lifeCycle);
                 break;
             case 7:
+                inputs_clearScreen();
                 mostrarCarreras(carreras, TAMC);
+                break;
+            case 8:
+                inputs_clearScreen();
+                mostrarComidas(comidas, TAMCOM);
                 break;
         }
 

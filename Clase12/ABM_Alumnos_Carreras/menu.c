@@ -16,7 +16,10 @@ int menu_main(int* option)
     printf("    5 - Ordenar Alumnos\n");
     printf("    6 - Informes Alumnos\n");
     printf("    7 - Mostrar Carreras\n");
-    printf("    8 - Salir\n");
+    printf("    8 - Mostrar Comidas\n");
+    printf("    9 - \n");
+    printf("    10 - \n");
+    printf("    11 - Salir\n");
     printf("=======================================================\n");
 
     if(!inputs_getInt(option, "Elija una opcion del menu: ",

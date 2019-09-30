@@ -4,7 +4,7 @@
 #include "inputs.h"
 
 #define OPTION_MIN 1 /**< Opcion minima en comun de cada menu >*/
-#define MAIN_MAX 8 /**< Opcion maxima del menu principal >*/
+#define MAIN_MAX 11 /**< Opcion maxima del menu principal >*/
 #define CREATE_MAX 5 /**< Opcion maxima de menu de creacion de Empleado >*/
 #define UPDATE_MAX 3 /**< Opcion maxima de menu para modificar un Empleado >*/
 #define DELETE_MAX 2 /**< Opcion maxima de menu para dar de baja un Empleado >*/
