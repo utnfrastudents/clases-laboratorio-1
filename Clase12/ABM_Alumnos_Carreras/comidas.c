@@ -103,7 +103,6 @@ int altaAlmuerzo(sAlmuerzo almuerzos[], int lenAlmuerzos,
     int lenComidas, sCarrera carreras[], int lenCarreras)
 {
     int returnValue = 0;
-    sAlmuerzo almuerzoAux;
     int indiceAlmuerzo;
     int almuerzoExistente;
 
@@ -126,7 +125,7 @@ int altaAlmuerzo(sAlmuerzo almuerzos[], int lenAlmuerzos,
             else
             {
                 almuerzos[almuerzoExistente].id = id;
-                
+
                 inputs_clearScreen();
                 mostrarAlumnos(alumnos, lenAlumnos, carreras, lenCarreras);
                 if(!inputs_getInt(&almuerzos[almuerzoExistente].idAlumno,
@@ -173,7 +172,7 @@ void mostrarComidas(sComida comidas[], int len)
 void mostrarAlmuerzo(sAlmuerzo almuerzo, sAlumno alumno, sComida comida)
 {
     printf("| %5d | %5d | %20s | %20s | %5.2f | %02d/%02d/%4d |\n",
-        almuerzo.id, alumno.legajo, alumno.nombre, comida.descripcion, 
+        almuerzo.id, alumno.legajo, alumno.nombre, comida.descripcion,
         comida.precio, almuerzo.fecha.day, almuerzo.fecha.month, almuerzo.fecha.year);
 }
 
