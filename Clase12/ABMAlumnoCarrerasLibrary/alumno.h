@@ -1,5 +1,6 @@
 #include "carrera.h"
 
+
 #ifndef ALUMNO_H_INCLUDED
 #define ALUMNO_H_INCLUDED
 
@@ -37,8 +38,3 @@ eAlumno newAlumno(int leg,char nombre[],int edad, char sexo, int nota1, int nota
 int bajaAlumno(eAlumno vec[], int tam, eCarrera carreras[], int tamC);
 int ModificarAlumno(eAlumno vec[], int tam, eCarrera carreras[], int tamC);
 int hardcodearAlumnos( eAlumno vec[], int tam, int cantidad);
-void mostrarAlumnosCarrera(eAlumno alumnos[], int tamA, eCarrera carreras[], int tamC, int idCarrera);
-void mostrarAlumnosCarreraSeleccionada(eAlumno alumnos[],int tamA, eCarrera carreras[], int tamC);
-void mostrarAlumnosDeTodasLasCarreras(eAlumno alumnos[], int tam, eCarrera carreras[], int tamC);
-int contadorAlumnosCarrera(eAlumno alumnos[], int tamA, eCarrera carreras[], int tamC, int idCarrera);
-void mostrarCantidadDeAlumnosPorCarreras(eAlumno alumnos[], int tamA, eCarrera carreras[], int tamC);

@@ -1,10 +1,7 @@
 #include "alumno.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include <string.h>
-#include "alumno.h"
-
 
 void mostrarAlumno(eAlumno x, eCarrera carreras[], int tam)
 {
@@ -27,13 +24,13 @@ void mostrarAlumno(eAlumno x, eCarrera carreras[], int tam)
 
 void mostrarAlumnos(eAlumno vec[], int tam,  eCarrera carreras[], int tamC)
 {
-    int i;
+
     int flag = 0;
     system("cls");
 
     printf(" Legajo    Nombre    Edad   Sexo  Nota1  Nota2  Promedio   FIngreso  Carrera\n\n");
 
-    for(i=0; i < tam; i++)
+    for(int i=0; i < tam; i++)
     {
         if( vec[i].isEmpty == 0)
         {
@@ -52,13 +49,11 @@ void mostrarAlumnos(eAlumno vec[], int tam,  eCarrera carreras[], int tamC)
 
 void ordenarAlumnos(eAlumno vec[], int tam)
 {
-    int i;
-    int j;
     eAlumno auxAlumno;
 
-    for(i= 0; i < tam-1 ; i++)
+    for(int i= 0; i < tam-1 ; i++)
     {
-        for(j= i+1; j <tam; j++)
+        for(int j= i+1; j <tam; j++)
         {
             if( vec[i].sexo > vec[j].sexo)
             {
@@ -73,8 +68,7 @@ void ordenarAlumnos(eAlumno vec[], int tam)
 
 void inicializarAlumnos(eAlumno vec[], int tam)
 {
-    int i;
-    for(i = 0; i < tam; i++)
+    for(int i = 0; i < tam; i++)
     {
         vec[i].isEmpty = 1;
     }
@@ -83,10 +77,9 @@ void inicializarAlumnos(eAlumno vec[], int tam)
 
 int buscarLibre(eAlumno vec[], int tam)
 {
-    int i;
     int indice = -1;
 
-    for(i=0; i < tam; i++)
+    for(int i=0; i < tam; i++)
     {
         if( vec[i].isEmpty == 1 )
         {
@@ -99,10 +92,9 @@ int buscarLibre(eAlumno vec[], int tam)
 
 int buscarAlumno(int legajo, eAlumno vec[], int tam)
 {
-    int i;
     int indice = -1;
 
-    for(i=0; i < tam; i++)
+    for(int i=0; i < tam; i++)
     {
         if( vec[i].legajo == legajo && vec[i].isEmpty == 0)
         {
@@ -178,7 +170,7 @@ eAlumno newAlumno(
     int nota2,
     eFecha fecha,
     int idCarrera
-    )
+)
 {
 
     eAlumno al;
@@ -195,7 +187,6 @@ eAlumno newAlumno(
 
     return al;
 }
-
 
 int bajaAlumno(eAlumno vec[], int tam, eCarrera carreras[], int tamC)
 {
@@ -237,6 +228,7 @@ int bajaAlumno(eAlumno vec[], int tam, eCarrera carreras[], int tamC)
 
     return todoOk;
 }
+
 int ModificarAlumno(eAlumno vec[], int tam, eCarrera carreras[], int tamC)
 {
 
@@ -288,14 +280,13 @@ int ModificarAlumno(eAlumno vec[], int tam, eCarrera carreras[], int tamC)
     return todoOk;
 }
 
-
 int hardcodearAlumnos( eAlumno vec[], int tam, int cantidad)
 {
     int cont = 0;
 
     eAlumno suplentes[]=
     {
-        { 20000, "Juan", 20, 'm', 5, 7, 6, {12, 5, 2015}, 1000, 0},
+        { 20000, "Juan", 20, 'm', 5, 7, 6, {12, 5, 2015}, 1002, 0},
         { 20001, "Alberto", 21, 'm', 2, 8, 5, {12, 5, 2019},1001, 0},
         { 20002, "Ana", 22, 'f', 4, 5, 4.5, {2, 7, 2018},1002, 0},
         { 20003, "Luis", 20, 'm', 9, 8, 8.5, {21, 5, 2018},1000, 0},
@@ -308,10 +299,9 @@ int hardcodearAlumnos( eAlumno vec[], int tam, int cantidad)
         { 20010, "Agustin", 24, 'm', 6, 7, 6.5, {1, 7, 2017},1002, 0},
     };
 
-    int i;
     if( cantidad <= 10 && tam >= cantidad)
     {
-        for(i=0; i < cantidad; i++)
+        for(int i=0; i < cantidad; i++)
         {
 
             vec[i] = suplentes[i];
@@ -321,83 +311,3 @@ int hardcodearAlumnos( eAlumno vec[], int tam, int cantidad)
 
     return cont;
 }
-// 1 esta cargado
-//0 esta vacio
-void mostrarAlumnosCarrera(eAlumno alumnos[], int tamA, eCarrera carreras[], int tamC, int idCarrera)
-{
-    int i;
-
-    for(i = 0; i < tamA; i++)
-    {
-       if(alumnos[i].idCarrera == idCarrera && alumnos[i].isEmpty == 0)
-       {
-           mostrarAlumno(alumnos[i],carreras,tamA);
-       }
-
-    }
-    printf("\n\n");
-}
-
-void mostrarAlumnosCarreraSeleccionada(eAlumno alumnos[],int tamA, eCarrera carreras[], int tamC)
-{
-    int idCarrera;
-    system("cls");
-    printf("**** Mostrar Alumnos de una carrera ****\n\n");
-    mostrarCarreras(carreras, tamC);
-    printf("Ingrese id Carrera: ");
-    scanf("%d", &idCarrera);
-    mostrarAlumnosCarrera(alumnos, tamA, carreras, tamC, idCarrera);
-}
-
-void mostrarAlumnosDeTodasLasCarreras(eAlumno alumnos[], int tam, eCarrera carreras[], int tamC)
-{
-    int i;
-    char desc[20];
-    //int idCarrera;
-    system("cls");
-    printf("*** Mostrar Alumnos de todas las Carreras ***\n\n");
-    for(i = 0; i < tamC; i++) //tamC porque estoy recorriendo el vector de carreras
-    {
-        cargarDescCarrera(carreras[i].id, carreras, tamC, desc);
-        printf("Carrera: %s\n\n", desc);
-        mostrarAlumnosCarrera(alumnos, tam, carreras, tamC, carreras[i].id);
-    }
-}
-
-int contadorAlumnosCarrera(eAlumno alumnos[], int tamA, eCarrera carreras[], int tamC, int idCarrera)
-{
-    int i;
-    int cantidad = 0;
-    for(i = 0; i < tamA; i++)
-    {
-        if(alumnos[i].idCarrera == idCarrera && alumnos[i].isEmpty == 0)
-        {
-            cantidad++;
-        }
-    }
-    return cantidad;
-}
-void mostrarCantidadDeAlumnosPorCarreras(eAlumno alumnos[], int tamA, eCarrera carreras[], int tamC)
-{
-    int i;
-    int cantidad;
-    char desc[20];
-    int idCarrera;
-    system("cls");
-    printf("*** Mostrar Alumnos de alumnos por Carrera ***\n\n");
-    for(i = 0; i < tamC; i++) //tamC porque estoy recorriendo el vector de carreras
-    {
-        cargarDescCarrera(carreras[i].id, carreras, tamC, desc);
-        printf("Carrera: %s", desc);
-        cantidad = contadorAlumnosCarrera(alumnos, tamA, carreras, tamC, idCarrera);
-        printf("%d\n\n",cantidad);
-    }
-}
-
-/*void carreraMasInscriptos(eAlumno alumnos[], int tam, eCarrera carreras[], int tamC)
-{
-    int inscriptos[tamC];
-    int mayor;
-    int flag = 0;
-
-}*/
