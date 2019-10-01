@@ -116,7 +116,7 @@ int menu_reports(int* optionMenu, int* optionReport)
             case 1:
             case 7:
                 if(!inputs_getInt(optionReport, "Coloque el numero de la carrera: ",
-                    "Opcion incorrecta, ingrese nuevamente: ", 1000, 1002))
+                    "Opcion incorrecta, ingrese nuevamente: ", CARRERA_MIN, CARRERA_MAX))
                 {
                     returnValue = 0;
                 }

@@ -33,8 +33,8 @@ int main()
     inicializarAlumnos(alumnos, TAM);
     inicializarAlmuerzos(almuerzos, TAMAL);
 
-    legajo += hardcodearAlumnos(alumnos, TAM, 9);
-    idAlmuerzo += hardcodearAlmuerzos(almuerzos, TAMAL, 15);
+    legajo += hardcodearAlumnos(alumnos, TAM, TAM - 1);
+    idAlmuerzo += hardcodearAlmuerzos(almuerzos, TAMAL, TAMAL - 1);
 
     do
     {
@@ -48,30 +48,30 @@ int main()
 
         switch (optionMainMenu)
         {
-            case 1: // Opcion elegida: Alta de Empleado
+            case 1: // Opcion elegida: Alta de Alumnos
                 if(altaAlumno(alumnos, TAM, legajo, carreras, TAMC))
                 {
                     printf("Carga exitosa del alumno.\n");
                     legajo++;
                 }
                 break;
-            case 2: // Opcion elegida: Modificar un Empleado
+            case 2: // Opcion elegida: Modificar un Alumno
                 if(modificarAlumno(alumnos, TAM, carreras, TAMC))
                 {
                     printf("Se ha actualiado la nota del alumno.\n");
                 }
                 break;
-            case 3: // Opcion elegida: Dar de baja un Empleado
+            case 3: // Opcion elegida: Dar de baja un Alumno
                 if(bajaAlumno(alumnos, TAM, carreras, TAMC))
                 {
                     printf("Alumno borrado.\n");
                 }
                 break;
-            case 4: // Opcion elegida: Mostrar lista de Empleados
+            case 4: // Opcion elegida: Mostrar lista de Alumnos
                 inputs_clearScreen();
                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                 break;
-            case 5: //Opcion elegida: Ordenar listado de Empleados
+            case 5: //Opcion elegida: Ordenar listado de Alumnos
                 do
                 {
                     lifeCycle = menu_order(&optionOrderMenu, &optionOrderType);
@@ -130,7 +130,7 @@ int main()
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
                 } while (!lifeCycle);
                 break;
-            case 6:
+            case 6: //Opcion elegida: Informes de Alumnos
                 do
                 {
                     lifeCycle = menu_reports(&optionReportsMenu, &optionCarrera);
@@ -179,24 +179,24 @@ int main()
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
                 } while (!lifeCycle);
                 break;
-            case 7:
+            case 7: //Opcion elegida: Mostrar Carreras
                 inputs_clearScreen();
                 mostrarCarreras(carreras, TAMC);
                 break;
-            case 8:
+            case 8: //Opcion elegida: Mostrar Comidas
                 inputs_clearScreen();
                 mostrarComidas(comidas, TAMCOM);
                 break;
-            case 9:
+            case 9: //Opcion elegida: Mostrar Almuerzos
                 inputs_clearScreen();
                 mostrarAlmuerzos(almuerzos, TAMAL, alumnos, TAM, comidas, TAMCOM);
                 break;
-            case 10:
+            case 10: //Opcion elegida: Alta de Almuerzo
                 inputs_clearScreen();
-                printf("->[debug]: ID Almuerzo: %d\n", idAlmuerzo);
                 if(altaAlmuerzo(almuerzos, TAMAL, idAlmuerzo, alumnos, TAM, comidas, TAMCOM, carreras, TAMC))
                 {
                     printf("Almuerzo cargado con exito.\n");
+                    idAlmuerzo++;
                 }
                 break;
         }

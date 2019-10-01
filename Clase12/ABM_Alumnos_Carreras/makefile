@@ -61,5 +61,5 @@ $(OBJDIR)$(STRO): $(STRC)
 	&& cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
 clean:
-	$(RM) $(PROJECT).layout $(PROJECT).depend \
+	$(RM) *.layout *.depend \
 	&& $(RM) $(RMFLAGS) bin/ obj/

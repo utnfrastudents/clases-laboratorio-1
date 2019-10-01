@@ -1,12 +1,15 @@
 #include "comidas.h"
 
+static void mostrarComidaSinEncabezado(sComida comida);
+static void mostrarAlmuerzoSinEncabezado(sAlmuerzo almuerzo, sAlumno alumno, sComida comida);
+
 void inicializarAlmuerzos(sAlmuerzo almuerzos[], int len)
 {
     if(almuerzos != NULL && len > 0 && len <= TAMAL)
     {
         for(int i=0; i < len; i++)
         {
-            almuerzos[i].isEmpty = 0;
+            almuerzos[i].isEmpty = 1;
         }
     }
 }
@@ -59,6 +62,25 @@ int buscarAlmuerzoLibre(sAlmuerzo almuerzos[], int len)
     return returnValue;
 }
 
+int buscarComidaPorId(sComida vec[], int len, int id)
+{
+    int indice = -1;
+
+    if(vec != NULL && len > 0)
+    {
+        for(int i=0; i < len; i++)
+        {
+            if(vec[i].id == id)
+            {
+                indice = i;
+                break;
+            }
+        }
+    }
+
+    return indice;
+}
+
 int buscarAlmuerzoPorId(sAlmuerzo almuerzos[], int len, int id)
 {
     int indice = -1;
@@ -79,25 +101,6 @@ int buscarAlmuerzoPorId(sAlmuerzo almuerzos[], int len, int id)
     return indice;
 }
 
-int buscarComidaPorId(sComida vec[], int len, int id)
-{
-    int indice = -1;
-
-    if(vec != NULL && len > 0)
-    {
-        for(int i=0; i < len; i++)
-        {
-            if(vec[i].id == id)
-            {
-                indice = i;
-                break;
-            }
-        }
-    }
-
-    return indice;
-}
-
 int altaAlmuerzo(sAlmuerzo almuerzos[], int lenAlmuerzos,
     int id, sAlumno alumnos[], int lenAlumnos, sComida comidas[],
     int lenComidas, sCarrera carreras[], int lenCarreras)
@@ -106,7 +109,10 @@ int altaAlmuerzo(sAlmuerzo almuerzos[], int lenAlmuerzos,
     int indiceAlmuerzo;
     int almuerzoExistente;
 
-    if(almuerzos != NULL && lenAlmuerzos > 0)
+    if(almuerzos != NULL && lenAlmuerzos > 0 && lenAlmuerzos <= TAMAL
+        && alumnos != NULL && lenAlumnos > 0 && lenAlumnos <= TAM
+        && comidas != NULL && lenComidas > 0 && lenComidas <= TAMCOM
+        && carreras != NULL && lenCarreras > 0 && lenCarreras <= TAMC)
     {
         indiceAlmuerzo = buscarAlmuerzoLibre(almuerzos, lenAlmuerzos);
 
@@ -124,19 +130,18 @@ int altaAlmuerzo(sAlmuerzo almuerzos[], int lenAlmuerzos,
             }
             else
             {
-                almuerzos[almuerzoExistente].id = id;
-
-                inputs_clearScreen();
+                almuerzos[indiceAlmuerzo].id = id;
+                
                 mostrarAlumnos(alumnos, lenAlumnos, carreras, lenCarreras);
-                if(!inputs_getInt(&almuerzos[almuerzoExistente].idAlumno,
-                        "Elija el legajo del alumno: ", "Intente nuevamente", 1900, 2100)
-                    && buscarAlumnoPorLegajo(alumnos, lenAlumnos, almuerzos[almuerzoExistente].idAlumno) != -1)
+                if(!inputs_getInt(&almuerzos[indiceAlmuerzo].idAlumno,
+                        "Elija el legajo del alumno: ", "Intente nuevamente: ", 1900, 2100)
+                    && buscarAlumnoPorLegajo(alumnos, lenAlumnos, almuerzos[indiceAlmuerzo].idAlumno) != -1)
                 {
                     inputs_clearScreen();
                     mostrarComidas(comidas, lenComidas);
-                    if(!inputs_getInt(&almuerzos[almuerzoExistente].idComida,
+                    if(!inputs_getInt(&almuerzos[indiceAlmuerzo].idComida,
                             "Elija el ID de la comida: ", "Intente nuevamente: ", 5000, 5004)
-                        && !inputs_getDate(&almuerzos[almuerzoExistente].fecha,
+                        && !inputs_getDate(&almuerzos[indiceAlmuerzo].fecha,
                             "Ingrese la fecha en DD/MM/AAAA: ", "Intente nuevamente: "))
                     {
                         returnValue = 1;
@@ -151,7 +156,11 @@ int altaAlmuerzo(sAlmuerzo almuerzos[], int lenAlmuerzos,
 
 void mostrarComida(sComida comida)
 {
-    printf("| %5d | %20s | %5.2f |\n", comida.id, comida.descripcion, comida.precio);
+    printf("+=======+======================+========+\n");
+    printf("|   ID  | Descripcion          | Precio |\n");
+    printf("+=======+======================+========+\n");
+    mostrarComidaSinEncabezado(comida);
+    printf("+-------+----------------------+--------+\n");
 }
 
 void mostrarComidas(sComida comidas[], int len)
@@ -159,11 +168,11 @@ void mostrarComidas(sComida comidas[], int len)
     if(comidas != NULL && len > 0 && len <= TAMCOM)
     {
         printf("+=======+======================+========+\n");
-        printf("|   ID  | Descripcion          | Precio |\n");
+        printf("|   ID  |      Descripcion     | Precio |\n");
         printf("+=======+======================+========+\n");
         for(int i=0; i < len; i++)
         {
-            mostrarComida(comidas[i]);
+            mostrarComidaSinEncabezado(comidas[i]);
         }
         printf("+-------+----------------------+--------+\n");
     }
@@ -171,9 +180,11 @@ void mostrarComidas(sComida comidas[], int len)
 
 void mostrarAlmuerzo(sAlmuerzo almuerzo, sAlumno alumno, sComida comida)
 {
-    printf("| %5d | %5d | %20s | %20s | %5.2f | %02d/%02d/%4d |\n",
-        almuerzo.id, alumno.legajo, alumno.nombre, comida.descripcion,
-        comida.precio, almuerzo.fecha.day, almuerzo.fecha.month, almuerzo.fecha.year);
+    printf("+=======+========+======================+======================+========+============+\n");
+    printf("|  ID   | Legajo |       Alumno         |        Comida        | Precio |    Fecha   |\n");
+    printf("+=======+========+======================+======================+========+============+\n");
+    mostrarAlmuerzoSinEncabezado(almuerzo, alumno, comida);
+    printf("+-------+--------+----------------------+----------------------+--------+------------+\n");
 }
 
 void mostrarAlmuerzos(sAlmuerzo almuerzos[], int lenAlmuerzos,
@@ -184,6 +195,10 @@ void mostrarAlmuerzos(sAlmuerzo almuerzos[], int lenAlmuerzos,
 
     if(almuerzos!=NULL)
     {
+        printf("+=======+========+======================+======================+========+============+\n");
+        printf("|  ID   | Legajo |       Alumno         |        Comida        | Precio |    Fecha   |\n");
+        printf("+=======+========+======================+======================+========+============+\n");
+
         for(int i = 0; i < lenAlmuerzos; i++)
         {
             indiceAlumno = buscarAlumnoPorLegajo(alumnos, lenAlumnos, almuerzos[i].idAlumno);
@@ -193,9 +208,25 @@ void mostrarAlmuerzos(sAlmuerzo almuerzos[], int lenAlmuerzos,
                 indiceComida = buscarComidaPorId(comidas, lenComidas, almuerzos[i].idComida);
 
                 if (indiceComida != -1) {
-                    mostrarAlmuerzo(almuerzos[i], alumnos[indiceAlumno], comidas[indiceComida]);
+                    mostrarAlmuerzoSinEncabezado(almuerzos[i], alumnos[indiceAlumno], comidas[indiceComida]);
                 }
             }
         }
+
+        printf("+-------+--------+----------------------+----------------------+--------+------------+\n");
     }
+}
+
+static void mostrarComidaSinEncabezado(sComida comida)
+{
+    printf("| %5d | %20s | %5.2f |\n",
+        comida.id, arrays_stringToCamelCase(comida.descripcion, NOMBRE_COMIDA), comida.precio);
+}
+
+static void mostrarAlmuerzoSinEncabezado(sAlmuerzo almuerzo, sAlumno alumno, sComida comida)
+{
+    printf("| %5d |  %5d | %20s | %20s | %5.2f | %02d/%02d/%4d |\n",
+        almuerzo.id, alumno.legajo, arrays_stringToCamelCase(alumno.nombre, NOMBRE),
+        arrays_stringToCamelCase(comida.descripcion, NOMBRE_COMIDA), comida.precio,
+        almuerzo.fecha.day, almuerzo.fecha.month, almuerzo.fecha.year);
 }

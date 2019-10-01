@@ -13,6 +13,8 @@
 #define OPTION_ERROR -1 /**< Opcion de retorno de error de cada menu >*/
 #define ASC 1
 #define DESC 2
+#define CARRERA_MIN 1000
+#define CARRERA_MAX 1002
 
 /** \brief Funcion que imprime un menu en pantalla
  *      para que el usuario ingrese la opcion elegida

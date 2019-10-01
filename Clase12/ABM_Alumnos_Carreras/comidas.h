@@ -5,11 +5,12 @@
 
 #define TAMCOM 5
 #define TAMAL 15
+#define NOMBRE_COMIDA 20
 
 typedef struct
 {
     int id;
-    char descripcion[20];
+    char descripcion[NOMBRE_COMIDA];
     float precio;
 } sComida;
 
@@ -25,8 +26,8 @@ typedef struct
 void inicializarAlmuerzos(sAlmuerzo almuerzos[], int len);
 int hardcodearAlmuerzos(sAlmuerzo almuerzos[], int len, int cantidad);
 int buscarAlmuerzoLibre(sAlmuerzo almuerzos[], int len);
-int buscarAlmuerzoPorId(sAlmuerzo almuerzos[], int len, int id);
 int buscarComidaPorId(sComida vec[], int len, int id);
+int buscarAlmuerzoPorId(sAlmuerzo almuerzos[], int len, int id);
 int altaAlmuerzo(sAlmuerzo almuerzos[], int lenAlmuerzos,
     int id, sAlumno alumnos[], int lenAlumnos, sComida comidas[],
     int lenComidas, sCarrera carreras[], int lenCarreras);
