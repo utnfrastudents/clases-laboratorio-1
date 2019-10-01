@@ -18,8 +18,8 @@ int menu_main(int* option)
     printf("    7 - Mostrar Carreras\n");
     printf("    8 - Mostrar Comidas\n");
     printf("    9 - Mostrar Almuerzos\n");
-    printf("    10 - \n");
-    printf("    11 - Salir\n");
+    printf("   10 - Alta Almuerzo\n");
+    printf("   11 - Salir\n");
     printf("=======================================================\n");
 
     if(!inputs_getInt(option, "Elija una opcion del menu: ",
@@ -103,7 +103,9 @@ int menu_reports(int* optionMenu, int* optionReport)
     printf("    6 - Mostrar Alumnos varones\n");
     printf("    7 - Mostrar mujeres de alguna Carrera\n");
     printf("    8 - Mostrar Alumnos mayores a 30 de licenciatura\n");
-    printf("    9 - Volver al menu principal\n");
+    printf("    9 - Almuerzos en una determinada fecha\n");
+    printf("   10 - Alumnos que comieron una determinada comida\n");
+    printf("   11 - Volver al menu principal\n");
     printf("=======================================================\n");
 
     if(!inputs_getInt(optionMenu, "Elija una opcion del menu: ",

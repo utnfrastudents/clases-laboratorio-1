@@ -34,7 +34,7 @@ int main()
     inicializarAlmuerzos(almuerzos, TAMAL);
 
     legajo += hardcodearAlumnos(alumnos, TAM, 9);
-    idAlmuerzo += hardcodearAlmuerzos(almuerzos, TAMAL, 10);
+    idAlmuerzo += hardcodearAlmuerzos(almuerzos, TAMAL, 15);
 
     do
     {
@@ -186,6 +186,18 @@ int main()
             case 8:
                 inputs_clearScreen();
                 mostrarComidas(comidas, TAMCOM);
+                break;
+            case 9:
+                inputs_clearScreen();
+                mostrarAlmuerzos(almuerzos, TAMAL, alumnos, TAM, comidas, TAMCOM);
+                break;
+            case 10:
+                inputs_clearScreen();
+                printf("->[debug]: ID Almuerzo: %d\n", idAlmuerzo);
+                if(altaAlmuerzo(almuerzos, TAMAL, idAlmuerzo, alumnos, TAM, comidas, TAMCOM, carreras, TAMC))
+                {
+                    printf("Almuerzo cargado con exito.\n");
+                }
                 break;
         }
 

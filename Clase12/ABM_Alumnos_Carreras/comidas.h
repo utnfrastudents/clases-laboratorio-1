@@ -4,7 +4,7 @@
 #include "alumnos.h"
 
 #define TAMCOM 5
-#define TAMAL 10
+#define TAMAL 15
 
 typedef struct
 {
@@ -22,14 +22,18 @@ typedef struct
     int isEmpty;
 } sAlmuerzo;
 
-void mostrarComida(sComida comida);
-void mostrarComidas(sComida comidas[], int len);
 void inicializarAlmuerzos(sAlmuerzo almuerzos[], int len);
 int hardcodearAlmuerzos(sAlmuerzo almuerzos[], int len, int cantidad);
 int buscarAlmuerzoLibre(sAlmuerzo almuerzos[], int len);
 int buscarAlmuerzoPorId(sAlmuerzo almuerzos[], int len, int id);
+int buscarComidaPorId(sComida vec[], int len, int id);
 int altaAlmuerzo(sAlmuerzo almuerzos[], int lenAlmuerzos,
     int id, sAlumno alumnos[], int lenAlumnos, sComida comidas[],
-    int lenComidas, sDate fecha);
+    int lenComidas, sCarrera carreras[], int lenCarreras);
+void mostrarComida(sComida comida);
+void mostrarComidas(sComida comidas[], int len);
+void mostrarAlmuerzo(sAlmuerzo almuerzo, sAlumno alumno, sComida comida);
+void mostrarAlmuerzos(sAlmuerzo almuerzos[], int lenAlmuerzos,
+    sAlumno alumnos[], int lenAlumnos, sComida comidas[], int lenComidas);
 
 #endif // COMIDAS_H_INCLUDED

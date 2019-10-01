@@ -11,6 +11,9 @@ OBJ = main.o
 MENUC = menu.c
 MENUH = menu.h
 MENUO = menu.o
+COMC = comidas.c
+COMH = comidas.h
+COMO = comidas.o
 ALUC = alumnos.c
 ALUH = alumnos.h
 ALUO = alumnos.o
@@ -29,11 +32,14 @@ STRO = structs.o
 
 debug: $(PROJECT)
 	./$(EXEDIR)$^
-$(PROJECT): $(OBJDIR)$(STRO) $(OBJDIR)$(ARRO) $(OBJDIR)$(INPO) $(OBJDIR)$(CARO) $(OBJDIR)$(ALUO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
+$(PROJECT): $(OBJDIR)$(STRO) $(OBJDIR)$(ARRO) $(OBJDIR)$(INPO) $(OBJDIR)$(CARO) $(OBJDIR)$(ALUO) $(OBJDIR)$(COMO) $(OBJDIR)$(MENUO) $(OBJDIR)$(OBJ)
 	$(CC) $(WFLAGS) $^ -o $(EXEDIR)$@
-$(OBJDIR)$(OBJ): $(ALUH) $(SRC)
+$(OBJDIR)$(OBJ): $(COMH) $(SRC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$(SRC)
+$(OBJDIR)$(COMO): $(COMC)
+	cd $(OBJDIR) \
+	&& $(CC) $(CFLAGS) $(UPDIR)$^
 $(OBJDIR)$(ALUO): $(ALUC)
 	cd $(OBJDIR) \
 	&& $(CC) $(CFLAGS) $(UPDIR)$^
