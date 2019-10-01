@@ -48,30 +48,30 @@ int main()
 
         switch (optionMainMenu)
         {
-            case 1: // Opcion elegida: Alta de Alumnos
+            case 1: // Opcion elegida: Alta de Alumnos.
                 if(altaAlumno(alumnos, TAM, legajo, carreras, TAMC))
                 {
                     printf("Carga exitosa del alumno.\n");
                     legajo++;
                 }
                 break;
-            case 2: // Opcion elegida: Modificar un Alumno
+            case 2: // Opcion elegida: Modificar un Alumno.
                 if(modificarAlumno(alumnos, TAM, carreras, TAMC))
                 {
                     printf("Se ha actualiado la nota del alumno.\n");
                 }
                 break;
-            case 3: // Opcion elegida: Dar de baja un Alumno
+            case 3: // Opcion elegida: Dar de baja un Alumno.
                 if(bajaAlumno(alumnos, TAM, carreras, TAMC))
                 {
                     printf("Alumno borrado.\n");
                 }
                 break;
-            case 4: // Opcion elegida: Mostrar lista de Alumnos
+            case 4: // Opcion elegida: Mostrar lista de Alumnos.
                 inputs_clearScreen();
                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                 break;
-            case 5: //Opcion elegida: Ordenar listado de Alumnos
+            case 5: //Opcion elegida: Ordenar listado de Alumnos.
                 do
                 {
                     lifeCycle = menu_order(&optionOrderMenu, &optionOrderType);
@@ -83,42 +83,42 @@ int main()
 
                     switch (optionOrderMenu)
                     {
-                        case 1: // Opcion elegida: Ordenar por legajo
+                        case 1: // Opcion elegida: Ordenar por legajo.
                             if(ordenarAlumnosPorLegajo(alumnos, TAM, optionOrderType))
                             {
                                 inputs_clearScreen();
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
-                        case 2: // Opcion elegida: Ordenar por nombre
+                        case 2: // Opcion elegida: Ordenar por nombre.
                             if(ordenarAlumnosPorNombre(alumnos, TAM, optionOrderType))
                             {
                                 inputs_clearScreen();
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
-                        case 3: // Opcion elegida: Ordenar por sexo y por edad
+                        case 3: // Opcion elegida: Ordenar por sexo y por edad.
                             if(ordenarAlumnosPorSexoEdad(alumnos, TAM, optionOrderType))
                             {
                                 inputs_clearScreen();
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
-                        case 4: // Opcion elegida: Ordenar por promedio
+                        case 4: // Opcion elegida: Ordenar por promedio.
                             if(ordenarAlumnosPorPromedio(alumnos, TAM, optionOrderType))
                             {
                                 inputs_clearScreen();
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
-                        case 5: // Opcion elegida: Ordenar por fecha de ingreso
+                        case 5: // Opcion elegida: Ordenar por fecha de ingreso.
                             if(ordenarAlumnosPorFechaIngreso(alumnos, TAM, optionOrderType))
                             {
                                 inputs_clearScreen();
                                 mostrarAlumnos(alumnos, TAM, carreras, TAMC);
                             }
                             break;
-                        case 6: // Opcion elegida: Ordenar por carrera y nombre
+                        case 6: // Opcion elegida: Ordenar por Carrera y nombre.
                             if(ordenarAlumnosPorCarreraNombre(alumnos, TAM, optionOrderType))
                             {
                                 inputs_clearScreen();
@@ -130,7 +130,7 @@ int main()
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
                 } while (!lifeCycle);
                 break;
-            case 6: //Opcion elegida: Informes de Alumnos
+            case 6: //Opcion elegida: Informes de Alumnos.
                 do
                 {
                     lifeCycle = menu_reports(&optionReportsMenu, &optionCarrera);
@@ -142,56 +142,56 @@ int main()
 
                     switch (optionReportsMenu)
                     {
-                        case 1: // Opcion elegida: Mostrar alumno por carrera
+                        case 1: // Opcion elegida: Mostrar Alumno por Carrera.
                             inputs_clearScreen();
                             mostrarAlumnosPorCarrera(alumnos, TAM, carreras, TAMC, optionCarrera);
                             break;
-                        case 2: // Opcion elegida: Mostrar alumnos de cada carrera
+                        case 2: // Opcion elegida: Mostrar Alumnos de cada Carrera.
                             inputs_clearScreen();
                             ordenarAlumnosPorCarreraNombre(alumnos, TAM, ASC);
                             mostrarAlumnosTodasLasCarreras(alumnos, TAM, carreras, TAMC);
                             break;
-                        case 3:
+                        case 3: // Opcion elegida: Mostrar cantidad de Alumnos por Carrera.
                             inputs_clearScreen();
                             mostrarCantidadAlumnosPorCarrera(alumnos, TAM, carreras, TAMC);
                             break;
-                        case 4:
+                        case 4: // Opcion elegida: Mostrar Carrera con mas inscriptos.
                             inputs_clearScreen();
                             mostrarCarreraConMasInscriptos(alumnos, TAM, carreras, TAMC);
                             break;
-                        case 5:
+                        case 5: // Opcion elegida: Mostrar el mejor promedio por Carrera.
                             inputs_clearScreen();
                             mostrarMejorPromedioPorCarrera(alumnos, TAM, carreras, TAMC);
                             break;
-                        case 6:
+                        case 6: // Opcion elegida: Mostrar Alumnos Varones.
                             inputs_clearScreen();
                             mostrarAlumnosVarones(alumnos, TAM, carreras, TAMC);
                             break;
-                        case 7:
+                        case 7: // Opcion elegida: Mostrar mujeres por carrera.
                             inputs_clearScreen();
                             mostrarMujeresPorCarrera(alumnos, TAM, carreras, TAMC, optionCarrera);
                             break;
                         case 8:
-                            inputs_clearScreen();
+                            inputs_clearScreen(); // Opcion elegida: Mostrar Alumnos mayores de 30 de licenciatura.
                             mostrarAlumnosMayoresDe30DeLicenciatura(alumnos, TAM, carreras, TAMC);
                             break;
                     }
                     inputs_pauseScreen("Presione la tecla Enter para continuar");
                 } while (!lifeCycle);
                 break;
-            case 7: //Opcion elegida: Mostrar Carreras
+            case 7: //Opcion elegida: Mostrar Carreras.
                 inputs_clearScreen();
                 mostrarCarreras(carreras, TAMC);
                 break;
-            case 8: //Opcion elegida: Mostrar Comidas
+            case 8: //Opcion elegida: Mostrar Comidas.
                 inputs_clearScreen();
                 mostrarComidas(comidas, TAMCOM);
                 break;
-            case 9: //Opcion elegida: Mostrar Almuerzos
+            case 9: //Opcion elegida: Mostrar Almuerzos.
                 inputs_clearScreen();
                 mostrarAlmuerzos(almuerzos, TAMAL, alumnos, TAM, comidas, TAMCOM);
                 break;
-            case 10: //Opcion elegida: Alta de Almuerzo
+            case 10: //Opcion elegida: Alta de Almuerzo.
                 inputs_clearScreen();
                 if(altaAlmuerzo(almuerzos, TAMAL, idAlmuerzo, alumnos, TAM, comidas, TAMCOM, carreras, TAMC))
                 {
