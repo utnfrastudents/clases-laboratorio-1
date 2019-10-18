@@ -27,10 +27,13 @@ int main()
     int j = 7;
     int* p = &j;
     int** q = &p;
+    int*** r = &q;
 
     printf("%d\n", *p);
 
     printf("%d\n", **q);
+
+    printf("%d\n", ***r);
 
     return 0;
 }
