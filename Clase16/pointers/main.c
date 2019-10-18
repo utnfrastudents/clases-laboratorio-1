@@ -28,12 +28,15 @@ int main()
     int* p = &j;
     int** q = &p;
     int*** r = &q;
+    int* s = p;
 
-    printf("%d\n", *p);
+    printf("p: %d\n", *p);
 
-    printf("%d\n", **q);
+    printf("q: %d\n", **q);
 
-    printf("%d\n", ***r);
+    printf("r: %d\n", ***r);
+
+    printf("s: %d\n", *s);
 
     return 0;
 }
