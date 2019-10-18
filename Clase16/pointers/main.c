@@ -26,8 +26,11 @@ int main()
 
     int j = 7;
     int* p = &j;
+    int** q = &p;
 
-    printf("%d", *p);
+    printf("%d\n", *p);
+
+    printf("%d\n", **q);
 
     return 0;
 }
