@@ -31,10 +31,11 @@ int main()
     int* s = p;
 
     printf("p: %d\n", *p);
-
     printf("q: %d\n", **q);
-
     printf("r: %d\n", ***r);
+    printf("s: %d\n", *s);
+
+    *p = 15;
 
     printf("s: %d\n", *s);
 
