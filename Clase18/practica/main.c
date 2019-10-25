@@ -34,6 +34,9 @@ int main()
         printf("No se puede mostrar el Empleado.\n");
     }
 
+    free(lista);
+    free(emp2);
+
     return 0;
 }
 
