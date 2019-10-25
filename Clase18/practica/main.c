@@ -20,7 +20,9 @@ int main()
 {
     int tam = 0;
     eEmpleado* emp2 = newFullEmpleado(1, "Pepe Argento", 55650.45);
+    eEmpleado* emp3 = newFullEmpleado(2, "Mony Argento", 68907.65);
     eEmpleado* lista = (eEmpleado*)malloc(sizeof(eEmpleado)*(tam+1));
+    eEmpleado* aux;
 
     if(inicializarEmpleados(lista, tam+1) == -1)
     {
@@ -33,9 +35,26 @@ int main()
     {
         printf("No se puede mostrar el Empleado.\n");
     }
+    tam++;
+
+    aux = (eEmpleado*)realloc(lista, sizeof(eEmpleado)*(tam+1));
+
+    if(aux != NULL)
+    {
+        lista = aux;
+        free(aux);
+    }
+
+    *(lista + tam) = *emp3;
+
+    if(!mostrarEmpleado(lista+tam))
+    {
+        printf("No se puede mostrar el Empleado.\n");
+    }
 
     free(lista);
     free(emp2);
+    free(emp3);
 
     return 0;
 }
