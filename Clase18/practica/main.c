@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
+#define TAM 5
 
 typedef struct
 {
@@ -12,11 +13,18 @@ typedef struct
 
 eEmpleado* newEmpleado();
 eEmpleado* newFullEmpleado(int id, char nombre[], float sueldo);
+int inicializarEmpleados(eEmpleado vec[], int tam);
 int mostrarEmpleado(eEmpleado* emp);
 
 int main()
 {
-    eEmpleado* emp2 = newFullEmpleado(1, "Pepe Argento", 55600);
+    eEmpleado* emp2 = newFullEmpleado(1, "Pepe Argento", 55650.45);
+    eEmpleado* lista = (eEmpleado*)malloc(sizeof(eEmpleado)*TAM);
+
+    if(inicializarEmpleados(lista, TAM) == -1)
+    {
+        exit(EXIT_FAILURE);
+    }
 
     if(!mostrarEmpleado(emp2))
     {
@@ -59,6 +67,32 @@ eEmpleado* newFullEmpleado(int id, char nombre[], float sueldo)
     return aux;
 }
 
+int inicializarEmpleados(eEmpleado vec[], int tam)
+{
+    int returnValue = -1;
+    int i;
+
+    if(vec != NULL && tam > 0)
+    {
+        for(i = 0; i < tam; i++)
+        {
+            (vec+i)->isEmpty = 1;
+
+            if((vec+i) == NULL) //Revisar
+            {
+                break;
+            }
+        }
+
+        if(i == tam)
+        {
+            returnValue = 0;
+        }
+    }
+
+    return returnValue;
+}
+
 int mostrarEmpleado(eEmpleado* emp)
 {
     int returnValue = 0;
@@ -70,6 +104,7 @@ int mostrarEmpleado(eEmpleado* emp)
         printf("+=======+======================+============+\n");
         printf("| %5d | %20s | $ %5.2f |\n", emp->id, emp->nombre, emp->sueldo);
         printf("+-------+----------------------+------------+\n");
+
         returnValue = 1;
     }
 
