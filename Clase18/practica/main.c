@@ -18,15 +18,18 @@ int mostrarEmpleado(eEmpleado* emp);
 
 int main()
 {
+    int tam = 0;
     eEmpleado* emp2 = newFullEmpleado(1, "Pepe Argento", 55650.45);
-    eEmpleado* lista = (eEmpleado*)malloc(sizeof(eEmpleado)*TAM);
+    eEmpleado* lista = (eEmpleado*)malloc(sizeof(eEmpleado)*(tam+1));
 
-    if(inicializarEmpleados(lista, TAM) == -1)
+    if(inicializarEmpleados(lista, tam+1) == -1)
     {
         exit(EXIT_FAILURE);
     }
 
-    if(!mostrarEmpleado(emp2))
+    *(lista + tam) = *emp2;
+
+    if(!mostrarEmpleado(lista+tam))
     {
         printf("No se puede mostrar el Empleado.\n");
     }
