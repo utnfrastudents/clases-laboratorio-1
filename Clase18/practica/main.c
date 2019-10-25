@@ -11,11 +11,12 @@ typedef struct
 }eEmpleado;
 
 eEmpleado* newEmpleado();
+eEmpleado* newFullEmpleado(int id, char nombre[], float sueldo);
 int mostrarEmpleado(eEmpleado* emp);
 
 int main()
 {
-    eEmpleado* emp2 = newEmpleado();
+    eEmpleado* emp2 = newFullEmpleado(1, "Pepe Argento", 55600);
 
     if(!mostrarEmpleado(emp2))
     {
@@ -29,7 +30,7 @@ eEmpleado* newEmpleado()
 {
     eEmpleado* aux;
 
-    aux = (eEmpleado*) malloc(sizeof(eEmpleado));
+    aux = (eEmpleado*)malloc(sizeof(eEmpleado));
 
     if(aux != NULL)
     {
@@ -42,13 +43,33 @@ eEmpleado* newEmpleado()
     return aux;
 }
 
+eEmpleado* newFullEmpleado(int id, char nombre[], float sueldo)
+{
+    eEmpleado* aux;
+    aux = newEmpleado();
+
+    if(aux != NULL)
+    {
+        aux->id = id;
+        strcpy(aux->nombre, nombre);
+        aux->sueldo = sueldo;
+        aux->isEmpty = 0;
+    }
+
+    return aux;
+}
+
 int mostrarEmpleado(eEmpleado* emp)
 {
     int returnValue = 0;
 
     if(emp != NULL && !emp->isEmpty)
     {
-        printf("| %5d | %20s | %5.2f |\n", emp->id, emp->nombre, emp->sueldo);
+        printf("+=======+======================+============+\n");
+        printf("|   ID  |        NOMBRE        |   SUELDO   |\n");
+        printf("+=======+======================+============+\n");
+        printf("| %5d | %20s | $ %5.2f |\n", emp->id, emp->nombre, emp->sueldo);
+        printf("+-------+----------------------+------------+\n");
         returnValue = 1;
     }
 
