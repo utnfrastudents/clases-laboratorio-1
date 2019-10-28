@@ -6,7 +6,7 @@ typedef struct
     int legajo;
     char nombre[30];
     float salario;
-}eEmpleado;
+} eEmpleado;
 
 void escribirBinario(char* path);
 void leerBinario(char* path);
@@ -30,17 +30,18 @@ void escribirBinario(char* path)
 
     if(miArchivo != NULL)
     {
-      fwrite((int*)&len, sizeof(miEmpleado), 2, miArchivo);
+        /**< Longitud de la estructura como cabeza del archivo. >*/
+        fwrite((int*)&len, sizeof(miEmpleado), 2, miArchivo);
 
-      for(i=0; i<2; i++)
-      {
-          if(fwrite((eEmpleado*)(&miEmpleado+i), sizeof(eEmpleado), 1, miArchivo) == 1)
-          {
-              printf("Se almacenaron los datos.\n");
-          }
-      }
+        for(i=0; i<2; i++)
+        {
+            if(fwrite((eEmpleado*)(&miEmpleado+i), sizeof(eEmpleado), 1, miArchivo) == 1)
+            {
+                printf("Se almacenaron los datos.\n");
+            }
+        }
 
-      fclose(miArchivo);
+        fclose(miArchivo);
     }
 }
 
@@ -55,17 +56,17 @@ void leerBinario(char* path)
 
     if(miArchivo != NULL)
     {
-      if(fread((int*)&len, sizeof(int), 1, miArchivo) == 1)
-      {
-          if(fread((eEmpleado*)(&miEmpleado), sizeof(eEmpleado), len, miArchivo) == len)
-          {
-              for(i=0; i<len; i++)
-              {
-                  printf("%d-%s-%.2f.\n", miEmpleado[i].legajo, miEmpleado[i].nombre, miEmpleado[i].salario);
-              }
-          }
-      }
+        if(fread((int*)&len, sizeof(int), 1, miArchivo) == 1)
+        {
+            if(fread((eEmpleado*)(&miEmpleado), sizeof(eEmpleado), len, miArchivo) == len)
+            {
+                for(i=0; i<len; i++)
+                {
+                    printf("%d-%s-%.2f.\n", miEmpleado[i].legajo, miEmpleado[i].nombre, miEmpleado[i].salario);
+                }
+            }
+        }
 
-      fclose(miArchivo);
+        fclose(miArchivo);
     }
 }
