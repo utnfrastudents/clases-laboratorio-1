@@ -10,16 +10,20 @@ typedef struct
     float sueldo;
 }eEmpleado;
 
+eEmpleado* new_empleado();
+
 int main()
 {
     FILE* miArchivo;
-    eEmpleado miEmpleado;
+    eEmpleado* miEmpleado;
+    eEmpleado* lista[50];
     char legajo[10];
     char nombre[20];
     char apellido[20];
     char sueldo[15];
     int id;
     float salary;
+    int i = 0;
 
     miArchivo = fopen("ramdom_data.csv", "r");
 
@@ -34,12 +38,21 @@ int main()
 
                 if(id != 0 && salary != 0 && nombre != NULL && apellido != NULL)
                 {
-                    miEmpleado.legajo = id;
-                    strcpy(miEmpleado.nombre, nombre);
-                    strcpy(miEmpleado.apellido, apellido);
-                    miEmpleado.sueldo = salary;
+                    miEmpleado = new_empleado();
 
-                    printf("%d-%s-%s-%.2f\n", miEmpleado.legajo, miEmpleado.nombre, miEmpleado.apellido, miEmpleado.sueldo);
+                    if(miEmpleado != NULL)
+                    {
+                        miEmpleado->legajo = id;
+                        strcpy(miEmpleado->nombre, nombre);
+                        strcpy(miEmpleado->apellido, apellido);
+                        miEmpleado->sueldo = salary;
+
+                        *(lista+i) = miEmpleado;
+                    }
+
+                    printf("%d-%s-%s-%.2f\n", lista[i]->legajo, lista[i]->nombre, lista[i]->apellido, lista[i]->sueldo);
+
+                    i++;
                 }
             }
         }
@@ -48,4 +61,13 @@ int main()
     }
 
     return 0;
+}
+
+eEmpleado* new_empleado()
+{
+    eEmpleado* aux;
+
+    aux = (eEmpleado*)malloc(sizeof(eEmpleado));
+
+    return aux;
 }
