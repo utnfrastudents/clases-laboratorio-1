@@ -24,6 +24,57 @@ int mostrarAutos(eAuto** autos, int tam);
 
 int main()
 {
+    int tam = 0;
+    int cant = 0;
+    char buffer[4][30];
+    FILE* file = NULL;
+    eAuto* aux = NULL;
+    eAuto** listaux = NULL;
+    eAuto** lista = (eAuto**)malloc(sizeof(eAuto*));
+
+    if(lista != NULL)
+    {
+        printf("Sin memoria.\n");
+        //TODO: Pausar programa.
+        exit(EXIT_FAILURE);
+    }
+
+    file = fopen("autos.csv", "r");
+
+    if(file == NULL)
+    {
+        printf("Error de archivo.\n");
+        //TODO: Pausar programa.
+        exit(EXIT_FAILURE);
+    }
+
+    /**< Lectura fantasma de encabezado, >*/
+    fscanf(file, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
+
+    while(!feof(file))
+    {
+        cant = fscanf(file, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
+        if(cant < 4)
+        {
+            break;
+        }
+        else
+        {
+            aux = new_AutoParametros(atoi(buffer[0]), buffer[1], atoi(buffer[2]), atof(buffer[3]));
+
+            if(aux != NULL)
+            {
+                *(lista + tam) = aux;
+                tam++;
+                listaux = (eAuto**)realloc(lista, sizeof(eAuto*) * (tam +1));
+
+                if(listaux != NULL)
+                {
+                    lista = listaux;
+                }
+            }
+        }
+    }
 
     return 0;
 }
