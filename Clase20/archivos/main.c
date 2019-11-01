@@ -20,7 +20,7 @@ int getMarcaAuto(eAuto* unAuto, char* marca);
 int setPrecioAuto(eAuto* unAuto, float precio);
 int getModeloAuto(eAuto* unAuto, int* modelo);
 int mostrarAuto(eAuto* unAuto);
-int mostrarAutos(eAuto* autos, int tam);
+int mostrarAutos(eAuto** autos, int tam);
 
 int main()
 {
@@ -173,7 +173,7 @@ int mostrarAuto(eAuto* unAuto)
     return returnValue;
 }
 
-int mostrarAutos(eAuto* autos, int tam)
+int mostrarAutos(eAuto** autos, int tam)
 {
     int counter = 0;
     int i;
@@ -189,7 +189,8 @@ int mostrarAutos(eAuto* autos, int tam)
                 printf("+=======+======================+========+==============+\n");
             }
 
-            if(mostrarAuto(autos + i))
+            /**< La direccion de memoria de la posicion del arreglo al que apunta esa direccion. >*/
+            if(mostrarAuto(*(autos + i)))
             {
                 counter++;
             }
