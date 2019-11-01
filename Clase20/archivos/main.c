@@ -38,18 +38,18 @@ eAuto* newAuto()
 eAuto* new_AutoParametros(int id, char marca[], int modelo, float precio)
 {
     eAuto* aux = newAuto();
-    eAuto* unAuto;
 
-    if(aux != NULL
-       && setIdAuto(aux, id)
-       && setMarcaAuto(aux, marca)
-       && setModeloAuto(aux, modelo)
-       && setPrecioAuto(aux, precio))
+    if(aux != NULL &&
+       (!setIdAuto(aux, id)
+       || !setMarcaAuto(aux, marca)
+       || !setModeloAuto(aux, modelo)
+       || !setPrecioAuto(aux, precio)))
     {
-        unAuto = aux;
+        free(aux);
+        aux = NULL;
     }
 
-    return unAuto;
+    return aux;
 }
 
 int setIdAuto(eAuto* unAuto, int id)
@@ -195,7 +195,7 @@ int mostrarAutos(eAuto* autos, int tam)
             }
         }
 
-        if(counter > 0)
+        if(counter == i)
         {
             printf("+-------+----------------------+--------+--------------+\n");
         }
