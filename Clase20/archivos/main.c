@@ -4,7 +4,7 @@
 
 typedef struct{
     int id;
-    char marca[30];
+    char marca[32];
     int modelo;
     float precio;
 }eAuto;
@@ -21,6 +21,7 @@ int setPrecioAuto(eAuto* unAuto, float precio);
 int getModeloAuto(eAuto* unAuto, int* modelo);
 int mostrarAuto(eAuto* unAuto);
 int mostrarAutos(eAuto** autos, int tam);
+int guardarAutosBinario(eAuto** autos, int tam, char path[]);
 
 int main()
 {
@@ -79,6 +80,63 @@ int main()
     fclose(file);
 
     mostrarAutos(lista, tam);
+
+    if(guardarAutosBinario(lista, tam, "autosBinario.bin"))
+    {
+        printf("Autos guardados a binario.\n");
+    }
+
+    /**< Lectura de binario. >*/
+    int tam2 = 0;
+    eAuto** lista2 = (eAuto**)malloc(sizeof(eAuto*));
+
+    if(lista2 == NULL)
+    {
+        printf("Sin memoria.\n");
+        //TODO: Pausar programa.
+        exit(EXIT_FAILURE);
+    }
+
+    file = fopen("autosBinario.bin", "rb");
+
+    if(file == NULL)
+    {
+        printf("Error de archivo.\n");
+        //TODO: Pausar programa.
+        exit(EXIT_FAILURE);
+    }
+
+    while(!feof(file))
+    {
+        aux = newAuto();
+        if(aux == NULL)
+        {
+            break;
+        }
+
+        cant = fread(aux, sizeof(eAuto), 1, file);
+
+        if(cant < 1)
+        {
+            break;
+        }
+        else
+        {
+            *(lista2 + tam2) = aux;
+            tam2++;
+            listaux = (eAuto**)realloc(lista2, sizeof(eAuto*) * (tam +1));
+
+            if(listaux != NULL)
+            {
+                lista2 = listaux;
+            }
+        }
+    }
+
+    fclose(file);
+
+    printf("Lectura desde binario en pantalla.\n");
+    mostrarAutos(lista2, tam);
 
     return 0;
 }
@@ -256,4 +314,37 @@ int mostrarAutos(eAuto** autos, int tam)
     }
 
     return counter;
+}
+
+int guardarAutosBinario(eAuto** autos, int tam, char path[])
+{
+    int returnValue = 0;
+    FILE* file = NULL;
+    int i;
+
+    if(autos != NULL && tam > 0 && path != NULL)
+    {
+        file = fopen("autosBinario.bin", "wb");
+
+        if(file == NULL)
+        {
+            printf("Error de archivo.\n");
+        }
+        else
+        {
+            for(i = 0; i < tam; i++)
+            {
+                fwrite((eAuto*)*(autos + i), sizeof(eAuto), 1, file);
+            }
+
+            fclose(file);
+
+            if(i == tam)
+            {
+                returnValue = 1;
+            }
+        }
+    }
+
+    return returnValue;
 }
