@@ -22,6 +22,7 @@ int getModeloAuto(eAuto* unAuto, int* modelo);
 int mostrarAuto(eAuto* unAuto);
 int mostrarAutos(eAuto** autos, int tam);
 int guardarAutosBinario(eAuto** autos, int tam, char path[]);
+int guardarAutosTexto(eAuto** autos, int tam, char path[]);
 
 int main()
 {
@@ -124,7 +125,7 @@ int main()
         {
             *(lista2 + tam2) = aux;
             tam2++;
-            listaux = (eAuto**)realloc(lista2, sizeof(eAuto*) * (tam +1));
+            listaux = (eAuto**)realloc(lista2, sizeof(eAuto*) * (tam2 +1));
 
             if(listaux != NULL)
             {
@@ -137,6 +138,11 @@ int main()
 
     printf("Lectura desde binario en pantalla.\n");
     mostrarAutos(lista2, tam);
+
+    if(guardarAutosTexto(lista, tam, "autos2.csv"))
+    {
+        printf("Autos guardados a texto.\n");
+    }
 
     return 0;
 }
@@ -324,7 +330,7 @@ int guardarAutosBinario(eAuto** autos, int tam, char path[])
 
     if(autos != NULL && tam > 0 && path != NULL)
     {
-        file = fopen("autosBinario.bin", "wb");
+        file = fopen(path, "wb");
 
         if(file == NULL)
         {
@@ -335,6 +341,41 @@ int guardarAutosBinario(eAuto** autos, int tam, char path[])
             for(i = 0; i < tam; i++)
             {
                 fwrite((eAuto*)*(autos + i), sizeof(eAuto), 1, file);
+            }
+
+            fclose(file);
+
+            if(i == tam)
+            {
+                returnValue = 1;
+            }
+        }
+    }
+
+    return returnValue;
+}
+
+int guardarAutosTexto(eAuto** autos, int tam, char path[])
+{
+    int returnValue = 0;
+    FILE* file = NULL;
+    int i;
+
+    if(autos != NULL && tam > 0 && path != NULL)
+    {
+        file = fopen(path, "w");
+
+        if(file == NULL)
+        {
+            printf("Error de archivo.\n");
+        }
+        else
+        {
+            fprintf(file, "id,marca,modelo,precio\n");
+            for(i = 0; i < tam; i++)
+            {
+                fprintf(file, "%d,%s,%d,%.2f\n",
+                        (*(autos + i))->id, (*(autos + i))->marca, (*(autos + i))->modelo, (*(autos + i))->precio);
             }
 
             fclose(file);
