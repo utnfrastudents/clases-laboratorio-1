@@ -32,7 +32,7 @@ int main()
     eAuto** listaux = NULL;
     eAuto** lista = (eAuto**)malloc(sizeof(eAuto*));
 
-    if(lista != NULL)
+    if(lista == NULL)
     {
         printf("Sin memoria.\n");
         //TODO: Pausar programa.
@@ -75,6 +75,10 @@ int main()
             }
         }
     }
+
+    fclose(file);
+
+    mostrarAutos(lista, tam);
 
     return 0;
 }
@@ -214,11 +218,9 @@ int mostrarAuto(eAuto* unAuto)
 
     if(unAuto != NULL)
     {
-        if(printf("| %4d | %20s | %6d | %12.2f |\n",
-               unAuto->id, unAuto->marca, unAuto->modelo, unAuto->precio) == 4)
-        {
-            returnValue = 1;
-        }
+        printf("| %4d | %20s | %6d | %12.2f |\n",
+               unAuto->id, unAuto->marca, unAuto->modelo, unAuto->precio);
+        returnValue = 1;
     }
 
     return returnValue;
@@ -235,9 +237,9 @@ int mostrarAutos(eAuto** autos, int tam)
         {
             if(counter == 0)
             {
-                printf("+=======+======================+========+==============+\n");
-                printf("|   ID  |        MARCA         | MODELO |    PRECIO    |\n");
-                printf("+=======+======================+========+==============+\n");
+                printf("+======+======================+========+==============+\n");
+                printf("|  ID  |        MARCA         | MODELO |    PRECIO    |\n");
+                printf("+======+======================+========+==============+\n");
             }
 
             /**< La direccion de memoria de la posicion del arreglo al que apunta esa direccion. >*/
@@ -249,7 +251,7 @@ int mostrarAutos(eAuto** autos, int tam)
 
         if(counter == i)
         {
-            printf("+-------+----------------------+--------+--------------+\n");
+            printf("+------+----------------------+--------+--------------+\n");
         }
     }
 
